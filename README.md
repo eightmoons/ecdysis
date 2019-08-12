@@ -9,7 +9,9 @@ npm start
 ```
 
 via Brackets
+```
 click nyo lang yung live preview
+```
 
 via XAMPP
 git clone nyo lang sa loob ng <xampp-directory>/htcdocs/ecdysis
