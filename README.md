@@ -1,6 +1,22 @@
 
 # ecdysis
 snake game with evolution
+## Installation
+via nodejs
+di pa nga pala tayo naka nodejs
+```
+npm start
+```
+
+via Brackets
+click nyo lang yung live preview
+
+via XAMPP
+git clone nyo lang sa loob ng <xampp-directory>/htcdocs/ecdysis
+   ```
+   git clone https://github.com/edgel0rd/ecdysis.git D:/xampp/htdocs/ecdysis
+   ```
+
 ## Project Status
 ### Level 1
 - [ ] Movement
