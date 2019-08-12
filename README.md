@@ -1,3 +1,4 @@
+
 # ecdysis
 snake game with evolution
 ## Project Status
@@ -7,14 +8,11 @@ snake game with evolution
 - [ ] Sprites
 
 ##### Project Assignments:
-@elihpoivulp
-- Collision
-- Snake Movement
-
-@jpgabad
+@elihpoivulp & @jpgabad 
 - UI/Sprites
 - Transition per level
 - Level design
+- Collision
 
 @edgel0rd & @limoso1
 - Snake Movement
