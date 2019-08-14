@@ -1,0 +1,57 @@
+{"frames": {
+
+"blob.png":
+{
+	"frame": {"x":35,"y":515,"w":32,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":24},
+	"sourceSize": {"w":32,"h":24},
+	"anchor": {"x":0,"y":0}
+},
+"door.png":
+{
+	"frame": {"x":1,"y":515,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32},
+	"anchor": {"x":0,"y":0}
+},
+"dungeon.png":
+{
+	"frame": {"x":1,"y":1,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"anchor": {"x":0,"y":0}
+},
+"explorer.png":
+{
+	"frame": {"x":69,"y":515,"w":21,"h":32},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":21,"h":32},
+	"sourceSize": {"w":21,"h":32},
+	"anchor": {"x":0,"y":0}
+},
+"treasure.png":
+{
+	"frame": {"x":103,"y":515,"w":28,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":28,"h":24},
+	"sourceSize": {"w":28,"h":24},
+	"anchor": {"x":0,"y":0}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "dungeonhunter.png",
+	"format": "RGBA8888",
+	"size": {"w":514,"h":548},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:77465a862998e2c5997c8b35b60d3102:3923663e59fb40b578d66a492a2cda2d:321b1c43f2fb42dbd0f297e06fe72bd9$"
+}
+}
