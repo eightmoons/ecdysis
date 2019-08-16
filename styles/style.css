@@ -1,0 +1,33 @@
+/* @font-face {
+    font-family: 'pixelated';
+    src: url('styles/fonts/pixelated.ttf') format("truetype");
+    } */
+    @import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
+*{
+
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+
+}
+
+body{
+    text-align: center;
+    background-image: url("../images/bg.jpg");
+    background-color: #245425;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #000;
+}
+
+.logo, .description{
+    font-family: 'VT323', monospace;
+}
+
+.logo{
+    font-size: 20px;
+}
+
+.description{
+    font-size: 15px;
+}
