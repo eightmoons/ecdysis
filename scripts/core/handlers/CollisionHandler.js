@@ -20,7 +20,6 @@ function isColliding(r1, r2) {
     combinedHalfWidths = r1.halfWidth + r2.halfWidth;
     combinedHalfHeights = r1.halfHeight + r2.halfHeight;
 
-
     if (Math.abs(vx) < combinedHalfWidths) {
 
         if (Math.abs(vy) < combinedHalfHeights) {

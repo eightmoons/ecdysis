@@ -20,6 +20,7 @@ document.body.appendChild(app.view);
 
 loader
     .add("images/ecdysis.json")
+    .add("images/enemy.json")
     .on("progress", onLoaderProgress)
     .load(main);
 
@@ -76,24 +77,24 @@ function main(){
     line.moveTo(0,0);
     line.lineTo(app.renderer.width, 0);
     line.x = 0;
-    line.y = 0;
+    line.y = line.height / 2;
     line2 = new Graphics();
     line2.lineStyle(16, 0x000000, 1);
     line2.moveTo(0,0);
     line2.lineTo(0, app.renderer.width);
-    line2.x = 0;
+    line2.x = line2.width / 2;
     line2.y = 0;
     line3 = new Graphics();
     line3.lineStyle(16, 0x000000, 1);
     line3.moveTo(0,0);
     line3.lineTo(app.renderer.width, 0);
     line3.x = 0;
-    line3.y = app.renderer.height;
+    line3.y = app.renderer.height - 8;
     line4 = new Graphics();
     line4.lineStyle(16, 0x000000, 1);
     line4.moveTo(0,0);
     line4.lineTo(0, app.renderer.width);
-    line4.x = app.renderer.width;
+    line4.x = app.renderer.width - 8;
     line4.y = 0;
     app.stage.addChild(line);
     app.stage.addChild(line2);
@@ -113,7 +114,6 @@ function play(delta){
     contain(slime, {x: slime.width, y:  slime.height, width: app.renderer.width, height: app.renderer.height });
     contain(enemySlime, {x: slime.width, y:  slime.height, width: app.renderer.width, height: app.renderer.height });
 
-    console.log(isColliding(slime, enemySlime))
 
     if (isColliding(slime, enemySlime)){
         enemySlime.x += 1;
