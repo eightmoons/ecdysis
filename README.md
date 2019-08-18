@@ -15,9 +15,10 @@ git clone nyo lang sa loob ng <xampp-directory>/htcdocs/ecdysis
 
 ## Project Status
 ### Level 1
-- [ ] Movement
-- [ ] Collision
-- [ ] Sprites
+- [x] Movement
+- [x] Collision
+- [x] Sprites
+- [ ] level design (enemy, obstacle, coins)
 
 ##### Project Assignments:
 1. @elihpoivulp & @jpgabad 
