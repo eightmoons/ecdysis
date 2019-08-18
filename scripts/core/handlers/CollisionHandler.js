@@ -17,8 +17,8 @@ function isColliding(r1, r2) {
     vx = r1.centerX - r2.centerX;
     vy = r1.centerY - r2.centerY;
 
-    combinedHalfWidths = r1.halfWidth + r2.halfWidth;
-    combinedHalfHeights = r1.halfHeight + r2.halfHeight;
+    combinedHalfWidths = r1.halfWidth + r2.halfWidth + 4;
+    combinedHalfHeights = r1.halfHeight + r2.halfHeight + 4;
 
     if (Math.abs(vx) < combinedHalfWidths) {
 

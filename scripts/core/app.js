@@ -29,7 +29,11 @@ function onLoaderProgress(loader, resource) {
 //scenes
 let mainMenuScene, inGameScene;
 
+//pixi objects
+let state;
+
 //in-game objects
+let slime, enemySlime;
 function main(){
     inGameScene = new Container();
     id = resources["images/ecdysis.json"].textures;
@@ -39,21 +43,48 @@ function main(){
     for (let i = 0; i < 5; i++) {
         slimeTexture.push(sheet.textures[slimeFrames[i]]);
     }
-    let slime = new PIXI.AnimatedSprite(slimeTexture);
+    slime = new PIXI.AnimatedSprite(slimeTexture);
     slime.x = 150;
     slime.y = 100;
+    slime.vx = 0;
+    slime.vy = 0;
     slime.anchor.set(0.5,0.5);
     slime.animationSpeed =0.15;
     slime.play();
 
     app.stage.addChild(slime);
 
+    slimeFrames = ["slime3-1.png","slime3-2.png","slime3-3.png","slime3-4.png","slime3-5.png"];
+    let enemySlimeTexture = [];
+    for (let i = 0; i < 5; i++) {
+        enemySlimeTexture.push(sheet.textures[slimeFrames[i]]);
+    }
+
+    enemySlime = new PIXI.AnimatedSprite(enemySlimeTexture);
+    enemySlime.x = 300;
+    enemySlime.y = 200;
+    enemySlime.animationSpeed =0.15;
+    enemySlime.play()
+    app.stage.addChild(enemySlime);
+
     state = play;
     app.ticker.add(delta => gameLoop(delta));
 }
 
 function gameLoop(delta) {
+    state(delta);
 }
 
 function play(delta){
+    slime.x += slime.vx;
+    slime.y += slime.vy;
+    setMovementManager(slime,2,2);
+    contain(slime, {x: slime.width, y:  slime.height, width: app.renderer.width, height: app.renderer.height });
+
+    if (isColliding(slime, enemySlime)){
+        enemySlime.x += 1;
+        enemySlime.alpha = 0.5
+    }else {
+        enemySlime.alpha = 1;
+    }
 }
