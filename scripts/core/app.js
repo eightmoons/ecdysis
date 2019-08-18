@@ -23,10 +23,11 @@ loader
 
 let cat, state, slime;
 function setup(){
+    base_speed = 5;
     cat = new Sprite(resources["images/cat.png"].texture);
     slime = new Sprite(resources["images/dungeonhunter.json"].textures["blob.png"])
     cat.y = 96;
-    cat.vx = 0;
+    cat.vx = 5;
     cat.vy = 0;
     app.stage.addChild(cat);
 
@@ -45,7 +46,7 @@ function setup(){
     };
     left.release = () => {
         if (!right.isDown && cat.vy === 0) {
-            cat.vx = 0;
+            cat.vx = -base_speed;
         }
     };
 
@@ -55,7 +56,7 @@ function setup(){
     };
     up.release = () => {
         if (!down.isDown && cat.vx === 0) {
-            cat.vy = 0;
+            cat.vy = -base_speed;
         }
     };
 
@@ -65,7 +66,7 @@ function setup(){
     };
     right.release = () => {
         if (!left.isDown && cat.vy === 0) {
-            cat.vx = 0;
+            cat.vx = base_speed;
         }
     };
 
@@ -75,7 +76,7 @@ function setup(){
     };
     down.release = () => {
         if (!up.isDown  && cat.vx === 0) {
-            cat.vy = 0;
+            cat.vy = base_speed;
         }
     };
 
@@ -89,19 +90,8 @@ function gameLoop(delta){
 }
 
 function play(delta){
-
     cat.x += cat.vx;
     cat.y += cat.vy;
-
-    if (hitTestRectangle(cat, slime)){
-        cat.width -= 1;
-        cat.height -= 1;
-        slime.width +=1;
-        slime.height +=1;
-    }else{
-
-    }
-
 }
 
 
