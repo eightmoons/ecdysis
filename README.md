@@ -2,12 +2,6 @@
 # ecdysis
 snake game with evolution
 ## Installation
-via nodejs
-di pa nga pala tayo naka nodejs
-```
-npm start
-```
-
 via Brackets
 ```
 click nyo lang yung live preview
