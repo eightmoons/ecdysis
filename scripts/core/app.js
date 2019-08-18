@@ -4,162 +4,107 @@ let Application = PIXI.Application,
     resources = PIXI.Loader.shared.resources,
     TextureCache = PIXI.utils.TextureCache,
     Sprite = PIXI.Sprite,
-    Rectangle = PIXI.Rectangle;
+    Rectangle = PIXI.Rectangle,
+    Text = PIXI.Text;
 
 let app = new Application({
     width: 512,
     height: 512,
     transparent: false,
-    antialias: true
+    antialias: true,
 });
+app.renderer.backgroundColor = 0x009f9f;
 document.body.appendChild(app.view);
 
 loader
-    .add("images/tileset.png")
+    .add("images/cat.png")
+    .add("images/dungeonhunter.json")
     .load(setup);
 
+let cat, state, slime;
 function setup(){
-    let baseTexture = TextureCache["images/tileset.png"];
+    cat = new Sprite(resources["images/cat.png"].texture);
+    slime = new Sprite(resources["images/dungeonhunter.json"].textures["blob.png"])
+    cat.y = 96;
+    cat.vx = 0;
+    cat.vy = 0;
+    app.stage.addChild(cat);
 
-    let catTexture = baseTexture;
-    catTexture.frame = new Rectangle(0, 0, 64, 64);
-    let cat = new Sprite(catTexture);
-    cat.position.set(16,16);
+    slime.x = 45;
+    slime.y = 211;
+    app.stage.addChild(slime);
 
-    let hedgehogTexture = baseTexture;
-    hedgehogTexture.frame = new Rectangle(64,0,64,64);
-    let hedgehog = new Sprite(hedgehogTexture);
-    hedgehog.position.set(32,32);
+    let left = keyboard("ArrowLeft"),
+        up = keyboard("ArrowUp"),
+        right = keyboard("ArrowRight"),
+        down = keyboard("ArrowDown");
 
-    let tigerTexture = baseTexture;
-    tigerTexture.frame = new Rectangle(0,64,64,64);
-    let tiger = new Sprite(tigerTexture);
-    tiger.position.set(64,64);
+    left.press = () => {
+        cat.vx = -5;
+        cat.vy = 0;
+    };
+    left.release = () => {
+        if (!right.isDown && cat.vy === 0) {
+            cat.vx = 0;
+        }
+    };
 
-    let animals = new Container();
-    animals.addChild(cat);
-    animals.addChild(hedgehog);
-    animals.addChild(tiger);
-    app.stage.addChild(animals);
-    app.renderer.render(app.stage);
+    up.press = () => {
+        cat.vy = -5;
+        cat.vx = 0;
+    };
+    up.release = () => {
+        if (!down.isDown && cat.vx === 0) {
+            cat.vy = 0;
+        }
+    };
+
+    right.press = () => {
+        cat.vx  = 5;
+        cat.vy = 0;
+    };
+    right.release = () => {
+        if (!left.isDown && cat.vy === 0) {
+            cat.vx = 0;
+        }
+    };
+
+    down.press = () => {
+        cat.vy = 5;
+        cat.vx = 0;
+    };
+    down.release = () => {
+        if (!up.isDown  && cat.vx === 0) {
+            cat.vy = 0;
+        }
+    };
+
+    state = play;
+    app.ticker.add(delta => gameLoop(delta));
 }
 
-// loader
-//     .add("images/cat.png")
-//     .load(setup);
-//
-// let cat, state;
-// function setup(){
-//     cat = new Sprite(resources["images/cat.png"].texture);
-//     cat.y = 96;
-//     cat.vx = 0;
-//     cat.vy = 0;
-//     app.stage.addChild(cat);
-//
-//     let left = keyboard("ArrowLeft"),
-//         up = keyboard("ArrowUp"),
-//         right = keyboard("ArrowRight"),
-//         down = keyboard("ArrowDown");
-//
-//     left.press = () => {
-//         cat.vx = -5;
-//         cat.vy = 0;
-//     };
-//     left.release = () => {
-//         if (!right.isDown && cat.vy === 0) {
-//             cat.vx = 0;
-//         }
-//     };
-//
-//     up.press = () => {
-//         cat.vy = -5;
-//         cat.vx = 0;
-//     };
-//     up.release = () => {
-//         if (!down.isDown && cat.vx === 0) {
-//             cat.vy = 0;
-//         }
-//     };
-//
-//     right.press = () => {
-//         cat.vx  = 5;
-//         cat.vy = 0;
-//     };
-//     right.release = () => {
-//         if (!left.isDown && cat.vy === 0) {
-//             cat.vx = 0;
-//         }
-//     };
-//
-//     down.press = () => {
-//         cat.vy = 5;
-//         cat.vx = 0;
-//     };
-//     down.release = () => {
-//         if (!up.isDown  && cat.vx === 0) {
-//             cat.vy = 0;
-//         }
-//     };
-//
-//     state = play;
-//     app.ticker.add(delta => gameLoop(delta));
-// }
-//
-//
-// function gameLoop(delta){
-//     state(delta);
-// }
-//
-// function play(delta){
-//
-//     cat.x += cat.vx;
-//     cat.y += cat.vy;
-// }
-//
-// function keyboard(value) {
-//     let key = {};
-//     key.value = value;
-//     key.isDown = false;
-//     key.isUp = true;
-//     key.press = undefined;
-//     key.release = undefined;
-//
-//     key.downHandler = event => {
-//         if (event.key === key.value) {
-//             if (key.isUp && key.press) key.press();
-//             key.isDown = true;
-//             key.isUp = false;
-//             event.preventDefault();
-//         }
-//     };
-//
-//     key.upHandler = event => {
-//         if (event.key === key.value) {
-//             if (key.isDown && key.release) key.release();
-//             key.isDown = false;
-//             key.isUp = true;
-//             event.preventDefault();
-//         }
-//     };
-//
-//     const downListener = key.downHandler.bind(key);
-//     const upListener = key.upHandler.bind(key);
-//
-//     window.addEventListener(
-//         "keydown", downListener, false
-//     );
-//
-//     window.addEventListener(
-//         "keyup", upListener, false
-//     );
-//
-//     key.unsubscribe = ( ) => {
-//         window.removeEventListener("keydown", downListener);
-//         window.removeEventListener("keyup", upListener);
-//     }
-//
-//     return key;
-// }
+
+function gameLoop(delta){
+    state(delta);
+}
+
+function play(delta){
+
+    cat.x += cat.vx;
+    cat.y += cat.vy;
+
+    if (hitTestRectangle(cat, slime)){
+        cat.width -= 1;
+        cat.height -= 1;
+        slime.width +=1;
+        slime.height +=1;
+    }else{
+
+    }
+
+}
+
+
 
 // loader
 //     .add("images/dungeonhunter.json")
