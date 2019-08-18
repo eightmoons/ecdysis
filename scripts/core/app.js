@@ -122,19 +122,7 @@ function play(delta){
         enemySlime.alpha = 1;
     }
 
-    if (isColliding(slime, line)){
-        slime.x = (app.renderer.width / 2) - slime.width;
-        slime.y = (app.renderer.height / 2) - slime.height;
-    }
-    if (isColliding(slime, line2)){
-        slime.x = (app.renderer.width / 2) - slime.width;
-        slime.y = (app.renderer.height / 2) - slime.height;
-    }
-    if (isColliding(slime, line3)){
-        slime.x = (app.renderer.width / 2) - slime.width;
-        slime.y = (app.renderer.height / 2) - slime.height;
-    }
-    if (isColliding(slime, line4)){
+    if (isColliding(slime, line) || isColliding(slime, line2) || isColliding(slime, line3) || isColliding(slime, line4)){
         slime.x = (app.renderer.width / 2) - slime.width;
         slime.y = (app.renderer.height / 2) - slime.height;
     }
