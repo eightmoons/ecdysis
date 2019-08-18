@@ -1,4 +1,4 @@
-function isColliding(r1, r2) {
+function isColliding(r1, r2, xoffset = 0, yoffset = 0) {
 
     let hit, combinedHalfWidths, combinedHalfHeights, vx, vy;
 
@@ -20,9 +20,9 @@ function isColliding(r1, r2) {
     combinedHalfWidths = r1.halfWidth + r2.halfWidth;
     combinedHalfHeights = r1.halfHeight + r2.halfHeight;
 
-    if (Math.abs(vx) < combinedHalfWidths) {
+    if (Math.abs(vx + xoffset) < combinedHalfWidths) {
 
-        if (Math.abs(vy) < combinedHalfHeights) {
+        if (Math.abs(vy + yoffset) < combinedHalfHeights) {
             hit = true;
         } else {
             hit = false;
