@@ -79,6 +79,8 @@ function setup(){
 
     healthBar = new PIXI.Container();
     healthBar.getGlobalPosition().set(stage.width - 170, 4);
+    healthBar.x = stage.width - 170;
+    healthBar.y = 4;
     gameScene.addChild(healthBar);
 
     let innerBar = new PIXI.Graphics();
