@@ -5,7 +5,8 @@ let Application = PIXI.Application,
     TextureCache = PIXI.utils.TextureCache,
     Sprite = PIXI.Sprite,
     Text = PIXI.Text,
-    TextStyle = PIXI.TextStyle
+    TextStyle = PIXI.TextStyle,
+    Graphics = PIXI.Graphics
 ;
 
 let app = new Application({
@@ -33,7 +34,7 @@ let mainMenuScene, inGameScene;
 let state;
 
 //in-game objects
-let slime, enemySlime;
+let slime, enemySlime, line, line2, line3, line4;
 function main(){
     inGameScene = new Container();
     id = resources["images/ecdysis.json"].textures;
@@ -69,6 +70,36 @@ function main(){
 
     state = play;
     app.ticker.add(delta => gameLoop(delta));
+
+    line = new Graphics();
+    line.lineStyle(16, 0x000000, 1);
+    line.moveTo(0,0);
+    line.lineTo(app.renderer.width, 0);
+    line.x = 0;
+    line.y = 0;
+    line2 = new Graphics();
+    line2.lineStyle(16, 0x000000, 1);
+    line2.moveTo(0,0);
+    line2.lineTo(0, app.renderer.width);
+    line2.x = 0;
+    line2.y = 0;
+    line3 = new Graphics();
+    line3.lineStyle(16, 0x000000, 1);
+    line3.moveTo(0,0);
+    line3.lineTo(app.renderer.width, 0);
+    line3.x = 0;
+    line3.y = app.renderer.height;
+    line4 = new Graphics();
+    line4.lineStyle(16, 0x000000, 1);
+    line4.moveTo(0,0);
+    line4.lineTo(0, app.renderer.width);
+    line4.x = app.renderer.width;
+    line4.y = 0;
+    app.stage.addChild(line);
+    app.stage.addChild(line2);
+    app.stage.addChild(line3);
+    app.stage.addChild(line4);
+
 }
 
 function gameLoop(delta) {
@@ -89,5 +120,22 @@ function play(delta){
         enemySlime.alpha = 0.5
     }else {
         enemySlime.alpha = 1;
+    }
+
+    if (isColliding(slime, line)){
+        slime.x = (app.renderer.width / 2) - slime.width;
+        slime.y = (app.renderer.height / 2) - slime.height;
+    }
+    if (isColliding(slime, line2)){
+        slime.x = (app.renderer.width / 2) - slime.width;
+        slime.y = (app.renderer.height / 2) - slime.height;
+    }
+    if (isColliding(slime, line3)){
+        slime.x = (app.renderer.width / 2) - slime.width;
+        slime.y = (app.renderer.height / 2) - slime.height;
+    }
+    if (isColliding(slime, line4)){
+        slime.x = (app.renderer.width / 2) - slime.width;
+        slime.y = (app.renderer.height / 2) - slime.height;
     }
 }

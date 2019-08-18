@@ -21,9 +21,9 @@ function isColliding(r1, r2) {
     combinedHalfHeights = r1.halfHeight + r2.halfHeight;
 
 
-    if (Math.abs(vx - 10) < combinedHalfWidths) {
+    if (Math.abs(vx) < combinedHalfWidths) {
 
-        if (Math.abs(vy - 11) < combinedHalfHeights - 2.5) {
+        if (Math.abs(vy) < combinedHalfHeights) {
             hit = true;
         } else {
             hit = false;
