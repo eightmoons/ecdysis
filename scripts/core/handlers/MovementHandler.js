@@ -1,46 +1,46 @@
-function setMovementManager(sprite, initial_speed = 2, base_speed = 0) {
+function setMovementManager(sprite, onKeyPressBonusSpeed = 2, defaultSpeed = 0) {
     let left = keyboard("ArrowLeft"),
         up = keyboard("ArrowUp"),
         right = keyboard("ArrowRight"),
         down = keyboard("ArrowDown");
 
     left.press = () => {
-        sprite.vx = -initial_speed;
+        sprite.vx = -onKeyPressBonusSpeed;
         sprite.vy = 0;
     };
     left.release = () => {
         if (!right.isDown && sprite.vy === 0) {
-            sprite.vx = -base_speed;
+            sprite.vx = -defaultSpeed;
         }
     };
 
     up.press = () => {
-        sprite.vy = -initial_speed;
+        sprite.vy = -onKeyPressBonusSpeed;
         sprite.vx = 0;
     };
     up.release = () => {
         if (!down.isDown && sprite.vx === 0) {
-            sprite.vy = -base_speed;
+            sprite.vy = -defaultSpeed;
         }
     };
 
     right.press = () => {
-        sprite.vx  = initial_speed;
+        sprite.vx  = onKeyPressBonusSpeed;
         sprite.vy = 0;
     };
     right.release = () => {
         if (!left.isDown && sprite.vy === 0) {
-            sprite.vx = base_speed;
+            sprite.vx = defaultSpeed;
         }
     };
 
     down.press = () => {
-        sprite.vy = initial_speed;
+        sprite.vy = onKeyPressBonusSpeed;
         sprite.vx = 0;
     };
     down.release = () => {
         if (!up.isDown  && sprite.vx === 0) {
-            sprite.vy = base_speed;
+            sprite.vy = defaultSpeed;
         }
     };
 }

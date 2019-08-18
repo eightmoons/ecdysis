@@ -110,10 +110,9 @@ function play(delta){
     console.log(slime.width + "x" + slime.height);
     slime.x += slime.vx;
     slime.y += slime.vy;
-    setMovementManager(slime,1,.5);
+    setMovementManager(slime,1,2);
     contain(slime, {x: slime.width, y:  slime.height, width: app.renderer.width, height: app.renderer.height });
     contain(enemySlime, {x: slime.width, y:  slime.height, width: app.renderer.width, height: app.renderer.height });
-
 
     if (isColliding(slime, enemySlime, -8, -10)){
         enemySlime.x += 1;
