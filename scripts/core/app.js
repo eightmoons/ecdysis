@@ -44,7 +44,7 @@ function main(){
         slimeTexture.push(sheet.textures[slimeFrames[i]]);
     }
     slime = new PIXI.AnimatedSprite(slimeTexture);
-    slime.x = 150;
+    slime.x = 100;
     slime.y = 100;
     slime.vx = 0;
     slime.vy = 0;
@@ -61,8 +61,8 @@ function main(){
     }
 
     enemySlime = new PIXI.AnimatedSprite(enemySlimeTexture);
-    enemySlime.x = 300;
-    enemySlime.y = 200;
+    enemySlime.x = 100;
+    enemySlime.y = 100;
     enemySlime.animationSpeed =0.15;
     enemySlime.play()
     app.stage.addChild(enemySlime);
@@ -78,8 +78,11 @@ function gameLoop(delta) {
 function play(delta){
     slime.x += slime.vx;
     slime.y += slime.vy;
-    setMovementManager(slime,2,2);
+    setMovementManager(slime,1,.5);
     contain(slime, {x: slime.width, y:  slime.height, width: app.renderer.width, height: app.renderer.height });
+    contain(enemySlime, {x: slime.width, y:  slime.height, width: app.renderer.width, height: app.renderer.height });
+
+    console.log(isColliding(slime, enemySlime))
 
     if (isColliding(slime, enemySlime)){
         enemySlime.x += 1;
