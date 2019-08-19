@@ -1,13 +1,4 @@
-let Application = PIXI.Application,
-    Container = PIXI.Container,
-    loader = PIXI.Loader.shared,
-    resources = PIXI.Loader.shared.resources,
-    TextureCache = PIXI.utils.TextureCache,
-    Sprite = PIXI.Sprite,
-    Text = PIXI.Text,
-    TextStyle = PIXI.TextStyle,
-    Graphics = PIXI.Graphics
-;
+
 
 let app = new Application({
     width: 800,
@@ -29,24 +20,10 @@ function onLoaderProgress(loader, resource) {
 
 
 function main(){
-    let scene1 = new Container();
-    let appNameText, versionText, startText, authorText;
-
-    appNameText = new Text(app_name, largeText);
-    appNameText.position.set(50,60);
-    scene1.addChild(appNameText);
-
-    versionText = new Text(app_version, smallText);
-    versionText.position.set(appNameText.width , 60 + appNameText.height);
-    scene1.addChild(versionText);
-
-    authorText = new Text(text_globalrisk, tinyTextAccent);
-    authorText.position.set(50, 15);
-    scene1.addChild(authorText);
-
-
-
-    app.stage.addChild(scene1);
+    startMenuScene.visible = false;
+    app.stage.addChild(mainMenuScene);
+    app.stage.addChild(howtoplayMenuScene);
+    app.stage.addChild(startMenuScene);
     state = play;
     app.ticker.add(delta => gameLoop(delta));
 }
