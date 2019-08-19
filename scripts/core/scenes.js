@@ -127,6 +127,7 @@ howtoplayText.on('mousedown', () => {
         h2pMenuScene.visible = false;
         h2pMenuScene2.visible = true;
 
+        h2pMenuScene2.addChild(headerText);
 
         let back, next;
         back = new PIXI.Text(string_back, style_small_text_idle);
@@ -147,6 +148,18 @@ howtoplayText.on('mousedown', () => {
                 .on('mouseout', onButtonOut);
             h2pMenuScene2.addChild(button);
         });
+    });
+
+    back.on('mousedown', () => {
+        h2pMenuScene.addChild(headerText);
+        h2pMenuScene.visible = true;
+        h2pMenuScene2.visible = false;
+    });
+
+    // Page 3
+    next.on('mousedown', () => {
+        h2pMenuScene2.visible = false;
+        h2pMenuScene3.visible = true;
     });
 });
 
