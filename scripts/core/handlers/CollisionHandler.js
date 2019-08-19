@@ -53,7 +53,6 @@ function contain(sprite, container) {
         sprite.x = container.width - sprite.width;
         collision = "right";
     }
-
     if (sprite.y + sprite.height > container.height) {
         sprite.y = container.height - sprite.height;
         collision = "bottom";
