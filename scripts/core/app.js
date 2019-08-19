@@ -40,9 +40,11 @@ function main(){
     versionText.position.set(appNameText.width , 60 + appNameText.height);
     scene1.addChild(versionText);
 
-    authorText = new Text(text_globalrisk, tinyText);
+    authorText = new Text(text_globalrisk, tinyTextAccent);
     authorText.position.set(50, 15);
     scene1.addChild(authorText);
+
+
 
     app.stage.addChild(scene1);
     state = play;

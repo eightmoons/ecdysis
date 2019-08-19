@@ -29,8 +29,8 @@ const smallText = new PIXI.TextStyle({
     fill: colorWhite,
 });
 
-const tinyText = new PIXI.TextStyle({
+const tinyTextAccent = new PIXI.TextStyle({
     fontFamily: font_family,
     fontSize: 8,
-    fill: colorWhite,
+    fill: colorAccent,
 });
