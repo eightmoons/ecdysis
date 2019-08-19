@@ -54,6 +54,12 @@ const style_medium_text = new TextStyle({
     fontSize: 40,
     fill: colorWhite,
 });
+const style_medium_text_accent = new TextStyle({
+    fontFamily: font_family,
+    fontSize: 40,
+    fill: colorAccent,
+});
+
 
 const style_small_text = new TextStyle({
     fontFamily: font_family,

@@ -3,9 +3,13 @@ let mainMenuScene = new Container();
 let startMenuScene = new Container();
 let settingsMenuScene = new Container();
 let leaderboardsMenuScene = new Container();
-let howtoplayMenuScene = new Container();
+let h2pMenuScene = new Container();
+let h2pMenuScene2 = new Container();
+let h2pMenuScene3 = new Container();
+let h2pMenuScene4 = new Container();
+let h2pMenuScene5 = new Container();
 
-let scenes = [mainMenuScene, startMenuScene, startMenuScene, leaderboardsMenuScene, howtoplayMenuScene];
+let scenes = [mainMenuScene, startMenuScene, startMenuScene, leaderboardsMenuScene, h2pMenuScene];
 
 
 let appNameText, versionText, authorText, dateText, causeText, reasonText;
@@ -68,18 +72,31 @@ mainButtons.forEach(button => {
 
 howtoplayText.on('mousedown', () => {
     mainMenuScene.visible = false;
-    howtoplayMenuScene.visible = true;
+    h2pMenuScene.visible = true;
 
     let headerText, controls, w, a, s, d;
     let back, next;
 
     headerText = new PIXI.Text(string_how_to_play, style_large_text);
     headerText.position = appNameText.position;
-    howtoplayMenuScene.addChild(headerText);
+    h2pMenuScene.addChild(headerText);
 
-    controls = new PIXI.Text(string_controls,style_medium_text);
+    controls = new PIXI.Text(string_controls,style_medium_text_accent);
     controls.position.set(50, headerText.y + headerText.height + 40);
-    howtoplayMenuScene.addChild(controls);
+    h2pMenuScene.addChild(controls);
+
+    w = new PIXI.Text("W - Move Up", style_small_text);
+    w.position.set(50, controls.y + controls.height + 100);
+    h2pMenuScene.addChild(w);
+    a = new PIXI.Text("A - Move Left", style_small_text);
+    a.position.set(50, w.y + w.height + 20);
+    h2pMenuScene.addChild(a);
+    s = new PIXI.Text("S - Move Bottom", style_small_text);
+    s.position.set(50, a.y + a.height + 20);
+    h2pMenuScene.addChild(s);
+    d = new PIXI.Text("D - Move Right", style_small_text);
+    d.position.set(50, s.y + s.height + 20);
+    h2pMenuScene.addChild(d);
 
     back = new PIXI.Text(string_back, style_small_text_idle);
     back.position.set(50, height - (60 + back.height));
@@ -97,8 +114,40 @@ howtoplayText.on('mousedown', () => {
             .on('touchendoutside', onButtonUp)
             .on('mouseover', onButtonOver)
             .on('mouseout', onButtonOut);
-        howtoplayMenuScene.addChild(button);
-    })
+        h2pMenuScene.addChild(button);
+    });
+
+    back.on('mousedown',() => {
+        mainMenuScene.visible = true;
+        h2pMenuScene.visible = false;
+    });
+
+    // PAGE 2
+    next.on('mousedown',() => {
+        h2pMenuScene.visible = false;
+        h2pMenuScene2.visible = true;
+
+
+        let back, next;
+        back = new PIXI.Text(string_back, style_small_text_idle);
+        back.position.set(50, height - (60 + back.height));
+
+        next = new PIXI.Text(string_next, style_small_text_idle);
+        next.position.set(width - (50 + next.width), height - (60 + next.height));
+
+        let buttons = [back, next];
+        buttons.forEach(button => {
+            button.interactive = true;
+            button
+                .on('touchstart', onButtonDown)
+                .on('mouseup', onButtonUp)
+                .on('mouseupoutside', onButtonUp)
+                .on('touchendoutside', onButtonUp)
+                .on('mouseover', onButtonOver)
+                .on('mouseout', onButtonOut);
+            h2pMenuScene2.addChild(button);
+        });
+    });
 });
 
 startText.on('mousedown',() => {
