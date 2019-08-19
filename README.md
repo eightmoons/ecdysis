@@ -22,15 +22,17 @@ git clone nyo lang sa loob ng <xampp-directory>/htcdocs/ecdysis
 
 ##### Project Assignments:
 1. @elihpoivulp & @jpgabad 
-   - UI/Sprites
-   - Transition per level
-   - Level design
-   - Collision
+   - [x] UI/Sprites
+   - [x] Transition per level
+   - [x] Level design
+   - [x] Collision
+   - [ ] GAME ENGINE
 
 2. @edgel0rd & @limoso1
-   - Snake Movement
-   - collision
-   - enemy ai
+   - [x] Snake Movement
+   - [x] collision
+   - [ ] enemy ai
+   - [ ] all menus
 
 ### Project Directories
 - /styles
