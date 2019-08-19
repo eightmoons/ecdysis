@@ -27,8 +27,24 @@ function onLoaderProgress(loader, resource) {
     console.log("progress:" + loader.progress + "%");
 }
 
-function main(){
 
+function main(){
+    let scene1 = new Container();
+    let appNameText, versionText, startText, authorText;
+
+    appNameText = new Text(app_name, largeText);
+    appNameText.position.set(50,60);
+    scene1.addChild(appNameText);
+
+    versionText = new Text(app_version, smallText);
+    versionText.position.set(appNameText.width , 60 + appNameText.height);
+    scene1.addChild(versionText);
+
+    authorText = new Text(text_globalrisk, tinyText);
+    authorText.position.set(50, 15);
+    scene1.addChild(authorText);
+
+    app.stage.addChild(scene1);
     state = play;
     app.ticker.add(delta => gameLoop(delta));
 }
