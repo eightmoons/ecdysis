@@ -88,8 +88,8 @@ function play(delta){
     slime.x += slime.vx;
     slime.y += slime.vy;
     setMovementManager(slime,1,2);
-    contain(slime, {x: 32, y:  88 + 32, width: app.renderer.width, height: app.renderer.height - 88 });
-    contain(enemySlime, {x: 32, y:  88 + 32, width: app.renderer.width, height: app.renderer.height - 88 });
+    contain(slime, {x: 23, y:  88 + 23, width: app.renderer.width, height: app.renderer.height - 88 });
+    contain(enemySlime, {x: 23, y:  88 + 23, width: app.renderer.width, height: app.renderer.height - 88 });
 
     if (isColliding(slime, enemySlime, -8, -10)){
         enemySlime.x += 1;
