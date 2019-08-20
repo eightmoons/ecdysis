@@ -148,18 +148,19 @@ howtoplayText.on('mousedown', () => {
                 .on('mouseout', onButtonOut);
             h2pMenuScene2.addChild(button);
         });
-    });
+        
+        back.on('mousedown', () => {
+            h2pMenuScene.addChild(headerText);
+            h2pMenuScene.visible = true;
+            h2pMenuScene2.visible = false;
+        });
 
-    back.on('mousedown', () => {
-        h2pMenuScene.addChild(headerText);
-        h2pMenuScene.visible = true;
-        h2pMenuScene2.visible = false;
-    });
-
-    // Page 3
-    next.on('mousedown', () => {
-        h2pMenuScene2.visible = false;
-        h2pMenuScene3.visible = true;
+        // Page 3
+        next.on('mousedown', () => {
+            h2pMenuScene2.visible = false;
+            h2pMenuScene3.visible = true;
+            
+        });
     });
 });
 
