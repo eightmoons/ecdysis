@@ -51,26 +51,13 @@ const string_campaign = "Campaign";
 const string_survival = "Survival";
 const string_controls = "Controls";
 const string_objective = "Objective";
-const string_objective_desc_line_1 =   "To win, You need to";
-const string_objective_desc_line_2 =   "reach the final";
-const string_objective_desc_line_3 =   "evolution by";
-const string_objective_desc_line_4 =   "picking ";
-const string_objective_desc_line_4_highlight =   "EVO Points";
+const string_objective_description = "the main objective \nis to reach the \nfinal form by \ncollecting evo points";
 const string_slime = "Slime";
-const string_the = "The";
-const string_slime_slimes = "slimes";
-const string_slime_desc_line_1_final_words = "are brainless";
-const string_slime_desc_line_2 = "creatures, do not touch";
-const string_slime_desc_line_3 = "them as you will lose";
-const string_hearts = "hearts";
+const string_slime_desc = "The slimes are \nbrainless creatures, \ndo not touch them as \nyou will lose a heart";
+const string_obstacles = "Obstacles";
+const string_obstacles_desc = "Obstacles blocks \nyour regular path, \nyou'll lose a \nheart upon touch";
 const string_heart = "Heart";
-const string_heart_desc_line_1 = "Every game you start with";
-const string_heart_desc_line_2_highlight = "3 hearts";
-const string_heart_desc_line_2 = ". If your ";
-const string_heart_desc_line_2_highlight_2 = "hearts";
-const string_heart_desc_line_3 = "reaches ";
-const string_heart_desc_line_3_highlight = "0";
-const string_heart_desc_line_3_final_words = " you lose";
+const string_heart_description = "Hearts are your life. \nlosing a heart respawns \nyou at the center. Losing \nall hearts means you lost \nthe game";
 const string_finish = "Finish";
 const string_difficulty = "Difficulty";
 const string_sound = "Sound";
@@ -125,6 +112,13 @@ const style_small_text = new TextStyle({
     fontFamily: font_family,
     fontSize: 20,
     fill: colorWhite,
+});
+
+const style_small_text_paragraph = new TextStyle({
+    fontFamily: font_family,
+    fontSize: 20,
+    fill: colorWhite,
+    lineHeight: 30
 });
 
 const style_small_text_idle = new TextStyle({

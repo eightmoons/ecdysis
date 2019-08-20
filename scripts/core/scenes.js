@@ -7,8 +7,8 @@ let mainMenuScene = new Container(),
     movementTutorialScene = new Container(),
     objectiveTutorialScene = new Container(),
     slimeTutorialScene = new Container(),
-    heartTutorialScene = new Container(),
-    h2pMenuScene5 = new Container()
+    obstaclesTutorialScene = new Container(),
+    heartTutorialScene = new Container()
 ;
 
 let scenes = [
@@ -20,8 +20,8 @@ let scenes = [
     movementTutorialScene,
     objectiveTutorialScene,
     slimeTutorialScene,
-    heartTutorialScene,
-    h2pMenuScene5
+    obstaclesTutorialScene,
+    heartTutorialScene
 ];
 
 /******************
@@ -289,30 +289,20 @@ next2page2.on('mousedown',() => {
  *****************/
 let objective = new PIXI.Text(string_objective, style_medium_text_accent),
     objectiveHeaderText = new PIXI.Text(string_how_to_play, style_large_text),
-    objective_desc_line_1 = new PIXI.Text(string_objective_desc_line_1, style_small_text),
-    objective_desc_line_2 = new PIXI.Text(string_objective_desc_line_2, style_small_text),
-    objective_desc_line_3 = new PIXI.Text(string_objective_desc_line_3, style_small_text),
-    objective_desc_line_4 = new PIXI.Text(string_objective_desc_line_4, style_small_text),
-    objective_line_4_highlight = new PIXI.Text(string_objective_desc_line_4_highlight, style_small_text_accent);
+    objective_description = new PIXI.Text(string_objective_description, style_small_text_paragraph);
 let backToPage1 = new PIXI.Text(string_back, style_small_text_idle),
     nextToPage3 = new PIXI.Text(string_next, style_small_text_idle);
 
 objectiveHeaderText.position = appNameText.position;
 objective.position = controls.position;
-objective_desc_line_1.position = w.position;
-objective_desc_line_2.position = a.position;
-objective_desc_line_3.position = s.position;
-objective_desc_line_4.position.set(appMargin, objective_desc_line_3.y + spacingTiny + objective_desc_line_4.height);
-objective_line_4_highlight.position.set(appMargin + objective_desc_line_4.width, objective_desc_line_4.y);
+objective_description.position = w.position;
 
 backToPage1.visible = true;
 backToPage1.position.set(appMargin, height - (appMargin + backToPage1.height));
 nextToPage3.position.set(width - (appMargin + nextToPage3.width), height - (appMargin + nextToPage3.height));
 
 let objectiveButtons = [backToPage1, nextToPage3];
-let objectiveObjects = [backToPage1, nextToPage3, objective, objective, objective_desc_line_1,
-    objective_desc_line_2, objective_desc_line_3,
-    objective_desc_line_4, objective_line_4_highlight, objectiveHeaderText];
+let objectiveObjects = [backToPage1, nextToPage3, objective, objective, objective_description, objectiveHeaderText];
 
 initializeInteractivity(objectiveButtons);
 initializeInContainer(objectiveObjects, objectiveTutorialScene);
@@ -336,30 +326,18 @@ let backToObjectiveTutorial = new PIXI.Text(string_back, style_small_text_idle),
     next2page4 = new PIXI.Text(string_next, style_small_text_idle);
 let slime = new PIXI.Text(string_slime, style_medium_text_accent),
     slimeHeaderText = new PIXI.Text(string_how_to_play, style_large_text),
-    slime_desc_line_1_word_1 = new PIXI.Text(string_the, style_small_text),
-    slime_desc_line_1_highlight = new PIXI.Text(string_slime_slimes, style_small_text_accent),
-    slime_desc_line_1_final_words = new PIXI.Text(string_slime_desc_line_1_final_words, style_small_text),
-    slime_desc_line_2 = new PIXI.Text(string_slime_desc_line_2, style_small_text),
-    slime_desc_line_3 = new PIXI.Text(string_slime_desc_line_3, style_small_text),
-    slime_desc_line_4_highlight = new PIXI.Text(string_hearts, style_small_text_accent);
+    slime_description = new PIXI.Text(string_slime_desc, style_small_text_paragraph);
 
 
 slimeHeaderText.position = appNameText.position;
 slime.position = controls.position;
-slime_desc_line_1_word_1.position = w.position;
-slime_desc_line_1_highlight.position.set(50+ slime_desc_line_1_word_1.width + 10, slime_desc_line_1_word_1.y);
-slime_desc_line_1_final_words.position.set(slime_desc_line_1_highlight.width + slime_desc_line_1_highlight.x + 10, slime_desc_line_1_highlight.y);
-slime_desc_line_2.position = a.position;
-slime_desc_line_3.position = s.position;
-slime_desc_line_4_highlight.position = d.position;
+slime_description.position = w.position;
 
 backToObjectiveTutorial.position = back2home.position;
 next2page4.position = next2page2.position;
 
 let slimeButtons = [backToObjectiveTutorial, next2page4];
-let slimeObjects = [backToObjectiveTutorial, next2page4,  slime,
-    slimeHeaderText, slime_desc_line_1_word_1, slime_desc_line_1_highlight, slime_desc_line_1_final_words,
-    slime_desc_line_2, slime_desc_line_3, slime_desc_line_4_highlight];
+let slimeObjects = [backToObjectiveTutorial, next2page4,  slime, slimeHeaderText, slime_description];
 initializeInteractivity(slimeButtons);
 initializeInContainer(slimeObjects, slimeTutorialScene);
 
@@ -371,23 +349,51 @@ backToObjectiveTutorial.on('mousedown', () => {
 //PAGE 4;
 next2page4.on('mousedown', () => {
     slimeTutorialScene.visible = false;
+    obstaclesTutorialScene.visible = true;
+});
+/******************
+ * How to Play Menu
+ * Obstacle tutorial
+ * Page 4
+ *****************/
+let obstacleOkButton = new PIXI.Text(string_next, style_small_text_idle),
+    obstacleCancelButton = new PIXI.Text(string_back, style_small_text_idle);
+
+let obstacleHeaderText = new PIXI.Text(string_how_to_play, style_large_text),
+    obstacleText = new PIXI.Text(string_obstacles, style_medium_text_accent),
+    obstacleDescription = new PIXI.Text(string_obstacles_desc, style_small_text_paragraph);
+
+obstacleHeaderText.position = appNameText.position;
+obstacleText.position = controls.position;
+obstacleDescription.position = w.position;
+
+obstacleCancelButton.position = back2home.position;
+obstacleOkButton.position = next2page2.position;
+
+let obstacleButtons = [obstacleOkButton, obstacleCancelButton];
+let obstacleObjects = [obstacleHeaderText, obstacleText, obstacleDescription, obstacleOkButton, obstacleCancelButton];
+initializeInteractivity(obstacleButtons);
+initializeInContainer(obstacleObjects, obstaclesTutorialScene);
+
+obstacleCancelButton.on('mousedown', () => {
+    obstaclesTutorialScene.visible = false;
+    slimeTutorialScene.visible = true;
+});
+
+obstacleOkButton.on('mousedown', () => {
+    obstaclesTutorialScene.visible = false;
     heartTutorialScene.visible = true;
 });
 
 /******************
  * How to Play Menu
  * Hearts tutorial
- * Page 4
+ * Page 5
  *****************/
 let heartText = new PIXI.Text(string_heart, style_medium_text_accent),
     heartHeaderText = new PIXI.Text(string_how_to_play, style_large_text),
-    heart_desc_line_1 = new PIXI.Text(string_heart_desc_line_1, style_small_text),
-    heart_desc_line_2_highlight = new PIXI.Text(string_heart_desc_line_2_highlight, style_small_text_accent),
-    heart_desc_line_2 = new PIXI.Text(string_heart_desc_line_2, style_small_text),
-    heart_desc_line_2_highlight_2 = new PIXI.Text(string_heart_desc_line_2_highlight_2, style_small_text_accent),
-    heart_desc_line_3 = new PIXI.Text(string_heart_desc_line_3, style_small_text),
-    heart_desc_line_3_highlight = new PIXI.Text(string_heart_desc_line_3_highlight, style_small_text_accent),
-    heart_desc_line_3_end = new PIXI.Text(string_heart_desc_line_3_final_words, style_small_text),
+    heart_description = new PIXI.Text(string_heart_description, style_small_text_paragraph),
+
     heartOkButton = new PIXI.Text(string_finish, style_small_text_idle),
     heartCancelButton = new PIXI.Text(string_back, style_small_text_idle);
 
@@ -395,28 +401,19 @@ heartHeaderText.position = appNameText.position;
 heartText.position = controls.position;
 
 slime.position = controls.position;
-heart_desc_line_1.position = w.position;
-heart_desc_line_2_highlight.position = a.position;
-heart_desc_line_2.position.set(heart_desc_line_2_highlight.x + heart_desc_line_2_highlight.width, a.y);
-heart_desc_line_2_highlight_2.position.set(heart_desc_line_2.x + heart_desc_line_2.width, a.y);
-heart_desc_line_3.position = s.position;
-heart_desc_line_3_highlight.position.set(heart_desc_line_3.x + heart_desc_line_3.width, heart_desc_line_3.y);
-heart_desc_line_3_end.position.set(heart_desc_line_3_highlight.x + heart_desc_line_3_highlight.width, heart_desc_line_3_highlight.y);
+heart_description.position = w.position;
 
-heartCancelButton.position.set(appMargin, height - (appMargin + backToPage1.height));
-heartOkButton.position.set(width - (appMargin + heartCancelButton.width), height - (appMargin + heartCancelButton.height));
+heartCancelButton.position.set(appMargin, height - (appMargin + heartCancelButton.height));
+heartOkButton.position.set(width - (appMargin + heartOkButton.width), height - (appMargin + heartOkButton.height));
 
 let heartButtons = [heartOkButton, heartCancelButton];
-let heartObjects = [heartText, heart_desc_line_1, heart_desc_line_2_highlight,
-    heart_desc_line_2, heart_desc_line_2_highlight_2,heartHeaderText,
-    heart_desc_line_3, heart_desc_line_3_highlight,
-    heart_desc_line_3_end,heartOkButton, heartCancelButton];
+let heartObjects = [heartText, heart_description,heartOkButton, heartCancelButton, heartHeaderText];
 initializeInteractivity(heartButtons);
 initializeInContainer(heartObjects, heartTutorialScene);
 
 heartCancelButton.on('mousedown', () => {
     heartTutorialScene.visible = false;
-    slimeTutorialScene.visible = true;
+    obstaclesTutorialScene.visible = true;
 });
 
 heartOkButton.on('mousedown', () => {
