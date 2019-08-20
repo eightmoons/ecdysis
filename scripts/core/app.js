@@ -26,6 +26,8 @@ function main(){
     poly1 = new Sprite(id["poly1.png"]);
     poly2 = new Sprite(id["poly2.png"]);
     poly3 = new Sprite(id["poly3.png"]);
+    poly2.position.set(129,505);
+    poly3.position.set(565,218);
     mainMenuScene.addChildAt(poly1, 0);
     mainMenuScene.addChildAt(poly2, 0);
     mainMenuScene.addChildAt(poly3, 0);
@@ -44,9 +46,5 @@ function gameLoop(delta) {
 }
 
 function play(delta){
-    polies.forEach(poly => {
-        poly.y = randomInt(-1,1);
-        poly.x = randomInt(-1,1);
-        contain(poly, mainMenuScene);
-    })
+
 }

@@ -59,19 +59,21 @@ let mainMenuObjects = [startText, settingsText, creditsText, leaderBoardsText, h
 initializeInteractivity(mainMenuButtons);
 initializeInContainer(mainMenuObjects, mainMenuScene);
 
+startText.on('mousedown',() => {
+    mainMenuScene.visible = false;
+    startMenuScene.visible = true;
+});
+settingsText.on('mousedown', () => {
+   mainMenuScene.visible = false;
+   settingsMenuScene.visible = true;
+});
 howToPlayText.on('mousedown', () => {
     mainMenuScene.visible = false;
     movementTutorialScene.visible = true;
 });
-
 leaderBoardsText.on('mousedown', () => {
     mainMenuScene.visible = false;
     leaderBoardsMenuScene.visible = true;
-});
-
-startText.on('mousedown',() => {
-    mainMenuScene.visible = false;
-    startMenuScene.visible = true;
 });
 /******************
  * START MENU
@@ -105,7 +107,88 @@ backText.on('mousedown', () => {
  * Settings
  *
  *****************/
-let settingsHeader = new PIXI.Text(string_settings, style_large_text);
+let settingsHeader = new PIXI.Text(string_settings, style_large_text),
+    soundText = new PIXI.Text(string_sound, style_small_text),
+    difficultyText = new PIXI.Text(string_difficulty, style_small_text),
+    easyText = new PIXI.Text(string_easy, style_small_text_green),
+    mediumText = new PIXI.Text(string_medium, style_small_text_idle),
+    hardText = new PIXI.Text(string_hard, style_small_text_idle),
+    toggleText = new PIXI.Text(string_on, style_small_text_green),
+    settingsBack = new PIXI.Text(string_back, style_small_text_idle);
+
+settingsHeader.position = appNameText.position;
+
+soundText.position.set(appMargin, settingsHeader.y + settingsHeader.height + 100);
+toggleText.position.set(soundText.x + soundText.width + spacingSmall, soundText.y);
+difficultyText.position.set(appMargin, soundText.y + soundText.height + spacingSmall);
+easyText.position.set(difficultyText.x + difficultyText.width + spacingSmall, difficultyText.y);
+mediumText.position.set(easyText.x + easyText.width + spacingTiny, difficultyText.y);
+hardText.position.set(mediumText.x + mediumText.width + spacingTiny, difficultyText.y);
+settingsBack.position.set(appMargin, backText.y);
+
+let settingsButtons = [settingsBack];
+let difficultyButtons = [easyText, mediumText, hardText];
+let settingsObjects = [settingsHeader, soundText, toggleText, difficultyText,
+    easyText, mediumText, hardText, settingsBack];
+
+initializeInteractivity(settingsButtons);
+initializeInContainer(settingsObjects, settingsMenuScene);
+
+toggleText.interactive = true;
+easyText.interactive = true;
+mediumText.interactive = true;
+hardText.interactive = true;
+toggleText.on('mousedown', () => {
+    if (SOUND) {
+        toggleText.text = string_off;
+        toggleText.style = style_small_text_red;
+        SOUND = false;
+    }
+    else {
+        toggleText.text = string_on;
+        toggleText.style = style_small_text_green;
+        SOUND = true;
+    }
+});
+easyText.on('mousedown', () => {
+    activeButton(1, difficultyButtons)
+});
+mediumText.on('mousedown', () => {
+    activeButton(2, difficultyButtons)
+});
+hardText.on('mousedown', () => {
+    activeButton(3, difficultyButtons)
+});
+
+function activeButton(mode, buttonGroup){
+    let text;
+    switch (mode) {
+        case 1:
+            text = easyText;
+            break;
+        case 2:
+            text = mediumText;
+            break;
+        case 3:
+            text = hardText;
+            break;
+        default:
+            text = easyText;
+            break;
+    }
+
+    buttonGroup.forEach(btn => {
+        btn.style = btn === text? style_small_text_green : style_small_text_idle;
+    });
+
+    DIFFICULTY = mode;
+}
+
+
+settingsBack.on('mousedown', () => {
+    settingsMenuScene.visible = false;
+    mainMenuScene.visible = true;
+});
 
 
 /******************
@@ -119,9 +202,9 @@ let leaderBoardHeaderText = new PIXI.Text(string_leader_boards,style_large_text)
 let leaderBoardBack = new PIXI.Text(string_back, style_small_text_idle);
 
 leaderBoardHeaderText.position = appNameText.position;
-firstText.position.set(50, leaderBoardHeaderText.y + leaderBoardHeaderText.height + 100);
-secondText.position.set(50, firstText.y + firstText.height + spacingTiny);
-thirdText.position.set(50, secondText.y + secondText.height + spacingTiny);
+firstText.position.set(appMargin, leaderBoardHeaderText.y + leaderBoardHeaderText.height + 100);
+secondText.position.set(appMargin, firstText.y + firstText.height + spacingTiny);
+thirdText.position.set(appMargin, secondText.y + secondText.height + spacingTiny);
 leaderBoardBack.position.set(appMargin, height - (appMargin + leaderBoardBack.height));
 let leaderboardButtons = [leaderBoardHeaderText, firstText, secondText, thirdText, leaderBoardBack];
     leaderboardObjects = [leaderBoardBack];

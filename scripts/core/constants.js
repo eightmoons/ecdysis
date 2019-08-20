@@ -11,6 +11,11 @@ let Application = PIXI.Application,
 ;
 let width = 800;
 let height = 600;
+//settings
+
+let DIFFICULTY = 1,
+    SOUND = true;
+
 
 //colors
 const colorBlack = 0x212121;
@@ -20,6 +25,10 @@ const colorAccent = 0xF44336;
 const colorGold = 0xFFEE00;
 const colorSilver = 0xBCBCBC;
 const colorBronze = 0x773F3F;
+const colorRed = 0xE53D3D;
+const colorPink = 0xE53DB3;
+const colorGreen = 0x80E53D;
+const colorBlue = 0x3D75E5;
 
 //etc
 const font_family = "Press Start 2P";
@@ -63,6 +72,13 @@ const string_heart_desc_line_3 = "reaches ";
 const string_heart_desc_line_3_highlight = "0";
 const string_heart_desc_line_3_final_words = " you lose";
 const string_finish = "Finish";
+const string_difficulty = "Difficulty";
+const string_sound = "Sound";
+const string_on = "On";
+const string_off = "Off";
+const string_easy = "Easy";
+const string_medium = "Medium";
+const string_hard = "Hard";
 
 //styles
 const appMargin = 50;
@@ -123,6 +139,16 @@ const style_small_text_accent = new TextStyle({
     fill: colorAccent,
 });
 
+const style_small_text_red = new TextStyle({
+    fontFamily: font_family,
+    fontSize: 20,
+    fill: colorRed,
+});
+const style_small_text_green = new TextStyle({
+    fontFamily: font_family,
+    fontSize: 20,
+    fill: colorGreen,
+});
 const style_tiny_text = new TextStyle({
     fontFamily: font_family,
     fontSize: 10,
