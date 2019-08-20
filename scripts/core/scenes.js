@@ -24,6 +24,22 @@ let scenes = [
     heartTutorialScene
 ];
 
+let sceneManager = {
+    MainMenu: {
+        Start: startMenuScene,
+        Settings: settingsMenuScene,
+        Credits: creditsMenuScene,
+        LeaderBoards: leaderBoardsMenuScene,
+        Tutorial: [
+            movementTutorialScene,
+            objectiveTutorialScene,
+            slimeTutorialScene,
+            obstaclesTutorialScene,
+            heartTutorialScene
+        ]
+    }
+};
+
 /******************
  * Main Menu
  *
@@ -85,7 +101,7 @@ leaderBoardsText.on('mousedown', () => {
  * START MENU
  *
  *****************/
-let campaignText = new PIXI.Text(stringCampaign, styleSmallTextIdle),
+let campaignText = new Text(stringCampaign, styleSmallTextIdle),
     survivalText = new PIXI.Text(stringSurvival, styleSmallTextIdle),
     backText = new PIXI.Text(stringBack, styleSmallTextIdle);
 let startAppNameText = new PIXI.Text(stringAppName, styleLargeText),
