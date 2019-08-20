@@ -262,7 +262,7 @@ let back2home = new PIXI.Text(string_back, style_small_text_idle),
 headerText.position.set(appMargin, appMargin + 30);
 controls.position.set(appMargin, headerText.y + headerText.height + 40);
 
-w.position.set(appMargin, controls.y + controls.height + 100);
+w.position.set(appMargin, controls.y + controls.height + 50);
 a.position.set(appMargin, w.y + w.height + spacingTiny);
 s.position.set(appMargin, a.y + a.height + spacingTiny);
 d.position.set(appMargin, s.y + s.height + spacingTiny);
