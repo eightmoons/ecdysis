@@ -2,30 +2,6 @@ function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function onButtonDown(){
-    this.isdown = true;
-    this.style = styleSmallTextAccent;
-}
-
-function onButtonUp(){
-    this.isdown = false;
-    this.style = this.isover ? styleSmallText : styleSmallTextIdle;
-}
-
-function onButtonOver() {
-    this.isover = true;
-    if (!this.isdown) {
-        this.style = styleSmallText;
-    }
-}
-
-function onButtonOut() {
-    this.isover = false;
-    if (!this.isdown) {
-        this.style = styleSmallTextIdle;
-    }
-}
-
 function initializeInteractivity(pixi_objects) {
     pixi_objects.forEach(obj => {
         obj.interactive = true;
@@ -39,14 +15,73 @@ function initializeInteractivity(pixi_objects) {
     });
 }
 
-function initializeInContainer(pixi_objects, container) {
+function initializeInContainer(pixi_objects, container, onBack = false) {
     pixi_objects.forEach(obj => {
-        container.addChild(obj);
+        if (!onBack){
+            container.addChild(obj);
+        }
+        else {
+            container.addChildAt(obj,0);
+        }
     });
 }
 
+function changeScene(from, to, polygons = undefined){
+    from.visible = false;
+    to.visible = true;
+    if (polygons !== undefined){
+        initializeInContainer(polygons, to, true);
+    }
+}
 
-function isColliding(r1, r2) {
+function setMovementManager(sprite, onKeyPressBonusSpeed = 2, defaultSpeed = 0) {
+    let left = keyboard("ArrowLeft"),
+        up = keyboard("ArrowUp"),
+        right = keyboard("ArrowRight"),
+        down = keyboard("ArrowDown");
+
+    left.press = () => {
+        sprite.vx = -onKeyPressBonusSpeed;
+        sprite.vy = 0;
+    };
+    left.release = () => {
+        if (!right.isDown && sprite.vy === 0) {
+            sprite.vx = -defaultSpeed;
+        }
+    };
+
+    up.press = () => {
+        sprite.vy = -onKeyPressBonusSpeed;
+        sprite.vx = 0;
+    };
+    up.release = () => {
+        if (!down.isDown && sprite.vx === 0) {
+            sprite.vy = -defaultSpeed;
+        }
+    };
+
+    right.press = () => {
+        sprite.vx  = onKeyPressBonusSpeed;
+        sprite.vy = 0;
+    };
+    right.release = () => {
+        if (!left.isDown && sprite.vy === 0) {
+            sprite.vx = defaultSpeed;
+        }
+    };
+
+    down.press = () => {
+        sprite.vy = onKeyPressBonusSpeed;
+        sprite.vx = 0;
+    };
+    down.release = () => {
+        if (!up.isDown  && sprite.vx === 0) {
+            sprite.vy = defaultSpeed;
+        }
+    };
+}
+
+function isColliding(r1, r2, xoffset = 0, yoffset = 0) {
 
     let hit, combinedHalfWidths, combinedHalfHeights, vx, vy;
 
@@ -68,9 +103,9 @@ function isColliding(r1, r2) {
     combinedHalfWidths = r1.halfWidth + r2.halfWidth;
     combinedHalfHeights = r1.halfHeight + r2.halfHeight;
 
-    if (Math.abs(vx) < combinedHalfWidths) {
+    if (Math.abs(vx + xoffset) < combinedHalfWidths) {
 
-        if (Math.abs(vy) < combinedHalfHeights) {
+        if (Math.abs(vy + yoffset) < combinedHalfHeights) {
             hit = true;
         } else {
             hit = false;
@@ -101,7 +136,6 @@ function contain(sprite, container) {
         sprite.x = container.width - sprite.width;
         collision = "right";
     }
-
     if (sprite.y + sprite.height > container.height) {
         sprite.y = container.height - sprite.height;
         collision = "bottom";

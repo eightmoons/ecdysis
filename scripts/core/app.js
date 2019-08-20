@@ -30,6 +30,10 @@ function main(){
     mainMenuScene.addChildAt(poly2, 0);
     mainMenuScene.addChildAt(poly3, 0);
     polies = [poly1,poly2,poly3];
+    polies.forEach(poly => {
+        poly.dx = 0.5;
+        poly.dy = 0.5;
+    });
     scenes.forEach(scene => {
         app.stage.addChild(scene);
         scene.visible = false;
@@ -44,5 +48,21 @@ function gameLoop(delta) {
 }
 
 function play(delta){
-
+    polies.forEach(poly => {
+        poly.y += poly.dy;
+        poly.x += poly.dx;
+        if (poly.x > width && poly.dx > 0) {
+            poly.dx = -poly.dx;
+        }
+        if (poly.y > height && poly.dy > 0) {
+            poly.dy = -poly.dy;
+        }
+        if (poly.x < 0 && poly.dx < 0) {
+            poly.dx = -poly.dx;
+        }
+        if (poly.y < 0 && poly.dy < 0) {
+            poly.dy = -poly.dy;
+        }
+        poly.rotation += 0.001;
+    })
 }

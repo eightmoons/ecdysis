@@ -78,24 +78,19 @@ initializeInteractivity(mainMenuButtons);
 initializeInContainer(mainMenuObjects, mainMenuScene);
 
 startText.on('mousedown',() => {
-    mainMenuScene.visible = false;
-    startMenuScene.visible = true;
+    changeScene(mainMenuScene, startMenuScene, polies);
 });
 settingsText.on('mousedown', () => {
-   mainMenuScene.visible = false;
-   settingsMenuScene.visible = true;
+    changeScene(mainMenuScene, settingsMenuScene, polies);
 });
 creditsText.on('mousedown', () => {
-    mainMenuScene.visible = false;
-    creditsMenuScene.visible = true;
+    changeScene(mainMenuScene, creditsMenuScene, polies);
 });
 howToPlayText.on('mousedown', () => {
-    mainMenuScene.visible = false;
-    movementTutorialScene.visible = true;
+    changeScene(mainMenuScene, movementTutorialScene, polies);
 });
 leaderBoardsText.on('mousedown', () => {
-    mainMenuScene.visible = false;
-    leaderBoardsMenuScene.visible = true;
+    changeScene(mainMenuScene, leaderBoardsMenuScene, polies);
 });
 /******************
  * START MENU
@@ -122,8 +117,7 @@ initializeInteractivity(startButtons);
 initializeInContainer(startObjects, startMenuScene);
 
 backText.on('mousedown', () => {
-    startMenuScene.visible = false;
-    mainMenuScene.visible = true;
+    changeScene(startMenuScene, mainMenuScene, polies);
 });
 /******************
  * Settings
@@ -207,8 +201,7 @@ function activeButton(mode, buttonGroup){
 }
 
 settingsBack.on('mousedown', () => {
-    settingsMenuScene.visible = false;
-    mainMenuScene.visible = true;
+    changeScene(settingsMenuScene, mainMenuScene, polies);
 });
 /******************
  * Credits
@@ -230,8 +223,7 @@ initializeInteractivity(creditButtons);
 initializeInContainer(creditObjects, creditsMenuScene);
 
 creditsBack.on('mousedown', () => {
-    creditsMenuScene.visible = false;
-    mainMenuScene.visible = true;
+    changeScene(creditsMenuScene, mainMenuScene, polies);
 });
 
 
@@ -258,8 +250,7 @@ initializeInteractivity(leaderboardObjects);
 initializeInContainer(leaderBoardsButtons, leaderBoardsMenuScene);
 
 leaderBoardsBack.on('mousedown', () => {
-   leaderBoardsMenuScene.visible = false;
-   mainMenuScene.visible = true;
+    changeScene(leaderBoardsMenuScene, mainMenuScene, polies);
 });
 /******************
  * How to Play Menu
@@ -290,12 +281,10 @@ let movementObjects = [back2home, next2page2, headerText, controls, w, a, s, d];
 initializeInteractivity(movementButtons);
 initializeInContainer(movementObjects, movementTutorialScene);
 back2home.on('mousedown',() => {
-    movementTutorialScene.visible = false;
-    mainMenuScene.visible = true;
+    changeScene(movementTutorialScene, mainMenuScene, polies);
 });
 next2page2.on('mousedown',() => {
-    movementTutorialScene.visible = false;
-    objectiveTutorialScene.visible = true;
+    changeScene(movementTutorialScene, objectiveTutorialScene, polies);
 });
 
 /******************
@@ -324,13 +313,11 @@ initializeInteractivity(objectiveButtons);
 initializeInContainer(objectiveObjects, objectiveTutorialScene);
 
 backToPage1.on('mousedown', () => {
-    objectiveTutorialScene.visible = false;
-    movementTutorialScene.visible = true;
+    changeScene(objectiveTutorialScene, movementTutorialScene, polies);
 });
 
 nextToPage3.on('mousedown', () => {
-    objectiveTutorialScene.visible = false;
-    slimeTutorialScene.visible = true;
+    changeScene(objectiveTutorialScene, slimeTutorialScene, polies);
 });
 
 /******************
@@ -358,14 +345,12 @@ initializeInteractivity(slimeButtons);
 initializeInContainer(slimeObjects, slimeTutorialScene);
 
 backToObjectiveTutorial.on('mousedown', () => {
-    objectiveTutorialScene.visible = true;
-    slimeTutorialScene.visible = false;
+    changeScene(slimeTutorialScene, objectiveTutorialScene, polies);
 });
 
 //PAGE 4;
 next2page4.on('mousedown', () => {
-    slimeTutorialScene.visible = false;
-    obstaclesTutorialScene.visible = true;
+    changeScene(slimeTutorialScene, obstaclesTutorialScene, polies);
 });
 /******************
  * How to Play Menu
@@ -392,13 +377,11 @@ initializeInteractivity(obstacleButtons);
 initializeInContainer(obstacleObjects, obstaclesTutorialScene);
 
 obstacleCancelButton.on('mousedown', () => {
-    obstaclesTutorialScene.visible = false;
-    slimeTutorialScene.visible = true;
+    changeScene(obstaclesTutorialScene, slimeTutorialScene, polies);
 });
 
 obstacleOkButton.on('mousedown', () => {
-    obstaclesTutorialScene.visible = false;
-    heartTutorialScene.visible = true;
+    changeScene(obstaclesTutorialScene, heartTutorialScene, polies);
 });
 
 /******************
@@ -428,11 +411,9 @@ initializeInteractivity(heartButtons);
 initializeInContainer(heartObjects, heartTutorialScene);
 
 heartCancelButton.on('mousedown', () => {
-    heartTutorialScene.visible = false;
-    obstaclesTutorialScene.visible = true;
+    changeScene(heartTutorialScene, obstaclesTutorialScene, polies);
 });
 
 heartOkButton.on('mousedown', () => {
-    heartTutorialScene.visible = false;
-    mainMenuScene.visible = true;
+    changeScene(heartTutorialScene, mainMenuScene, polies);
 });
