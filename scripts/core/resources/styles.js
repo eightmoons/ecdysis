@@ -45,6 +45,12 @@ const styleSmallTextParagraph = new TextStyle({
     lineHeight: 30
 });
 
+const styleSmallTextDisabled = new TextStyle({
+    fontFamily: font_family,
+    fontSize: 20,
+    fill: colorDisabled,
+});
+
 const styleSmallTextIdle = new TextStyle({
     fontFamily: font_family,
     fontSize: 20,

@@ -8,7 +8,9 @@ let mainMenuScene = new Container(),
     objectiveTutorialScene = new Container(),
     slimeTutorialScene = new Container(),
     obstaclesTutorialScene = new Container(),
-    heartTutorialScene = new Container()
+    heartTutorialScene = new Container(),
+
+    campaignScene = new Container()
 ;
 
 let scenes = [
@@ -21,7 +23,8 @@ let scenes = [
     objectiveTutorialScene,
     slimeTutorialScene,
     obstaclesTutorialScene,
-    heartTutorialScene
+    heartTutorialScene,
+    campaignScene
 ];
 
 let sceneManager = {
@@ -71,6 +74,9 @@ creditsText.position.set(appMargin, settingsText.y + settingsText.height + spaci
 leaderBoardsText.position.set(appMargin, creditsText.y + creditsText.height + spacingSmall);
 howToPlayText.position.set(appMargin, leaderBoardsText.y + leaderBoardsText.height + spacingSmall);
 
+let innerContainer = new Container();
+innerContainer.position.set(480,160);
+
 let mainMenuButtons = [startText, settingsText, creditsText, leaderBoardsText, howToPlayText];
 let mainMenuObjects = [startText, settingsText, creditsText, leaderBoardsText, howToPlayText,
     appNameText, versionText, authorText, dateText, causeText, reasonText];
@@ -97,21 +103,21 @@ leaderBoardsText.on('mousedown', () => {
  *
  *****************/
 let campaignText = new Text(stringCampaign, styleSmallTextIdle),
-    survivalText = new PIXI.Text(stringSurvival, styleSmallTextIdle),
+    survivalText = new PIXI.Text(stringSurvival, styleSmallTextDisabled),
     backText = new PIXI.Text(stringBack, styleSmallTextIdle);
-let startAppNameText = new PIXI.Text(stringAppName, styleLargeText),
-    startVersionText = new PIXI.Text(stringAppVersion, styleSmallText);
+let startHeaderText = new PIXI.Text("Game " + stringStart, styleLargeText),
+    startSubtitleText = new PIXI.Text("Select a mode", styleSmallText);
 
-startAppNameText.position.set(appMargin,appMargin + 30);
-startVersionText.position.set(appMargin + startAppNameText.width - startVersionText.width - 8,
-    appMargin + startAppNameText.height + startVersionText.height + 8);
+startHeaderText.position.set(appMargin,appMargin + 30);
+startSubtitleText.position.set(appMargin + startHeaderText.width - startSubtitleText.width - 8,
+    appMargin + startHeaderText.height + startSubtitleText.height + 8);
 
 campaignText.position = startText.position;
 survivalText.position = settingsText.position;
 backText.position.set(appMargin,height - (appMargin + backText.height));
 
-let startButtons = [campaignText, survivalText, backText];
-let startObjects = [startAppNameText, startVersionText, campaignText, survivalText, backText];
+let startButtons = [campaignText, backText];
+let startObjects = [startHeaderText, startSubtitleText, campaignText, survivalText, backText];
 
 initializeInteractivity(startButtons);
 initializeInContainer(startObjects, startMenuScene);
@@ -119,6 +125,39 @@ initializeInContainer(startObjects, startMenuScene);
 backText.on('mousedown', () => {
     changeScene(startMenuScene, mainMenuScene, polies);
 });
+campaignText.on('mousedown', () => {
+    changeScene(startMenuScene, campaignScene, polies);
+    continueText.interactive = saveState.campaign.stage !== 0;
+    continueText.style = saveState.campaign.stage !== 0 ? styleSmallTextIdle: styleSmallTextDisabled;
+});
+/******************
+ * Campaign
+ *
+ *****************/
+let campaignHeaderText = new PIXI.Text(stringCampaign, styleLargeText),
+    newGameText = new PIXI.Text(stringNewGame, styleSmallTextIdle),
+    continueText = new PIXI.Text(stringContinue, styleSmallTextIdle),
+    campaignBack = new PIXI.Text(stringBack, styleSmallTextIdle);
+
+campaignHeaderText.position = appNameText.position;
+newGameText.position = startText.position;
+continueText.position = survivalText.position;
+campaignBack.position.set(appMargin, height - (appMargin + campaignText.height));
+
+let campaignButtons = [newGameText, continueText, campaignBack];
+let campaignObjects = [campaignHeaderText, newGameText, continueText, campaignBack];
+
+initializeInteractivity(campaignButtons);
+initializeInContainer(campaignObjects, campaignScene);
+
+campaignBack.on('mousedown', () => {
+    changeScene(campaignScene, startMenuScene, polies);
+});
+
+newGameText.on('mousedown', () => {
+    saveState = newGameState;
+});
+
 /******************
  * Settings
  *
@@ -318,6 +357,7 @@ backToPage1.on('mousedown', () => {
 
 nextToPage3.on('mousedown', () => {
     changeScene(objectiveTutorialScene, slimeTutorialScene, polies);
+
 });
 
 /******************
@@ -338,6 +378,7 @@ slimeDescription.position = w.position;
 
 backToObjectiveTutorial.position = back2home.position;
 next2page4.position = next2page2.position;
+
 
 let slimeButtons = [backToObjectiveTutorial, next2page4];
 let slimeObjects = [backToObjectiveTutorial, next2page4,  slime, slimeHeaderText, slimeDescription];

@@ -20,3 +20,66 @@ const appMargin = 50;
 const externalMargin = 20;
 const spacingSmall = 30;
 const spacingTiny = 20;
+const newGameState =  {
+    playerName: "",
+    campaign: {
+        life: 3,
+        score: 0,
+        coins: 0,
+        evolve: 0,
+        stage: 0,
+        upgrades: {
+            lethality: 1,
+            quantity: 1,
+            duration: 1,
+            fireRate: 1
+        }
+    },
+    survival: {
+        life: 3,
+        score: 0,
+        coins: 0,
+        upgrades: {
+            lethality: 1,
+            quantity: 1,
+            duration: 1,
+            fireRate: 1
+        }
+    },
+    settings: {
+        difficulty: 1,
+        sounds: true
+    }
+};
+
+let saveState  = {
+    playerName: "",
+    campaign: {
+        life: 3,
+        score: 0,
+        coins: 0,
+        evolve: 0,
+        stage: 0,
+        upgrades: {
+            lethality: 1,
+            quantity: 1,
+            duration: 1,
+            fireRate: 1
+        }
+    },
+    survival: {
+        life: 3,
+        score: 0,
+        coins: 0,
+        upgrades: {
+            lethality: 1,
+            quantity: 1,
+            duration: 1,
+            fireRate: 1
+        }
+    },
+    settings: {
+        difficulty: 1,
+        sounds: true
+    }
+};

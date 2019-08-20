@@ -30,3 +30,5 @@ const stringOff = "Off";
 const stringEasy = "Easy";
 const stringMedium = "Medium";
 const stringHard = "Hard";
+const stringNewGame = "New Game";
+const stringContinue = "Continue";

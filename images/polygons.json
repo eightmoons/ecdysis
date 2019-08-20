@@ -2,7 +2,7 @@
 
 "poly1.png":
 {
-	"frame": {"x":1,"y":346,"w":399,"h":399},
+	"frame": {"x":0,"y":343,"w":399,"h":399},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":399,"h":399},
@@ -11,7 +11,7 @@
 },
 "poly2.png":
 {
-	"frame": {"x":1,"y":747,"w":232,"h":232},
+	"frame": {"x":0,"y":742,"w":232,"h":232},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":37,"y":37,"w":232,"h":232},
@@ -20,11 +20,20 @@
 },
 "poly3.png":
 {
-	"frame": {"x":1,"y":1,"w":410,"h":343},
+	"frame": {"x":0,"y":0,"w":410,"h":343},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":44,"y":78,"w":410,"h":343},
 	"sourceSize": {"w":499,"h":499},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"poly_red.png":
+{
+	"frame": {"x":232,"y":742,"w":171,"h":171},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":171},
+	"sourceSize": {"w":171,"h":171},
 	"anchor": {"x":0.5,"y":0.5}
 }},
 "animations": {
@@ -35,8 +44,8 @@
 	"version": "1.0",
 	"image": "polygons.png",
 	"format": "RGBA8888",
-	"size": {"w":412,"h":980},
+	"size": {"w":410,"h":974},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:b51ce7d17e5dc79af98c14d45c6580ac:1743d03a31bac6c38f4ee6bfcc091db6:3b45997681754dc1213a0fb5d315848c$"
+	"smartupdate": "$TexturePacker:SmartUpdate:e4bcf715804c1d66a002b941140aba68:0bb01c2aa8f5bb776f1bba12dcade794:3b45997681754dc1213a0fb5d315848c$"
 }
 }
