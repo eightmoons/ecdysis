@@ -1,6 +1,7 @@
 //scenes
 let mainMenuScene = new Container(),
     startMenuScene = new Container(),
+    creditsMenuScene = new Container(),
     settingsMenuScene = new Container(),
     leaderBoardsMenuScene = new Container(),
     movementTutorialScene = new Container(),
@@ -13,6 +14,7 @@ let mainMenuScene = new Container(),
 let scenes = [
     mainMenuScene,
     startMenuScene,
+    creditsMenuScene,
     settingsMenuScene,
     leaderBoardsMenuScene,
     movementTutorialScene,
@@ -66,6 +68,10 @@ startText.on('mousedown',() => {
 settingsText.on('mousedown', () => {
    mainMenuScene.visible = false;
    settingsMenuScene.visible = true;
+});
+creditsText.on('mousedown', () => {
+    mainMenuScene.visible = false;
+    creditsMenuScene.visible = true;
 });
 howToPlayText.on('mousedown', () => {
     mainMenuScene.visible = false;
@@ -184,11 +190,34 @@ function activeButton(mode, buttonGroup){
     DIFFICULTY = mode;
 }
 
-
 settingsBack.on('mousedown', () => {
     settingsMenuScene.visible = false;
     mainMenuScene.visible = true;
 });
+/******************
+ * Credits
+ *
+ *****************/
+
+let creditsHeader = new PIXI.Text(string_credits, style_large_text),
+    creditsLine1 = new PIXI.Text("somedude @ opengameart.com", style_small_text_idle),
+    creditsBack = new PIXI.Text(string_back, style_small_text_idle);
+
+creditsHeader.position.set(appMargin, appMargin + 30);
+creditsLine1.position.set(appMargin, creditsHeader.x + creditsHeader.height + 100);
+creditsBack.position.set(appMargin, backText.y);
+
+let creditButtons = [creditsLine1, creditsBack];
+let creditObjects = [creditsLine1, creditsBack, creditsHeader];
+
+initializeInteractivity(creditButtons);
+initializeInContainer(creditObjects, creditsMenuScene);
+
+creditsBack.on('mousedown', () => {
+    creditsMenuScene.visible = false;
+    mainMenuScene.visible = true;
+});
+
 
 
 /******************
