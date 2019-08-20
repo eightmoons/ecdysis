@@ -25,3 +25,22 @@ function onButtonOut() {
         this.style = style_small_text_idle;
     }
 }
+
+function initializeInteractivity(pixi_objects) {
+    pixi_objects.forEach(obj => {
+        obj.interactive = true;
+        obj
+            .on('touchstart', onButtonDown)
+            .on('mouseup', onButtonUp)
+            .on('mouseupoutside', onButtonUp)
+            .on('touchendoutside', onButtonUp)
+            .on('mouseover', onButtonOver)
+            .on('mouseout', onButtonOut);
+    });
+}
+
+function initializeInContainer(pixi_objects, container) {
+    pixi_objects.forEach(obj => {
+        container.addChild(obj);
+    });
+}
