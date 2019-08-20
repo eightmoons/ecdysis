@@ -4,25 +4,25 @@ function randomInt(min, max) {
 
 function onButtonDown(){
     this.isdown = true;
-    this.style = style_small_text_accent;
+    this.style = styleSmallTextAccent;
 }
 
 function onButtonUp(){
     this.isdown = false;
-    this.style = this.isover ? style_small_text : style_small_text_idle;
+    this.style = this.isover ? styleSmallText : styleSmallTextIdle;
 }
 
 function onButtonOver() {
     this.isover = true;
     if (!this.isdown) {
-        this.style = style_small_text;
+        this.style = styleSmallText;
     }
 }
 
 function onButtonOut() {
     this.isover = false;
     if (!this.isdown) {
-        this.style = style_small_text_idle;
+        this.style = styleSmallTextIdle;
     }
 }
 

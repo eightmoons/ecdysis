@@ -28,17 +28,17 @@ let scenes = [
  * Main Menu
  *
  *****************/
-let startText = new PIXI.Text(string_start, style_small_text_idle),
-    settingsText = new PIXI.Text(string_settings, style_small_text_idle),
-    creditsText = new PIXI.Text(string_credits, style_small_text_idle),
-    leaderBoardsText = new PIXI.Text(string_leader_boards, style_small_text_idle),
-    howToPlayText = new PIXI.Text(string_how_to_play, style_small_text_idle);
-let appNameText = new PIXI.Text(string_app_name, style_large_text),
-    versionText = new PIXI.Text(string_app_version, style_small_text),
-    authorText = new PIXI.Text(string_global_risk, style_tiny_text_accent),
-    dateText = new PIXI.Text(string_date, style_tiny_text_accent),
-    causeText = new PIXI.Text(string_cause, style_tiny_text),
-    reasonText = new PIXI.Text(string_reason, style_tiny_text_accent);
+let startText = new PIXI.Text(stringStart, styleSmallTextIdle),
+    settingsText = new PIXI.Text(stringSettings, styleSmallTextIdle),
+    creditsText = new PIXI.Text(stringCredits, styleSmallTextIdle),
+    leaderBoardsText = new PIXI.Text(stringLeaderBoards, styleSmallTextIdle),
+    howToPlayText = new PIXI.Text(stringHowToPlace, styleSmallTextIdle);
+let appNameText = new PIXI.Text(stringAppName, styleLargeText),
+    versionText = new PIXI.Text(stringAppVersion, styleSmallText),
+    authorText = new PIXI.Text(stringGlobalRisk, styleTinyTextAccent),
+    dateText = new PIXI.Text(stringAug2019, styleTinyTextAccent),
+    causeText = new PIXI.Text(stringDevelopedFor, styleTinyText),
+    reasonText = new PIXI.Text(stringGameJam2019, styleTinyTextAccent);
 
 appNameText.position.set(appMargin,appMargin + 30);
 versionText.position.set(
@@ -85,11 +85,11 @@ leaderBoardsText.on('mousedown', () => {
  * START MENU
  *
  *****************/
-let campaignText = new PIXI.Text(string_campaign, style_small_text_idle),
-    survivalText = new PIXI.Text(string_survival, style_small_text_idle),
-    backText = new PIXI.Text(string_back, style_small_text_idle);
-let startAppNameText = new PIXI.Text(string_app_name, style_large_text),
-    startVersionText = new PIXI.Text(string_app_version, style_small_text);
+let campaignText = new PIXI.Text(stringCampaign, styleSmallTextIdle),
+    survivalText = new PIXI.Text(stringSurvival, styleSmallTextIdle),
+    backText = new PIXI.Text(stringBack, styleSmallTextIdle);
+let startAppNameText = new PIXI.Text(stringAppName, styleLargeText),
+    startVersionText = new PIXI.Text(stringAppVersion, styleSmallText);
 
 startAppNameText.position.set(appMargin,appMargin + 30);
 startVersionText.position.set(appMargin + startAppNameText.width - startVersionText.width - 8,
@@ -113,14 +113,14 @@ backText.on('mousedown', () => {
  * Settings
  *
  *****************/
-let settingsHeader = new PIXI.Text(string_settings, style_large_text),
-    soundText = new PIXI.Text(string_sound, style_small_text),
-    difficultyText = new PIXI.Text(string_difficulty, style_small_text),
-    easyText = new PIXI.Text(string_easy, style_small_text_green),
-    mediumText = new PIXI.Text(string_medium, style_small_text_idle),
-    hardText = new PIXI.Text(string_hard, style_small_text_idle),
-    toggleText = new PIXI.Text(string_on, style_small_text_green),
-    settingsBack = new PIXI.Text(string_back, style_small_text_idle);
+let settingsHeader = new PIXI.Text(stringSettings, styleLargeText),
+    soundText = new PIXI.Text(stringSound, styleSmallText),
+    difficultyText = new PIXI.Text(stringDifficulty, styleSmallText),
+    easyText = new PIXI.Text(stringEasy, styleSmallTextGreen),
+    mediumText = new PIXI.Text(stringMedium, styleSmallTextIdle),
+    hardText = new PIXI.Text(stringHard, styleSmallTextIdle),
+    toggleText = new PIXI.Text(stringOn, styleSmallTextGreen),
+    settingsBack = new PIXI.Text(stringBack, styleSmallTextIdle);
 
 settingsHeader.position = appNameText.position;
 
@@ -146,13 +146,13 @@ mediumText.interactive = true;
 hardText.interactive = true;
 toggleText.on('mousedown', () => {
     if (SOUND) {
-        toggleText.text = string_off;
-        toggleText.style = style_small_text_red;
+        toggleText.text = stringOff;
+        toggleText.style = styleSmallTextRed;
         SOUND = false;
     }
     else {
-        toggleText.text = string_on;
-        toggleText.style = style_small_text_green;
+        toggleText.text = stringOn;
+        toggleText.style = styleSmallTextGreen;
         SOUND = true;
     }
 });
@@ -184,7 +184,7 @@ function activeButton(mode, buttonGroup){
     }
 
     buttonGroup.forEach(btn => {
-        btn.style = btn === text? style_small_text_green : style_small_text_idle;
+        btn.style = btn === text? styleSmallTextGreen : styleSmallTextIdle;
     });
 
     DIFFICULTY = mode;
@@ -199,9 +199,9 @@ settingsBack.on('mousedown', () => {
  *
  *****************/
 
-let creditsHeader = new PIXI.Text(string_credits, style_large_text),
-    creditsLine1 = new PIXI.Text("somedude @ opengameart.com", style_small_text_idle),
-    creditsBack = new PIXI.Text(string_back, style_small_text_idle);
+let creditsHeader = new PIXI.Text(stringCredits, styleLargeText),
+    creditsLine1 = new PIXI.Text("somedude @ opengameart.com", styleSmallTextIdle),
+    creditsBack = new PIXI.Text(stringBack, styleSmallTextIdle);
 
 creditsHeader.position.set(appMargin, appMargin + 30);
 creditsLine1.position.set(appMargin, creditsHeader.x + creditsHeader.height + 100);
@@ -224,24 +224,24 @@ creditsBack.on('mousedown', () => {
  * Leaderboards
  *
  *****************/
-let leaderBoardHeaderText = new PIXI.Text(string_leader_boards,style_large_text),
-    firstText = new PIXI.Text("1st  N0obSl4yer: 69", style_first),
-    secondText = new PIXI.Text("2nd  XxPROxX: 42", style_second),
-    thirdText = new PIXI.Text("3rd  Rami: 22", style_third);
-let leaderBoardBack = new PIXI.Text(string_back, style_small_text_idle);
+let leaderBoardHeaderText = new PIXI.Text(stringLeaderBoards,styleLargeText),
+    firstText = new PIXI.Text("1st  N0obSl4yer: 69", styleFirst),
+    secondText = new PIXI.Text("2nd  XxPROxX: 42", styleSecond),
+    thirdText = new PIXI.Text("3rd  Rami: 22", styleThird);
+let leaderBoardsBack = new PIXI.Text(stringBack, styleSmallTextIdle);
 
 leaderBoardHeaderText.position = appNameText.position;
 firstText.position.set(appMargin, leaderBoardHeaderText.y + leaderBoardHeaderText.height + 100);
 secondText.position.set(appMargin, firstText.y + firstText.height + spacingTiny);
 thirdText.position.set(appMargin, secondText.y + secondText.height + spacingTiny);
-leaderBoardBack.position.set(appMargin, height - (appMargin + leaderBoardBack.height));
-let leaderboardButtons = [leaderBoardHeaderText, firstText, secondText, thirdText, leaderBoardBack];
-    leaderboardObjects = [leaderBoardBack];
+leaderBoardsBack.position.set(appMargin, height - (appMargin + leaderBoardsBack.height));
+let leaderBoardsButtons = [leaderBoardHeaderText, firstText, secondText, thirdText, leaderBoardsBack];
+    leaderboardObjects = [leaderBoardsBack];
 
 initializeInteractivity(leaderboardObjects);
-initializeInContainer(leaderboardButtons, leaderBoardsMenuScene);
+initializeInContainer(leaderBoardsButtons, leaderBoardsMenuScene);
 
-leaderBoardBack.on('mousedown', () => {
+leaderBoardsBack.on('mousedown', () => {
    leaderBoardsMenuScene.visible = false;
    mainMenuScene.visible = true;
 });
@@ -250,14 +250,14 @@ leaderBoardBack.on('mousedown', () => {
  * Controls Tutorial
  * Page 1
  *****************/
-let headerText = new PIXI.Text(string_how_to_play, style_large_text),
-    controls = new PIXI.Text(string_controls,style_medium_text_accent),
-    w = new PIXI.Text("W - Move Up", style_small_text),
-    a = new PIXI.Text("A - Move Left", style_small_text),
-    s = new PIXI.Text("S - Move Bottom", style_small_text),
-    d = new PIXI.Text("D - Move Right", style_small_text);
-let back2home = new PIXI.Text(string_back, style_small_text_idle),
-    next2page2 = new PIXI.Text(string_next, style_small_text_idle);
+let headerText = new PIXI.Text(stringHowToPlace, styleLargeText),
+    controls = new PIXI.Text(stringControls,styleMediumTextAccent),
+    w = new PIXI.Text("W - Move Up", styleSmallText),
+    a = new PIXI.Text("A - Move Left", styleSmallText),
+    s = new PIXI.Text("S - Move Bottom", styleSmallText),
+    d = new PIXI.Text("D - Move Right", styleSmallText);
+let back2home = new PIXI.Text(stringBack, styleSmallTextIdle),
+    next2page2 = new PIXI.Text(stringNext, styleSmallTextIdle);
 
 headerText.position.set(appMargin, appMargin + 30);
 controls.position.set(appMargin, headerText.y + headerText.height + 40);
@@ -287,22 +287,22 @@ next2page2.on('mousedown',() => {
  * Objectives Tutorial
  * Page 2
  *****************/
-let objective = new PIXI.Text(string_objective, style_medium_text_accent),
-    objectiveHeaderText = new PIXI.Text(string_how_to_play, style_large_text),
-    objective_description = new PIXI.Text(string_objective_description, style_small_text_paragraph);
-let backToPage1 = new PIXI.Text(string_back, style_small_text_idle),
-    nextToPage3 = new PIXI.Text(string_next, style_small_text_idle);
+let objective = new PIXI.Text(stringObjective, styleMediumTextAccent),
+    objectiveHeaderText = new PIXI.Text(stringHowToPlace, styleLargeText),
+    objectiveDescription = new PIXI.Text(stringObjectiveHint, styleSmallTextParagraph);
+let backToPage1 = new PIXI.Text(stringBack, styleSmallTextIdle),
+    nextToPage3 = new PIXI.Text(stringNext, styleSmallTextIdle);
 
 objectiveHeaderText.position = appNameText.position;
 objective.position = controls.position;
-objective_description.position = w.position;
+objectiveDescription.position = w.position;
 
 backToPage1.visible = true;
 backToPage1.position.set(appMargin, height - (appMargin + backToPage1.height));
 nextToPage3.position.set(width - (appMargin + nextToPage3.width), height - (appMargin + nextToPage3.height));
 
 let objectiveButtons = [backToPage1, nextToPage3];
-let objectiveObjects = [backToPage1, nextToPage3, objective, objective, objective_description, objectiveHeaderText];
+let objectiveObjects = [backToPage1, nextToPage3, objective, objective, objectiveDescription, objectiveHeaderText];
 
 initializeInteractivity(objectiveButtons);
 initializeInContainer(objectiveObjects, objectiveTutorialScene);
@@ -322,22 +322,22 @@ nextToPage3.on('mousedown', () => {
  * Slime Tutorial
  * Page 3
  *****************/
-let backToObjectiveTutorial = new PIXI.Text(string_back, style_small_text_idle),
-    next2page4 = new PIXI.Text(string_next, style_small_text_idle);
-let slime = new PIXI.Text(string_slime, style_medium_text_accent),
-    slimeHeaderText = new PIXI.Text(string_how_to_play, style_large_text),
-    slime_description = new PIXI.Text(string_slime_desc, style_small_text_paragraph);
+let backToObjectiveTutorial = new PIXI.Text(stringBack, styleSmallTextIdle),
+    next2page4 = new PIXI.Text(stringNext, styleSmallTextIdle);
+let slime = new PIXI.Text(stringSlime, styleMediumTextAccent),
+    slimeHeaderText = new PIXI.Text(stringHowToPlace, styleLargeText),
+    slimeDescription = new PIXI.Text(stringSlimeHint, styleSmallTextParagraph);
 
 
 slimeHeaderText.position = appNameText.position;
 slime.position = controls.position;
-slime_description.position = w.position;
+slimeDescription.position = w.position;
 
 backToObjectiveTutorial.position = back2home.position;
 next2page4.position = next2page2.position;
 
 let slimeButtons = [backToObjectiveTutorial, next2page4];
-let slimeObjects = [backToObjectiveTutorial, next2page4,  slime, slimeHeaderText, slime_description];
+let slimeObjects = [backToObjectiveTutorial, next2page4,  slime, slimeHeaderText, slimeDescription];
 initializeInteractivity(slimeButtons);
 initializeInContainer(slimeObjects, slimeTutorialScene);
 
@@ -356,12 +356,12 @@ next2page4.on('mousedown', () => {
  * Obstacle tutorial
  * Page 4
  *****************/
-let obstacleOkButton = new PIXI.Text(string_next, style_small_text_idle),
-    obstacleCancelButton = new PIXI.Text(string_back, style_small_text_idle);
+let obstacleOkButton = new PIXI.Text(stringNext, styleSmallTextIdle),
+    obstacleCancelButton = new PIXI.Text(stringBack, styleSmallTextIdle);
 
-let obstacleHeaderText = new PIXI.Text(string_how_to_play, style_large_text),
-    obstacleText = new PIXI.Text(string_obstacles, style_medium_text_accent),
-    obstacleDescription = new PIXI.Text(string_obstacles_desc, style_small_text_paragraph);
+let obstacleHeaderText = new PIXI.Text(stringHowToPlace, styleLargeText),
+    obstacleText = new PIXI.Text(stringObstacles, styleMediumTextAccent),
+    obstacleDescription = new PIXI.Text(stringObstaclesHint, styleSmallTextParagraph);
 
 obstacleHeaderText.position = appNameText.position;
 obstacleText.position = controls.position;
@@ -390,24 +390,24 @@ obstacleOkButton.on('mousedown', () => {
  * Hearts tutorial
  * Page 5
  *****************/
-let heartText = new PIXI.Text(string_heart, style_medium_text_accent),
-    heartHeaderText = new PIXI.Text(string_how_to_play, style_large_text),
-    heart_description = new PIXI.Text(string_heart_description, style_small_text_paragraph),
+let heartText = new PIXI.Text(stringHeart, styleMediumTextAccent),
+    heartHeaderText = new PIXI.Text(stringHowToPlace, styleLargeText),
+    heartDescription = new PIXI.Text(stringHeartHint, styleSmallTextParagraph),
 
-    heartOkButton = new PIXI.Text(string_finish, style_small_text_idle),
-    heartCancelButton = new PIXI.Text(string_back, style_small_text_idle);
+    heartOkButton = new PIXI.Text(stringFinish, styleSmallTextIdle),
+    heartCancelButton = new PIXI.Text(stringBack, styleSmallTextIdle);
 
 heartHeaderText.position = appNameText.position;
 heartText.position = controls.position;
 
 slime.position = controls.position;
-heart_description.position = w.position;
+heartDescription.position = w.position;
 
 heartCancelButton.position.set(appMargin, height - (appMargin + heartCancelButton.height));
 heartOkButton.position.set(width - (appMargin + heartOkButton.width), height - (appMargin + heartOkButton.height));
 
 let heartButtons = [heartOkButton, heartCancelButton];
-let heartObjects = [heartText, heart_description,heartOkButton, heartCancelButton, heartHeaderText];
+let heartObjects = [heartText, heartDescription,heartOkButton, heartCancelButton, heartHeaderText];
 initializeInteractivity(heartButtons);
 initializeInContainer(heartObjects, heartTutorialScene);
 

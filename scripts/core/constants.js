@@ -34,38 +34,38 @@ const colorBlue = 0x3D75E5;
 const font_family = "Press Start 2P";
 
 //strings
-const string_app_name = "Ecdysis";
-const string_app_version = "v 1.0";
-const string_start = "Start";
-const string_settings = "Settings";
-const string_credits = "Credits";
-const string_leader_boards = "Leaderboards";
-const string_how_to_play = "How to play";
-const string_global_risk = "Global Risk";
-const string_date = "Aug 2019";
-const string_cause = "Developed for ";
-const string_reason = "GAME JAM 2019";
-const string_back = "Back";
-const string_next = "Next";
-const string_campaign = "Campaign";
-const string_survival = "Survival";
-const string_controls = "Controls";
-const string_objective = "Objective";
-const string_objective_description = "the main objective \nis to reach the \nfinal form by \ncollecting evo points";
-const string_slime = "Slime";
-const string_slime_desc = "The slimes are \nbrainless creatures, \ndo not touch them as \nyou will lose a heart";
-const string_obstacles = "Obstacles";
-const string_obstacles_desc = "Obstacles blocks \nyour regular path, \nyou'll lose a \nheart upon touch";
-const string_heart = "Heart";
-const string_heart_description = "Hearts are your life. \nlosing a heart respawns \nyou at the center. Losing \nall hearts means you lost \nthe game";
-const string_finish = "Finish";
-const string_difficulty = "Difficulty";
-const string_sound = "Sound";
-const string_on = "On";
-const string_off = "Off";
-const string_easy = "Easy";
-const string_medium = "Medium";
-const string_hard = "Hard";
+const stringAppName = "Ecdysis";
+const stringAppVersion = "v 1.0";
+const stringStart = "Start";
+const stringSettings = "Settings";
+const stringCredits = "Credits";
+const stringLeaderBoards = "Leaderboards";
+const stringHowToPlace = "How to play";
+const stringGlobalRisk = "Global Risk";
+const stringAug2019 = "Aug 2019";
+const stringDevelopedFor = "Developed for ";
+const stringGameJam2019 = "GAME JAM 2019";
+const stringBack = "Back";
+const stringNext = "Next";
+const stringCampaign = "Campaign";
+const stringSurvival = "Survival";
+const stringControls = "Controls";
+const stringObjective = "Objective";
+const stringObjectiveHint = "the main objective \nis to reach the \nfinal form by \ncollecting evo points";
+const stringSlime = "Slime";
+const stringSlimeHint = "The slimes are \nbrainless creatures, \ndo not touch them as \nyou will lose a heart";
+const stringObstacles = "Obstacles";
+const stringObstaclesHint = "Obstacles blocks \nyour regular path, \nyou'll lose a \nheart upon touch";
+const stringHeart = "Heart";
+const stringHeartHint = "Hearts are your life. \nlosing a heart respawns \nyou at the center. Losing \nall hearts means you lost \nthe game";
+const stringFinish = "Finish";
+const stringDifficulty = "Difficulty";
+const stringSound = "Sound";
+const stringOn = "On";
+const stringOff = "Off";
+const stringEasy = "Easy";
+const stringMedium = "Medium";
+const stringHard = "Hard";
 
 //styles
 const appMargin = 50;
@@ -74,82 +74,82 @@ const spacingSmall = 30;
 const spacingTiny = 20;
 
 //textStyles
-const style_large_text = new TextStyle({
+const styleLargeText = new TextStyle({
     fontFamily: font_family,
     fontSize: 60,
     fill: colorWhite,
 });
 
-const style_medium_text = new TextStyle({
+const styleMediumText = new TextStyle({
     fontFamily: font_family,
     fontSize: 40,
     fill: colorWhite,
 });
-const style_medium_text_accent = new TextStyle({
+const styleMediumTextAccent = new TextStyle({
     fontFamily: font_family,
     fontSize: 40,
     fill: colorAccent,
 });
 
-const style_first = new TextStyle({
+const styleFirst = new TextStyle({
     fontFamily: font_family,
     fontSize: 25,
     fill: colorGold,
 });
-const style_second = new TextStyle({
+const styleSecond = new TextStyle({
     fontFamily: font_family,
     fontSize: 25,
     fill: colorSilver,
 });
-const style_third = new TextStyle({
+const styleThird = new TextStyle({
     fontFamily: font_family,
     fontSize: 25,
     fill: colorBronze,
 });
 
 
-const style_small_text = new TextStyle({
+const styleSmallText = new TextStyle({
     fontFamily: font_family,
     fontSize: 20,
     fill: colorWhite,
 });
 
-const style_small_text_paragraph = new TextStyle({
+const styleSmallTextParagraph = new TextStyle({
     fontFamily: font_family,
     fontSize: 20,
     fill: colorWhite,
     lineHeight: 30
 });
 
-const style_small_text_idle = new TextStyle({
+const styleSmallTextIdle = new TextStyle({
     fontFamily: font_family,
     fontSize: 20,
     fill: colorLGray,
 });
 
-const style_small_text_accent = new TextStyle({
+const styleSmallTextAccent = new TextStyle({
     fontFamily: font_family,
     fontSize: 20,
     fill: colorAccent,
 });
 
-const style_small_text_red = new TextStyle({
+const styleSmallTextRed = new TextStyle({
     fontFamily: font_family,
     fontSize: 20,
     fill: colorRed,
 });
-const style_small_text_green = new TextStyle({
+const styleSmallTextGreen = new TextStyle({
     fontFamily: font_family,
     fontSize: 20,
     fill: colorGreen,
 });
-const style_tiny_text = new TextStyle({
+const styleTinyText = new TextStyle({
     fontFamily: font_family,
     fontSize: 10,
     fill: colorWhite,
 });
 
-const style_tiny_text_accent = new TextStyle({
+const styleTinyTextAccent = new TextStyle({
     fontFamily: font_family,
     fontSize: 10,
     fill: colorAccent,
