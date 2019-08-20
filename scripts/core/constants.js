@@ -9,7 +9,6 @@ let Application = PIXI.Application,
     TextStyle = PIXI.TextStyle,
     Graphics = PIXI.Graphics
 ;
-
 let width = 800;
 let height = 600;
 

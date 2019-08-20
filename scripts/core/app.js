@@ -10,20 +10,30 @@ app.renderer.backgroundColor = 0x212121;
 document.body.appendChild(app.view);
 
 loader
+    .add("images/polygons.json")
     .on("progress", onLoaderProgress)
     .load(main);
 
+let id;
 function onLoaderProgress(loader, resource) {
     console.log("loading: " + resource.url);
     console.log("progress:" + loader.progress + "%");
 }
 
+let poly1, poly2, poly3, polies;
 function main(){
+    id = resources["images/polygons.json"].textures;
+    poly1 = new Sprite(id["poly1.png"]);
+    poly2 = new Sprite(id["poly2.png"]);
+    poly3 = new Sprite(id["poly3.png"]);
+    mainMenuScene.addChildAt(poly1, 0);
+    mainMenuScene.addChildAt(poly2, 0);
+    mainMenuScene.addChildAt(poly3, 0);
+    polies = [poly1,poly2,poly3];
     scenes.forEach(scene => {
         app.stage.addChild(scene);
         scene.visible = false;
     });
-
     mainMenuScene.visible = true;
     state = play;
     app.ticker.add(delta => gameLoop(delta));
@@ -34,6 +44,9 @@ function gameLoop(delta) {
 }
 
 function play(delta){
-
-
+    polies.forEach(poly => {
+        poly.y = randomInt(-1,1);
+        poly.x = randomInt(-1,1);
+        contain(poly, mainMenuScene);
+    })
 }

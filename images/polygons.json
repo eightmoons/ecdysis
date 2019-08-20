@@ -1,0 +1,42 @@
+{"frames": {
+
+"poly1.png":
+{
+	"frame": {"x":1,"y":346,"w":399,"h":399},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":399,"h":399},
+	"sourceSize": {"w":399,"h":399},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"poly2.png":
+{
+	"frame": {"x":1,"y":747,"w":232,"h":232},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":37,"y":37,"w":232,"h":232},
+	"sourceSize": {"w":306,"h":306},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"poly3.png":
+{
+	"frame": {"x":1,"y":1,"w":410,"h":343},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":44,"y":78,"w":410,"h":343},
+	"sourceSize": {"w":499,"h":499},
+	"anchor": {"x":0.5,"y":0.5}
+}},
+"animations": {
+	"poly": ["poly1.png","poly2.png","poly3.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "polygons.png",
+	"format": "RGBA8888",
+	"size": {"w":412,"h":980},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:b51ce7d17e5dc79af98c14d45c6580ac:1743d03a31bac6c38f4ee6bfcc091db6:3b45997681754dc1213a0fb5d315848c$"
+}
+}

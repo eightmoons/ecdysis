@@ -102,8 +102,14 @@ backText.on('mousedown', () => {
     mainMenuScene.visible = true;
 });
 /******************
- * Leaderboards
+ * Settings
  *
+ *****************/
+let settingsHeader = new PIXI.Text(string_settings, style_large_text);
+
+
+/******************
+ * Leaderboards
  *
  *****************/
 let leaderBoardHeaderText = new PIXI.Text(string_leader_boards,style_large_text),
