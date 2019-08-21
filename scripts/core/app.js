@@ -22,7 +22,7 @@ function onLoaderProgress(loader, resource) {
 }
 let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets;
 let poly1, poly2, poly3, polies, animatedLargeSlime, snakeSilhouette, borderedRectangle;
-let tSnakeHead;
+let miniSnake;
 let state;
 function main(){
 
@@ -30,7 +30,7 @@ function main(){
     largeSlimeAssets = resources["images/large_slime.json"].spritesheet;
     playAreasAssets = resources["images/playAreas.json"].textures;
     uiAssets = resources["images/uiAssets.json"].textures;
-    gameAssets = resources["images/gameAssets.json"].textures;
+    gameAssets = resources["images/gameAssets.json"].spritesheet;
 
     poly1 = new Sprite(polygonAssets["poly1.png"]);
     poly2 = new Sprite(polygonAssets["poly2.png"]);
@@ -44,7 +44,7 @@ function main(){
     });
     snakeSilhouette = new Sprite(uiAssets["snake_menu.png"]);
     snakeSilhouette.position.set(width - (appMargin + snakeSilhouette.width), 170);
-    snakeSilhouette.vy = 0.075;
+    snakeSilhouette.vy = 0.3;
     mainMenuScene.addChild(snakeSilhouette);
 
     animatedLargeSlime = new PIXI.AnimatedSprite(largeSlimeAssets.animations["1"]);
@@ -57,14 +57,15 @@ function main(){
 
     borderedRectangle = new Sprite(uiAssets["rectangleGrayFillWithBorder.png"]);
     borderedRectangle.position.set(width - (appMargin + borderedRectangle.width), 170);
-    tSnakeHead = new Sprite(gameAssets["head16.png"]);
-    tSnakeHead.position.set(
+    miniSnake = new PIXI.AnimatedSprite(gameAssets.animations["p"]);
+    miniSnake.animationSpeed = 0.3;
+    miniSnake.position.set(
         borderedRectangle.x + (borderedRectangle.width / 2),
         borderedRectangle.y + (borderedRectangle.height / 2));
-    tSnakeHead.vx = 0;
-    tSnakeHead.vy = 0;
+    miniSnake.vx = 0;
+    miniSnake.vy = 0;
     movementTutorialScene.addChild(borderedRectangle);
-    movementTutorialScene.addChild(tSnakeHead);
+    movementTutorialScene.addChild(miniSnake);
 
 
 
@@ -96,19 +97,23 @@ function onMenu(delta){
         poly.rotation += poly.vy * .01;
     });
 
-    snakeSilhouette.y += snakeSilhouette.vy;
-    if (snakeSilhouette.y >= 180 || snakeSilhouette.y <= 170) {
-        snakeSilhouette.vy = -snakeSilhouette.vy;
+    if (mainMenuScene.visible) {
+        snakeSilhouette.y += snakeSilhouette.vy;
+        if (snakeSilhouette.y >= 190 || snakeSilhouette.y <= 160) {
+            snakeSilhouette.vy = -snakeSilhouette.vy;
+        }
     }
+
     if (movementTutorialScene.visible) {
-        tSnakeHead.x += tSnakeHead.vx;
-        tSnakeHead.y += tSnakeHead.vy;
-        contain(tSnakeHead, {
-            x: borderedRectangle.x + 24, y:  borderedRectangle.y + 24, width: app.renderer.width - 58, height: app.renderer.height - 138 });
-        setMovementManager(tSnakeHead, 4, 3);
+        miniSnake.x += miniSnake.vx;
+        miniSnake.y += miniSnake.vy;
+        contain(miniSnake, {
+            x: borderedRectangle.x + 24, y:  borderedRectangle.y + 24, width: app.renderer.width - 55, height: app.renderer.height - 135 });
+        setMovementManager(miniSnake, 4, 3);
+        miniSnake.play();
     }
     else {
-        tSnakeHead.vx = 0;
-        tSnakeHead.vy = 0;
+        miniSnake.vx = 0;
+        miniSnake.vy = 0;
     }
 }

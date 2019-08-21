@@ -34,7 +34,7 @@ function changeScene(from, to, polygons = undefined){
     }
 }
 
-function setMovementManager(sprite, onKeyPressBonusSpeed = 2, defaultSpeed = 0) {
+function setMovementManager(sprite, onKeyPressBonusSpeed = 2) {
     let left = keyboard("a"),
         up = keyboard("w"),
         right = keyboard("d"),
@@ -44,24 +44,56 @@ function setMovementManager(sprite, onKeyPressBonusSpeed = 2, defaultSpeed = 0) 
         if (sprite.vx === 0) {
             sprite.vx = -onKeyPressBonusSpeed;
             sprite.vy = 0;
+            sprite.rotation = Math.PI / 2;
+        }
+        a.style = styleSmallTextAccent;
+    };
+    left.release = () => {
+        if (!right.isDown) {
+            a.style = styleSmallText;
         }
     };
+
+
     up.press = () => {
         if (sprite.vy === 0) {
             sprite.vy = -onKeyPressBonusSpeed;
             sprite.vx = 0;
+            sprite.rotation = Math.PI;
+        }
+        w.style = styleSmallTextAccent;
+    };
+    up.release = () => {
+        if (!down.isDown) {
+            w.style = styleSmallText;
         }
     };
+
     right.press = () => {
+        d.style = styleSmallTextAccent;
         if (sprite.vx === 0) {
             sprite.vx  = onKeyPressBonusSpeed;
             sprite.vy = 0;
+            sprite.rotation = Math.PI / 2 + Math.PI;
         }
     };
+    right.release = () => {
+        if (!left.isDown) {
+            d.style = styleSmallText;
+        }
+    };
+
     down.press = () => {
         if (sprite.vy === 0) {
             sprite.vy = onKeyPressBonusSpeed;
             sprite.vx = 0;
+            sprite.rotation = Math.PI * 2;
+        }
+        s.style = styleSmallTextAccent;
+    };
+    down.release = () => {
+        if (!up.isDown) {
+            s.style = styleSmallText;
         }
     };
 }
