@@ -305,7 +305,7 @@ let headerText = new PIXI.Text(stringHowToPlace, styleLargeText),
 let back2home = new PIXI.Text(stringBack, styleSmallTextIdle),
     next2page2 = new PIXI.Text(stringNext, styleSmallTextIdle);
 
-headerText.position.set(appMargin, appMargin + 30);
+headerText.position = appNameText.position;
 controls.position.set(appMargin, headerText.y + headerText.height + 40);
 
 w.position.set(appMargin, controls.y + controls.height + 50);

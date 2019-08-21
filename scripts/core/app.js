@@ -13,7 +13,6 @@ loader
     .on("progress", onLoaderProgress)
     .load(main);
 
-let id;
 function onLoaderProgress(loader, resource) {
     console.log("loading: " + resource.url);
     console.log("progress:" + loader.progress + "%");
@@ -21,44 +20,37 @@ function onLoaderProgress(loader, resource) {
 
 let poly1, poly2, poly3, polies, animatedLargeSlime;
 function main(){
-    id = resources["images/polygons.json"].textures;
-    poly1 = new Sprite(id["poly1.png"]);
-    poly2 = new Sprite(id["poly2.png"]);
-    poly3 = new Sprite(id["poly3.png"]);
-    poly2.position.set(129,505);
-    poly3.position.set(565,218);
-    mainMenuScene.addChildAt(poly1, 0);
-    mainMenuScene.addChildAt(poly2, 0);
-    mainMenuScene.addChildAt(poly3, 0);
+
+    let polygons = resources["images/polygons.json"].textures;
+
+    poly1 = new Sprite(polygons["poly1.png"]);
+    poly2 = new Sprite(polygons["poly2.png"]);
+    poly3 = new Sprite(polygons["poly3.png"]);
     polies = [poly1,poly2,poly3];
     polies.forEach(poly => {
-        poly.dx = 0.5;
-        poly.dy = 0.5;
+        poly.dx = (randomInt(-9,9)*.1);
+        poly.dy = (randomInt(-9,9)*.1);
+        poly.position.set(randomInt(0,width), randomInt(0,height));
+        mainMenuScene.addChildAt(poly, 0);
     });
     scenes.forEach(scene => {
         app.stage.addChild(scene);
         scene.visible = false;
     });
     mainMenuScene.visible = true;
-
-    animatedLargeSlime = new PIXI.AnimatedSprite(resources["images/large_slime.json"].spritesheet.animations["1"]);
+    let slimeResource = resources["images/large_slime.json"].spritesheet;
+    animatedLargeSlime = new PIXI.AnimatedSprite(slimeResource.animations["1"]);
     animatedLargeSlime.width = 150;
     animatedLargeSlime.height = 150;
-    animatedLargeSlime.x = 25;
-    animatedLargeSlime.y = 25;
-    animatedLargeSlime.play();
-    animatedLargeSlime.animationSpeed =0.12;
+    animatedLargeSlime.animationSpeed =0.11;
     animatedLargeSlime.position.set(600,220);
+    animatedLargeSlime.play();
     slimeTutorialScene.addChild(animatedLargeSlime);
 
 
-
-
-
-
-
-
-
+    // let square = new PIXI.Sprite();
+    // square.position.set(width - (appMargin + square.width), 220);
+    // movementTutorialScene.addChild(square);
 
     state = onMenu;
     app.ticker.add(delta => gameLoop(delta));
@@ -85,6 +77,6 @@ function onMenu(delta){
         if (poly.y < 0 && poly.dy < 0) {
             poly.dy = -poly.dy;
         }
-        poly.rotation += 0.001;
+        poly.rotation += poly.dy * .01;
     })
 }

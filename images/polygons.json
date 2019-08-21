@@ -2,7 +2,7 @@
 
 "poly1.png":
 {
-	"frame": {"x":1,"y":346,"w":399,"h":399},
+	"frame": {"x":0,"y":343,"w":399,"h":399},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":399,"h":399},
@@ -11,7 +11,7 @@
 },
 "poly2.png":
 {
-	"frame": {"x":1,"y":747,"w":232,"h":232},
+	"frame": {"x":0,"y":742,"w":232,"h":232},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":37,"y":37,"w":232,"h":232},
@@ -20,7 +20,7 @@
 },
 "poly3.png":
 {
-	"frame": {"x":1,"y":1,"w":410,"h":343},
+	"frame": {"x":0,"y":0,"w":410,"h":343},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":44,"y":78,"w":410,"h":343},
@@ -35,8 +35,8 @@
 	"version": "1.0",
 	"image": "polygons.png",
 	"format": "RGBA8888",
-	"size": {"w":412,"h":980},
+	"size": {"w":410,"h":974},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:e77e6f3fbb9c9b38e96be6acbeef45d9:1743d03a31bac6c38f4ee6bfcc091db6:3b45997681754dc1213a0fb5d315848c$"
+	"smartupdate": "$TexturePacker:SmartUpdate:c981a2da0942fb44431afe11e7b82c44:1743d03a31bac6c38f4ee6bfcc091db6:3b45997681754dc1213a0fb5d315848c$"
 }
 }
