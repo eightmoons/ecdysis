@@ -1,0 +1,36 @@
+{"frames": {
+
+"rectangleGrayFill.png":
+{
+	"frame": {"x":396,"y":1,"w":300,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":300},
+	"sourceSize": {"w":300,"h":300}
+},
+"rectangleGrayFillWithBorder.png":
+{
+	"frame": {"x":698,"y":1,"w":300,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":300},
+	"sourceSize": {"w":300,"h":300}
+},
+"snake_menu.png":
+{
+	"frame": {"x":1,"y":1,"w":393,"h":325},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":393,"h":325},
+	"sourceSize": {"w":393,"h":325}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "uiAssets.png",
+	"format": "RGBA8888",
+	"size": {"w":999,"h":327},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:7b407ac2e6ba5ff2ab6f5d98a808ab35:e56dc120c17a9a34e956b69ba94eaa78:727d0100c7c859844df42fb524152aaf$"
+}
+}

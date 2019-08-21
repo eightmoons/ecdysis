@@ -1,8 +1,8 @@
 //colors
-const colorBlack = 0x212121;
-const colorWhite = 0xFFFFFF;
+const colorBlack = DARKTHEME ? 0x212121 : 0xFFFFFF;
+const colorWhite = DARKTHEME ? 0xFFFFFF : 0x212121;
 const colorLGray = 0x757575;
-const colorDisabled = 0x3E3E3E;
+const colorDisabled = DARKTHEME ? 0x3E3E3E : 0xBCACAC;
 const colorAccent = 0xF44336;
 const colorGold = 0xFFEE00;
 const colorSilver = 0xBCBCBC;

@@ -15,6 +15,8 @@ let height = 600;
 let DIFFICULTY = 1;
 let SOUND = true;
 
+const DARKTHEME = false;
+
 const font_family = "Press Start 2P";
 const appMargin = 50;
 const externalMargin = 20;
