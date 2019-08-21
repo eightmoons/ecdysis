@@ -1,0 +1,23 @@
+{"frames": {
+
+"head16.png":
+{
+	"frame": {"x":1,"y":1,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16},
+	"anchor": {"x":0.5,"y":0.5}
+}},
+"animations": {
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "gameAssets.png",
+	"format": "RGBA8888",
+	"size": {"w":18,"h":18},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:808f01c60d281d95292da3f142a0ac16:2af95a6017ca70bf55961385220c0c92:410e49e65058c12258dc811c83ef725b$"
+}
+}

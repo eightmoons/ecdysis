@@ -35,48 +35,33 @@ function changeScene(from, to, polygons = undefined){
 }
 
 function setMovementManager(sprite, onKeyPressBonusSpeed = 2, defaultSpeed = 0) {
-    let left = keyboard("ArrowLeft"),
-        up = keyboard("ArrowUp"),
-        right = keyboard("ArrowRight"),
-        down = keyboard("ArrowDown");
+    let left = keyboard("a"),
+        up = keyboard("w"),
+        right = keyboard("d"),
+        down = keyboard("s");
 
     left.press = () => {
-        sprite.vx = -onKeyPressBonusSpeed;
-        sprite.vy = 0;
-    };
-    left.release = () => {
-        if (!right.isDown && sprite.vy === 0) {
-            sprite.vx = -defaultSpeed;
+        if (sprite.vx === 0) {
+            sprite.vx = -onKeyPressBonusSpeed;
+            sprite.vy = 0;
         }
     };
-
     up.press = () => {
-        sprite.vy = -onKeyPressBonusSpeed;
-        sprite.vx = 0;
-    };
-    up.release = () => {
-        if (!down.isDown && sprite.vx === 0) {
-            sprite.vy = -defaultSpeed;
+        if (sprite.vy === 0) {
+            sprite.vy = -onKeyPressBonusSpeed;
+            sprite.vx = 0;
         }
     };
-
     right.press = () => {
-        sprite.vx  = onKeyPressBonusSpeed;
-        sprite.vy = 0;
-    };
-    right.release = () => {
-        if (!left.isDown && sprite.vy === 0) {
-            sprite.vx = defaultSpeed;
+        if (sprite.vx === 0) {
+            sprite.vx  = onKeyPressBonusSpeed;
+            sprite.vy = 0;
         }
     };
-
     down.press = () => {
-        sprite.vy = onKeyPressBonusSpeed;
-        sprite.vx = 0;
-    };
-    down.release = () => {
-        if (!up.isDown  && sprite.vx === 0) {
-            sprite.vy = defaultSpeed;
+        if (sprite.vy === 0) {
+            sprite.vy = onKeyPressBonusSpeed;
+            sprite.vx = 0;
         }
     };
 }
