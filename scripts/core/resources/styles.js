@@ -100,3 +100,9 @@ const styleTinyTextAccent = new TextStyle({
     fontSize: 10,
     fill: colorAccent,
 });
+
+const styleEVO1 = new TextStyle({
+    fontFamily: font_family,
+    fontSize: 16,
+    fill: colorBlack,
+});

@@ -1,0 +1,97 @@
+{"frames": {
+
+"coin1-1.png":
+{
+	"frame": {"x":1,"y":1,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"coin1-2.png":
+{
+	"frame": {"x":19,"y":1,"w":12,"h":16},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":12,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"coin1-3.png":
+{
+	"frame": {"x":1,"y":51,"w":8,"h":16},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":8,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"coin1-4.png":
+{
+	"frame": {"x":19,"y":19,"w":12,"h":16},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":12,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"coin2-1.png":
+{
+	"frame": {"x":1,"y":19,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"coin2-2.png":
+{
+	"frame": {"x":1,"y":37,"w":12,"h":16},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":12,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"coin2-3.png":
+{
+	"frame": {"x":19,"y":55,"w":8,"h":16},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":8,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"coin2-4.png":
+{
+	"frame": {"x":19,"y":37,"w":12,"h":16},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":12,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"laser1.png":
+{
+	"frame": {"x":1,"y":61,"w":14,"h":6},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":14,"h":6},
+	"sourceSize": {"w":14,"h":6}
+},
+"laser2.png":
+{
+	"frame": {"x":1,"y":69,"w":14,"h":6},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":14,"h":6},
+	"sourceSize": {"w":14,"h":6}
+}},
+"animations": {
+	"coin1": ["coin1-1.png","coin1-2.png","coin1-3.png","coin1-4.png"],
+	"coin2": ["coin2-1.png","coin2-2.png","coin2-3.png","coin2-4.png"],
+	"laser": ["laser1.png","laser2.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "inGameObjects.png",
+	"format": "RGBA8888",
+	"size": {"w":32,"h":76},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9a7232f4d53ec942cfabdb853e51d755:437429613cb0a6545ecd666416eac00d:cfa4de4126b073fe8b383b7444951adb$"
+}
+}

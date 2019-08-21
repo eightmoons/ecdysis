@@ -31,7 +31,7 @@ let miniSnake;
 let state;
 let gameStageArea;
 let isPaused = false;
-let mainPlayer, evoPointBlock, coins, slimes;
+let mainPlayer, evoPointBlock, coins, slimes, activeSlimes;
 function main(){
     polygonAssets = resources["images/polygons.json"].textures;
     largeSlimeAssets = resources["images/large_slime.json"].spritesheet;
@@ -96,6 +96,7 @@ function main(){
     heartImageDisplay.play();
     heartTutorialScene.addChild(heartImageDisplay);
 
+
     gameStageArea = new PIXI.Sprite(playAreasAssets["playerArea1.png"]);
     mainPlayer = new PIXI.AnimatedSprite(gameAssets.animations["p"]);
     gameStageArea.position.set(0,88);
@@ -103,7 +104,8 @@ function main(){
     gameStageArea.height = 512;
     mainPlayer.play();
     mainPlayer.animationSpeed = 0.11;
-    evoPointBlock = new PIXI.Sprite(gameBlocks["blockEvo.png"]);
+    // evoPointBlock = new PIXI.Sprite(gameBlocks["blockEvo.png"]);
+    evoPointBlock = new PIXI.Text("EVO", styleEVO1);
     evoPointBlock.position.set(
         randomInt(50, gameStageArea.width - 40),
         randomInt(150, gameStageArea.height + 50 ));
@@ -229,4 +231,16 @@ function getHearts(life) {
         harts += "♥";
     }
     return harts;
+}
+
+function generateSlimes(count, stage) {
+    let slimes = [];
+    for (let i = 0; i < numberOfBlobs; i++) {
+        let slime = new PIXI.AnimatedSprite(mainSprites["slime" + stage]);
+        slime.animationSpeed = 0.11;
+        slime.play();
+        slime.position.set(48 * i ,randomInt(0, 500 - slime.height));
+        slimes.push(slime);
+    }
+    return slimes;
 }
