@@ -34,8 +34,8 @@ let saveState  = {
         upgrades: {
             lethality: 1,
             quantity: 1,
-            duration: 1,
-            fireRate: 1
+            fireRate: 1,
+            movement: false
         }
     }
 };

@@ -49,6 +49,11 @@ const styleSmallText = new TextStyle({
     fill: colorWhite,
 });
 
+const styleSmallTextYellow = new TextStyle({
+    fontFamily: font_family,
+    fontSize: 15,
+    fill: colorGold,
+});
 const styleSmallTextParagraph = new TextStyle({
     fontFamily: font_family,
     fontSize: 20,

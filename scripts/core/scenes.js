@@ -1,7 +1,6 @@
 //scenes
 let mainMenuScene = new Container(),
     startMenuScene = new Container(),
-    creditsMenuScene = new Container(),
     settingsMenuScene = new Container(),
     leaderBoardsMenuScene = new Container(),
     movementTutorialScene = new Container(),
@@ -9,16 +8,15 @@ let mainMenuScene = new Container(),
     slimeTutorialScene = new Container(),
     obstaclesTutorialScene = new Container(),
     heartTutorialScene = new Container(),
-
     campaignScene = new Container(),
     gameScreenScene = new Container(),
-    gameEndScene = new Container()
+    gameEndScene = new Container(),
+    snakeShopScene = new Container()
 ;
 
 let scenes = [
     mainMenuScene,
     startMenuScene,
-    creditsMenuScene,
     settingsMenuScene,
     leaderBoardsMenuScene,
     movementTutorialScene,
@@ -28,14 +26,14 @@ let scenes = [
     heartTutorialScene,
     campaignScene,
     gameScreenScene,
-    gameEndScene
+    gameEndScene,
+    snakeShopScene
 ];
 
 let sceneManager = {
     MainMenu: {
         Start: startMenuScene,
         Settings: settingsMenuScene,
-        Credits: creditsMenuScene,
         LeaderBoards: leaderBoardsMenuScene,
         Tutorial: [
             movementTutorialScene,
@@ -53,7 +51,6 @@ let sceneManager = {
  *****************/
 let startText = new PIXI.Text(stringStart, styleSmallTextIdle),
     settingsText = new PIXI.Text(stringSettings, styleSmallTextIdle),
-    creditsText = new PIXI.Text(stringCredits, styleSmallTextIdle),
     leaderBoardsText = new PIXI.Text(stringLeaderBoards, styleSmallTextIdle),
     howToPlayText = new PIXI.Text(stringHowToPlace, styleSmallTextIdle);
 let appNameText = new PIXI.Text(stringAppName, styleLargeText),
@@ -74,15 +71,14 @@ reasonText.position.set(appMargin + causeText.width, height - externalMargin - r
 
 startText.position.set(appMargin, versionText.y + 115);
 settingsText.position.set(appMargin, startText.y + startText.height + spacingSmall);
-creditsText.position.set(appMargin, settingsText.y + settingsText.height + spacingSmall);
-leaderBoardsText.position.set(appMargin, creditsText.y + creditsText.height + spacingSmall);
+leaderBoardsText.position.set(appMargin, settingsText.y + settingsText.height + spacingSmall);
 howToPlayText.position.set(appMargin, leaderBoardsText.y + leaderBoardsText.height + spacingSmall);
 
 let innerContainer = new Container();
 innerContainer.position.set(480,160);
 
-let mainMenuButtons = [startText, settingsText, creditsText, leaderBoardsText, howToPlayText];
-let mainMenuObjects = [startText, settingsText, creditsText, leaderBoardsText, howToPlayText,
+let mainMenuButtons = [startText, settingsText, leaderBoardsText, howToPlayText];
+let mainMenuObjects = [startText, settingsText, leaderBoardsText, howToPlayText,
     appNameText, versionText, authorText, dateText, causeText, reasonText];
 initializeInteractivity(mainMenuButtons);
 initializeInContainer(mainMenuObjects, mainMenuScene);
@@ -92,9 +88,6 @@ startText.on('mousedown',() => {
 });
 settingsText.on('mousedown', () => {
     changeScene(mainMenuScene, settingsMenuScene, polies);
-});
-creditsText.on('mousedown', () => {
-    changeScene(mainMenuScene, creditsMenuScene, polies);
 });
 howToPlayText.on('mousedown', () => {
     changeScene(mainMenuScene, movementTutorialScene, polies);
@@ -106,7 +99,7 @@ leaderBoardsText.on('mousedown', () => {
  * START MENU
  *
  *****************/
-let campaignText = new Text(stringCampaign, styleSmallTextIdle),
+let campaignText = new PIXI.Text(stringCampaign, styleSmallTextIdle),
     survivalText = new PIXI.Text(stringSurvival, styleSmallTextDisabled),
     backText = new PIXI.Text(stringBack, styleSmallTextIdle);
 let startHeaderText = new PIXI.Text("Game " + stringStart, styleLargeText),
@@ -179,8 +172,8 @@ newGameText.on('mousedown', () => {
                 upgrades: {
                     lethality: 1,
                     quantity: 1,
-                    duration: 1,
-                    fireRate: 1
+                    fireRate: 1,
+                    movement: false
                 }
             },
             settings: {
@@ -289,31 +282,6 @@ function activeButton(mode, buttonGroup){
 settingsBack.on('mousedown', () => {
     changeScene(settingsMenuScene, mainMenuScene, polies);
 });
-/******************
- * Credits
- *
- *****************/
-
-let creditsHeader = new PIXI.Text(stringCredits, styleLargeText),
-    creditsLine1 = new PIXI.Text("somedude @ opengameart.com", styleSmallTextIdle),
-    creditsBack = new PIXI.Text(stringBack, styleSmallTextIdle);
-
-creditsHeader.position.set(appMargin, appMargin + 30);
-creditsLine1.position.set(appMargin, creditsHeader.x + creditsHeader.height + 100);
-creditsBack.position.set(appMargin, backText.y);
-
-let creditButtons = [creditsLine1, creditsBack];
-let creditObjects = [creditsLine1, creditsBack, creditsHeader];
-
-initializeInteractivity(creditButtons);
-initializeInContainer(creditObjects, creditsMenuScene);
-
-creditsBack.on('mousedown', () => {
-    changeScene(creditsMenuScene, mainMenuScene, polies);
-});
-
-
-
 /******************
  * Leaderboards
  *
@@ -511,12 +479,64 @@ heartOkButton.on('mousedown', () => {
  *
  *****************/
 
-let shopHeaderText,
-    snakeUpgradesText,
-    yourGoldText,
-    goldCountText;
+let shopHeaderText = new PIXI.Text(stringShop, styleLargeText),
+    snakeUpgradesText = new PIXI.Text(stringSnakeUpgrade, styleMediumTextAccent),
+    yourGoldText = new PIXI.Text(stringYourGold, styleSmallText),
+    goldCountText = new PIXI.Text("", styleFirst),
+    lethalityText = new PIXI.Text(stringLethality, styleSmallTextIdle),
+    quantityText = new PIXI.Text(stringQuantity, styleSmallTextIdle),
+    fireRateText = new PIXI.Text(stringFireRate, styleSmallTextIdle),
+    movementText = new PIXI.Text(stringMovement, styleSmallTextIdle),
+    lethalityCostText = new PIXI.Text("", styleSmallTextYellow),
+    quantityCostText = new PIXI.Text("", styleSmallTextYellow),
+    fireRateCostText = new PIXI.Text("", styleSmallTextYellow),
+    movementCostText = new PIXI.Text("250g", styleSmallTextYellow),
+    backToGameText = new PIXI.Text("Back to Game", styleSmallTextIdle)
+;
 
+shopHeaderText.position = appNameText.position;
+snakeUpgradesText.position = heartHeaderText.position;
+yourGoldText.position.set(width - (appMargin + yourGoldText.width), shopHeaderText.y);
+goldCountText.position.set(width - (appMargin + goldCountText.width), shopHeaderText.y + shopHeaderText.height + 10);
+lethalityText.position.set(110, 370);
+quantityText.position.set(lethalityText.x + 35, lethalityText.y);
+fireRateText.position.set(quantityText.x + 35, lethalityText.y);
+movementText.position.set(fireRateText.x + 35, lethalityText.y);
+lethalityCostText.position.set(lethalityText.x, lethalityText.y + lethalityText.height + 10);
+quantityCostText.position.set(quantityText.x, quantityCostText.y + quantityCostText.height + 10);
+fireRateCostText.position.set(fireRateText.x, fireRateCostText.y + fireRateCostText.height + 10);
+movementCostText.position.set(movementText.x, movementCostText.y + movementCostText.height + 10);
+backToGameText.position.set(appMargin, height - (appMargin + backToGameText.height));
 
+let shopButtons = [lethalityText, quantityText, fireRateText, movementText, backToGameText];
+
+let shopObjects = [shopHeaderText, snakeUpgradesText, yourGoldText,
+    lethalityText, quantityText, fireRateText, movementText, lethalityCostText, quantityCostText,
+fireRateCostText, movementCostText, backToGameText];
+
+initializeInteractivity(shopButtons);
+initializeInContainer(shopObjects, snakeShopScene);
+
+lethalityText.on('mousedown', () => {
+
+});
+
+quantityText.on('mousedown', () => {
+
+});
+
+fireRateText.on('mousedown', () => {
+
+});
+
+movementText.on('mousedown', () => {
+
+});
+
+backToGameText.on('mousedown', () => {
+    changeScene(snakeShopScene, gameScreenScene);
+    state = onGame;
+});
 
 /******************
  * GAME START
@@ -571,3 +591,9 @@ initializeInContainer(gameEndObjects, gameEndScene);
 toMainMenuText.on('mousedown', () => {
     changeScene(gameEndScene, mainMenuScene, polies)
 });
+
+
+/******************
+ * GAME END
+ *
+ *****************/
