@@ -37,9 +37,19 @@ let saveState  = {
             duration: 1,
             fireRate: 1
         }
-    },
-    settings: {
-        difficulty: 1,
-        sounds: true
     }
+};
+
+
+let rank1  = {
+    playerName: "N0obSlayer",
+    score: 69
+};
+let rank2  = {
+    playerName: "XxPr0xX",
+    score: 42
+};
+let rank3  = {
+    playerName: "Rami",
+    score: 22
 };

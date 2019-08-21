@@ -34,13 +34,22 @@ function changeScene(from, to, polygons = undefined){
         initializeInContainer(polygons, to, true);
     }
 }
+function setMenuControls(scene) {
+    if (scene.visible){
+        let aaa = keyboard("q");
+        aaa.press = () => {
 
-function setMovementManager(sprite, onKeyPressBonusSpeed = 2) {
+            isPaused = !isPaused;
+        };
+    }
+}
+
+function setMovementManager(sprite, as = 0) {
     let left = keyboard("a"),
         up = keyboard("w"),
         right = keyboard("d"),
         down = keyboard("s");
-
+    let onKeyPressBonusSpeed = 2;
     left.press = () => {
         if (sprite.vx === 0) {
             sprite.vx = -onKeyPressBonusSpeed;
