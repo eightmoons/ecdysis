@@ -34,9 +34,6 @@ function changeScene(from, to, polygons = undefined){
         initializeInContainer(polygons, to, true);
     }
 }
-function setMenuControls(scene) {
-
-}
 
 function setMovementManager(sprite, as = 0) {
     let left = keyboard("a"),
@@ -175,26 +172,6 @@ function gameOver() {
     gameEndScoreText.position.set(width - (appMargin + gameEndScoreText.width), height - (appMargin + gameEndScoreText.height));
     gameStageArea.texture = playAreasAssets["playerArea1.png"]
     checkHighScores();
-    saveState = {
-        playerName: "",
-        campaign: {
-            life: 3,
-            score: 0,
-            coins: 0,
-            evolve: 0,
-            stage: 1,
-            upgrades: {
-                lethality: 1,
-                quantity: 1,
-                duration: 1,
-                fireRate: 1
-            }
-        },
-        settings: {
-            difficulty: 1,
-            sounds: true
-        }
-    };
 }
 
 function victory() {
@@ -207,26 +184,6 @@ function victory() {
     gameEndScoreText.position.set(width - (appMargin + gameEndScoreText.width), height - (appMargin + gameEndScoreText.height));
     gameStageArea.texture = playAreasAssets["playerArea1.png"];
     checkHighScores();
-    saveState = {
-        playerName: "",
-        campaign: {
-            life: 3,
-            score: 0,
-            coins: 0,
-            evolve: 0,
-            stage: 1,
-            upgrades: {
-                lethality: 1,
-                quantity: 1,
-                duration: 1,
-                fireRate: 1
-            }
-        },
-        settings: {
-            difficulty: 1,
-            sounds: true
-        }
-    };
 }
 
 function checkHighScores() {
@@ -281,4 +238,22 @@ function checkHighScores() {
     firstText.text = "1st  " + rank1.playerName +": " + rank1.score;
     secondText.text = "2nd  " + rank2.playerName +": " + rank2.score;
     thirdText.text = "3rd  " + rank3.playerName + ": " + rank3.score;
+
+    saveState = {
+        playerName: "",
+        campaign: {
+            life: 3,
+            score: 0,
+            coins: 0,
+            evolve: 0,
+            stage: 1,
+            upgrades: {
+                lethality: 1,
+                quantity: 1,
+                fireRate: 1,
+                movement: false
+            }
+        }
+    };
+    saveState.campaign.life = 3;
 }

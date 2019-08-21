@@ -175,10 +175,6 @@ newGameText.on('mousedown', () => {
                     fireRate: 1,
                     movement: false
                 }
-            },
-            settings: {
-                difficulty: 1,
-                sounds: true
             }
         };
         Object.assign(saveState, saveState);

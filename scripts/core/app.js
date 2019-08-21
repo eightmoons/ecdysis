@@ -91,7 +91,6 @@ function main(){
     gameScreenScene.addChild(evoPointBlock);
     gameScreenScene.addChild(mainPlayer);
 
-    setMenuControls(gameScreenScene);
     scenes.forEach(scene => {
         app.stage.addChild(scene);
         scene.visible = false;
@@ -118,55 +117,9 @@ function onGame(delta) {
             evoPointBlock.position.set(
                 randomInt(50, gameStageArea.width - 40),
                 randomInt(150, gameStageArea.height + 50 ));
-            saveState.campaign.evolve += 1;
+            incrementEvolution();
             updateUI();
         }
-
-        if (saveState.campaign.evolve === 1) {
-            saveState.campaign.stage = 1;
-            gameStageArea.texture = (playAreasAssets["playerArea2.png"])
-        }
-        else if (saveState.campaign.evolve === 2) {
-            saveState.campaign.stage = 2;
-            gameStageArea.texture = (playAreasAssets["playerArea3.png"])
-        }
-        else if (saveState.campaign.evolve === 3) {
-            saveState.campaign.stage = 3;
-            victory();
-            state = onMenu;
-            changeScene(gameScreenScene, gameEndScene, polies);
-        }
-    }
-
-    function respawnSnake(){
-        if (saveState.campaign.life > 1) {
-            saveState.campaign.life--;
-            mainPlayer.vx = 0;
-            mainPlayer.vy = 0;
-            mainPlayer.position.set(gameStageArea.width / 2, gameStageArea.height / 2 + 88);
-            updateUI();
-        }
-        else {
-            gameOver();
-            state = onMenu;
-            changeScene(gameScreenScene, gameEndScene, polies);
-        }
-    }
-
-    function updateUI() {
-        coinCountText.text = saveState.campaign.coins + "g";
-        heartCountText.text = getHearts(saveState.campaign.life);
-        stageCountText.text = "STAGE: " + saveState.campaign.stage;
-        evoCountText.text = "EVO: " + saveState.campaign.evolve;
-        saveState.campaign.score =(saveState.campaign.evolve + saveState.campaign.stage + saveState.campaign.life) * DIFFICULTY;
-    }
-
-    function getHearts(life) {
-        let harts = "";
-        for (let i = 0; i< life; i++) {
-            harts += "♥";
-        }
-        return harts;
     }
 }
 
@@ -204,6 +157,54 @@ function onMenu(delta){
     }
 }
 
-function generateSlimes(count) {
+function updateUI() {
+    coinCountText.text = saveState.campaign.coins + "g";
+    heartCountText.text = getHearts(saveState.campaign.life);
+    stageCountText.text = "STAGE: " + saveState.campaign.stage;
+    evoCountText.text = "EVO: " + saveState.campaign.evolve;
+    saveState.campaign.score =(saveState.campaign.evolve + saveState.campaign.stage + saveState.campaign.life) * DIFFICULTY;
+}
 
+function incrementEvolution() {
+    saveState.campaign.evolve += 1;
+    if (saveState.campaign.evolve === 1){
+        saveState.campaign.stage = 1;
+        gameStageArea.texture = (playAreasAssets["playerArea2.png"])
+    }
+    else if (saveState.campaign.evolve === 2) {
+        saveState.campaign.stage = 2;
+        gameStageArea.texture = (playAreasAssets["playerArea3.png"])
+    }
+    else if (saveState.campaign.evolve === 3) {
+        saveState.campaign.stage = 3;
+        victory();
+        state = onMenu;
+        changeScene(gameScreenScene, gameEndScene, polies);
+    }
+}
+
+function respawnSnake(){
+    if (saveState.campaign.life > 1) {
+        saveState.campaign.life--;
+        mainPlayer.vx = 0;
+        mainPlayer.vy = 0;
+        mainPlayer.position.set(gameStageArea.width / 2, gameStageArea.height / 2 + 88);
+        updateUI();
+    }
+    else {
+        updateUI();
+        mainPlayer.position.set(gameStageArea.width / 2, gameStageArea.height / 2 + 88);
+        gameOver();
+        state = onMenu;
+        changeScene(gameScreenScene, gameEndScene, polies);
+        updateUI();
+    }
+}
+
+function getHearts(life) {
+    let harts = "";
+    for (let i = 0; i< life; i++) {
+        harts += "♥";
+    }
+    return harts;
 }
