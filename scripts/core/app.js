@@ -16,6 +16,7 @@ loader
     .add("images/gameBlocks.json")
     .add("images/mainSprites.json")
     .add("images/otherSprites.json")
+    .add("images/inGameObjects.json")
     .on("progress", onLoaderProgress)
     .load(main);
 
@@ -23,7 +24,7 @@ function onLoaderProgress(loader, resource) {
     console.log("loading: " + resource.url);
     console.log("progress:" + loader.progress + "%");
 }
-let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets, mainSprites, otherSprites, otherSpritesSheet;
+let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets, mainSprites, otherSprites, otherSpritesSheet, inGameObjects;
 let poly1, poly2, poly3, polies, animatedLargeSlime,
     snakeSilhouette, borderedRectangle, gameAssetsTexture, gameBlocks,
     obstacleImageDisplay, heartImageDisplay, evoText;
@@ -43,6 +44,7 @@ function main(){
     mainSprites = resources["images/mainSprites.json"].spritesheet;
     otherSprites = resources["images/otherSprites.json"].textures;
     otherSpritesSheet = resources["images/otherSprites.json"].spritesheet;
+    inGameObjects = resources["images/inGameObjects.json"].spritesheet;
 
     poly1 = new Sprite(polygonAssets["poly1.png"]);
     poly2 = new Sprite(polygonAssets["poly2.png"]);
@@ -80,7 +82,11 @@ function main(){
     movementTutorialScene.addChild(borderedRectangle);
     movementTutorialScene.addChild(miniSnake);
 
-    evoText = new PIXI.Text("EVO", styleLargeTextGreen);
+    evoText = new PIXI.AnimatedSprite(inGameObjects.animations["coin1"]);
+    evoText.x = 200;
+    evoText.y = 200;
+    evoText.animationSpeed = 0.11;
+    evoText.play();
     evoText.position.set(width - (appMargin + evoText.width), 200);
     objectiveTutorialScene.addChild(evoText);
 
@@ -105,7 +111,10 @@ function main(){
     mainPlayer.play();
     mainPlayer.animationSpeed = 0.11;
     // evoPointBlock = new PIXI.Sprite(gameBlocks["blockEvo.png"]);
-    evoPointBlock = new PIXI.Text("EVO", styleEVO1);
+    // evoPointBlock = new PIXI.Text("EVO", styleEVO1);
+    evoPointBlock = new PIXI.AnimatedSprite(inGameObjects.animations["coin1"]);
+    evoPointBlock.animationSpeed = 0.11;
+    evoPointBlock.play();
     evoPointBlock.position.set(
         randomInt(50, gameStageArea.width - 40),
         randomInt(150, gameStageArea.height + 50 ));
@@ -140,7 +149,7 @@ function onGame(delta) {
         if (isColliding(mainPlayer, evoPointBlock)){
             evoPointBlock.position.set(
                 randomInt(50, gameStageArea.width - 40),
-                randomInt(150, gameStageArea.height + 50 ));
+                randomInt(150, gameStageArea.height + 40));
             incrementEvolution();
             updateUI();
         }
