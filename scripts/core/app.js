@@ -15,6 +15,7 @@ loader
     .add("images/gameAssets.json")
     .add("images/gameBlocks.json")
     .add("images/mainSprites.json")
+    .add("images/otherSprites.json")
     .on("progress", onLoaderProgress)
     .load(main);
 
@@ -22,8 +23,10 @@ function onLoaderProgress(loader, resource) {
     console.log("loading: " + resource.url);
     console.log("progress:" + loader.progress + "%");
 }
-let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets, mainSprites;
-let poly1, poly2, poly3, polies, animatedLargeSlime, snakeSilhouette, borderedRectangle, gameAssetsTexture, gameBlocks;
+let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets, mainSprites, otherSprites, otherSpritesSheet;
+let poly1, poly2, poly3, polies, animatedLargeSlime,
+    snakeSilhouette, borderedRectangle, gameAssetsTexture, gameBlocks,
+    obstacleImageDisplay, heartImageDisplay, evoText;
 let miniSnake;
 let state;
 let gameStageArea;
@@ -38,6 +41,8 @@ function main(){
     gameAssetsTexture = resources["images/gameAssets.json"].textures;
     gameBlocks = resources["images/gameBlocks.json"].textures;
     mainSprites = resources["images/mainSprites.json"].spritesheet;
+    otherSprites = resources["images/otherSprites.json"].textures;
+    otherSpritesSheet = resources["images/otherSprites.json"].spritesheet;
 
     poly1 = new Sprite(polygonAssets["poly1.png"]);
     poly2 = new Sprite(polygonAssets["poly2.png"]);
@@ -74,6 +79,23 @@ function main(){
     borderedRectangle.interactive = true;
     movementTutorialScene.addChild(borderedRectangle);
     movementTutorialScene.addChild(miniSnake);
+
+    evoText = new PIXI.Text("EVO", styleLargeTextGreen);
+    evoText.position.set(width - (appMargin + evoText.width), 200);
+    objectiveTutorialScene.addChild(evoText);
+
+    obstacleImageDisplay = new Sprite(otherSprites["obstacles.png"]);
+    obstacleImageDisplay.width = 200;
+    obstacleImageDisplay.height = 200;
+    obstacleImageDisplay.position.set(width - (appMargin + obstacleImageDisplay.width), 200);
+    obstaclesTutorialScene.addChild(obstacleImageDisplay);
+
+    heartImageDisplay = new PIXI.AnimatedSprite(otherSpritesSheet.animations["hart"]);
+    heartImageDisplay.animationSpeed = 0.11;
+    heartImageDisplay.position = obstacleImageDisplay.position;
+    heartImageDisplay.play();
+    heartTutorialScene.addChild(heartImageDisplay);
+
     gameStageArea = new PIXI.Sprite(playAreasAssets["playerArea1.png"]);
     mainPlayer = new PIXI.AnimatedSprite(gameAssets.animations["p"]);
     gameStageArea.position.set(0,88);

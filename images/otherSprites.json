@@ -1,0 +1,47 @@
+{"frames": {
+
+"hart1.png":
+{
+	"frame": {"x":1,"y":131,"w":124,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":124,"h":124},
+	"sourceSize": {"w":140,"h":141}
+},
+"hart2.png":
+{
+	"frame": {"x":1,"y":1,"w":129,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":129,"h":128},
+	"sourceSize": {"w":146,"h":146}
+},
+"hart3.png":
+{
+	"frame": {"x":127,"y":131,"w":115,"h":115},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":115},
+	"sourceSize": {"w":130,"h":131}
+},
+"obstacles.png":
+{
+	"frame": {"x":132,"y":1,"w":125,"h":110},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":125,"h":110},
+	"sourceSize": {"w":125,"h":110}
+}},
+"animations": {
+	"hart": ["hart1.png","hart2.png","hart3.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "otherSprites.png",
+	"format": "RGBA8888",
+	"size": {"w":243,"h":256},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2c19c998a2b92978015b06fc2559f592:2dfe2fa8b48ce8f50b554e86d015971c:a75b0b5ac479a69fc2ffe2c76ef69228$"
+}
+}
