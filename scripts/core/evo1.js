@@ -1,18 +1,27 @@
+let Application = PIXI.Application,
+    Container = PIXI.Container,
+    loader = PIXI.Loader.shared,
+    resources = PIXI.Loader.shared.resources,
+    TextureCache = PIXI.utils.TextureCache,
+    Sprite = PIXI.Sprite,
+    Text = PIXI.Text,
+    TextStyle = PIXI.TextStyle,
+    Graphics = PIXI.Graphics
+;
+
 let app = new Application({
     width: 800,
     height: 600,
     transparent: false,
     antialias: true
 });
-app.renderer.backgroundColor = colorBlack;
+app.renderer.backgroundColor = 0x212121;
 document.body.appendChild(app.view);
 
 loader
-    .add("images/polygons.json")
-    .add("images/large_slime.json")
-    .add("images/playAreas.json")
-    .add("images/uiAssets.json")
-    .add("images/gameAssets.json")
+    .add("images/ecdysis.json")
+    .add("images/enemy.json")
+    .add("images/rectangle.png")
     .on("progress", onLoaderProgress)
     .load(main);
 
@@ -20,55 +29,73 @@ function onLoaderProgress(loader, resource) {
     console.log("loading: " + resource.url);
     console.log("progress:" + loader.progress + "%");
 }
-let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets;
-let poly1, poly2, poly3, polies, animatedLargeSlime, snakeSilhouette, borderedRectangle;
-let miniSnake;
+//scenes
+let mainMenuScene, inGameScene;
+
+//pixi objects
 let state;
+
+//in-game objects
+let slime, enemySlime;
+let bg;
 function main(){
-
-    polygonAssets = resources["images/polygons.json"].textures;
-    largeSlimeAssets = resources["images/large_slime.json"].spritesheet;
-    playAreasAssets = resources["images/playAreas.json"].textures;
-    uiAssets = resources["images/uiAssets.json"].textures;
-    gameAssets = resources["images/gameAssets.json"].spritesheet;
-
-    poly1 = new Sprite(polygonAssets["poly1.png"]);
-    poly2 = new Sprite(polygonAssets["poly2.png"]);
-    poly3 = new Sprite(polygonAssets["poly3.png"]);
-    polies = [poly1,poly2,poly3];
-    polies.forEach(poly => {
-        poly.vx = (randomInt(-9,9)*.1);
-        poly.vy = (randomInt(-9,9)*.1);
-        poly.position.set(randomInt(0,width), randomInt(0,height));
-        mainMenuScene.addChildAt(poly, 0);
-    });
-    snakeSilhouette = new Sprite(uiAssets["snake_menu.png"]);
-    snakeSilhouette.position.set(width - (appMargin + snakeSilhouette.width), 170);
-    snakeSilhouette.vy = 0.3;
-    mainMenuScene.addChild(snakeSilhouette);
-
-    animatedLargeSlime = new PIXI.AnimatedSprite(largeSlimeAssets.animations["1"]);
-    animatedLargeSlime.width = 150;
-    animatedLargeSlime.height = 150;
-    animatedLargeSlime.animationSpeed =0.11;
-    animatedLargeSlime.position.set(600,220);
-    animatedLargeSlime.play();
-    slimeTutorialScene.addChild(animatedLargeSlime);
-
-    borderedRectangle = new Sprite(uiAssets["rectangleGrayFillWithBorder.png"]);
-    borderedRectangle.position.set(width - (appMargin + borderedRectangle.width), 170);
-    miniSnake = new PIXI.AnimatedSprite(gameAssets.animations["p"]);
-    miniSnake.animationSpeed = 0.3;
-    miniSnake.position.set(
-        borderedRectangle.x + (borderedRectangle.width / 2),
-        borderedRectangle.y + (borderedRectangle.height / 2));
-    miniSnake.vx = 0;
-    miniSnake.vy = 0;
-    movementTutorialScene.addChild(borderedRectangle);
-    movementTutorialScene.addChild(miniSnake);
+    inGameScene = new Container();
+    bg = new Sprite(resources["images/rectangle.png"].texture);
+    bg.y = 88;
+    inGameScene.addChild(bg);
 
 
+    id = resources["images/ecdysis.json"].textures;
+    sheet = resources["images/ecdysis.json"].spritesheet;
+    let slimeFrames = ["slime1-1.png","slime1-2.png","slime1-3.png","slime1-4.png","slime1-5.png"];
+    let slimeTexture = [];
+    for (let i = 0; i < 5; i++) {
+        slimeTexture.push(sheet.textures[slimeFrames[i]]);
+    }
+    slime = new PIXI.AnimatedSprite(slimeTexture);
+    slime.x = 100;
+    slime.y = 100;
+    slime.vx = 0;
+    slime.vy = 0;
+    slime.anchor.set(0.5,0.5);
+    slime.animationSpeed = 0.1;
+    slime.play();
+    inGameScene.addChild(slime);
 
-    scenes.forEach(scene => {
-        app.stage.addChild(scene);
-  
+    slimeFrames = ["slime3-1.png","slime3-2.png","slime3-3.png","slime3-4.png","slime3-5.png"];
+    let enemySlimeTexture = [];
+    for (let i = 0; i < 5; i++) {
+        enemySlimeTexture.push(sheet.textures[slimeFrames[i]]);
+    }
+
+    enemySlime = new PIXI.AnimatedSprite(enemySlimeTexture);
+    enemySlime.x = 100;
+    enemySlime.y = 100;
+    enemySlime.animationSpeed =0.15;
+    enemySlime.play()
+    inGameScene.addChild(enemySlime);
+    app.stage.addChild(inGameScene);
+
+    state = play;
+    app.ticker.add(delta => gameLoop(delta));
+}
+
+function gameLoop(delta) {
+    state(delta);
+}
+
+function play(delta){
+    slime.x += slime.vx;
+    slime.y += slime.vy;
+    setMovementManager(slime,1,2);
+    contain(slime, {x: 23, y:  88 + 23, width: app.renderer.width, height: app.renderer.height - 88 });
+    contain(enemySlime, {x: 23, y:  88 + 23, width: app.renderer.width, height: app.renderer.height - 88 });
+
+    if (isColliding(slime, enemySlime, -8, -10)){
+        enemySlime.x += 1;
+        enemySlime.alpha = 0.5
+    }else {
+        enemySlime.alpha = 1;
+    }
+
+}
