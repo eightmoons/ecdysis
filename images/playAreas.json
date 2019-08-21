@@ -1,0 +1,39 @@
+{"frames": {
+
+"playerArea1.png":
+{
+	"frame": {"x":1,"y":1,"w":800,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":512},
+	"sourceSize": {"w":800,"h":512}
+},
+"playerArea2.png":
+{
+	"frame": {"x":1,"y":515,"w":800,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":512},
+	"sourceSize": {"w":800,"h":512}
+},
+"playerArea3.png":
+{
+	"frame": {"x":1,"y":1029,"w":800,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":512},
+	"sourceSize": {"w":800,"h":512}
+}},
+"animations": {
+	"playerArea": ["playerArea1.png","playerArea2.png","playerArea3.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "playAreas.png",
+	"format": "RGBA8888",
+	"size": {"w":802,"h":1542},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:b6e840a16e1c19c5765f718463bd55c6:7480f8bc401c627e4138f893d2fa7493:645172a5c75afa6a5bd0836ae3ee8091$"
+}
+}
