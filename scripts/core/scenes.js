@@ -8,7 +8,8 @@ let mainMenuScene = new Container(),
     objectiveTutorialScene = new Container(),
     slimeTutorialScene = new Container(),
     obstaclesTutorialScene = new Container(),
-    heartTutorialScene = new Container();
+    heartTutorialScene = new Container(),
+    campaignScene = new Container();
 
 let scenes = [
     mainMenuScene,
