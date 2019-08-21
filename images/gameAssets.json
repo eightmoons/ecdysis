@@ -1,8 +1,71 @@
 {"frames": {
 
+"exp1.png":
+{
+	"frame": {"x":54,"y":13,"w":4,"h":4},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":7,"w":4,"h":4},
+	"sourceSize": {"w":16,"h":16},
+	"anchor": {"x":0,"y":0}
+},
+"exp2.png":
+{
+	"frame": {"x":47,"y":11,"w":5,"h":5},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":6,"w":5,"h":5},
+	"sourceSize": {"w":16,"h":16},
+	"anchor": {"x":0,"y":0}
+},
+"exp3.png":
+{
+	"frame": {"x":47,"y":1,"w":7,"h":8},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":4,"w":7,"h":8},
+	"sourceSize": {"w":16,"h":16},
+	"anchor": {"x":0,"y":0}
+},
+"exp4.png":
+{
+	"frame": {"x":56,"y":19,"w":11,"h":10},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":11,"h":10},
+	"sourceSize": {"w":16,"h":16},
+	"anchor": {"x":0,"y":0}
+},
+"exp5.png":
+{
+	"frame": {"x":69,"y":13,"w":14,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":1,"w":14,"h":14},
+	"sourceSize": {"w":16,"h":16},
+	"anchor": {"x":0,"y":0}
+},
+"exp6.png":
+{
+	"frame": {"x":32,"y":1,"w":13,"h":16},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":13,"h":16},
+	"sourceSize": {"w":16,"h":16},
+	"anchor": {"x":0,"y":0}
+},
+"exp7.png":
+{
+	"frame": {"x":14,"y":19,"w":15,"h":5},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":7,"w":15,"h":5},
+	"sourceSize": {"w":16,"h":16},
+	"anchor": {"x":0,"y":0}
+},
 "head16.png":
 {
-	"frame": {"x":38,"y":1,"w":16,"h":16},
+	"frame": {"x":14,"y":1,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -11,8 +74,8 @@
 },
 "p1.png":
 {
-	"frame": {"x":14,"y":1,"w":10,"h":23},
-	"rotated": false,
+	"frame": {"x":31,"y":19,"w":10,"h":23},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":7,"y":0,"w":10,"h":23},
 	"sourceSize": {"w":23,"h":23},
@@ -20,8 +83,8 @@
 },
 "p2.png":
 {
-	"frame": {"x":26,"y":1,"w":10,"h":23},
-	"rotated": false,
+	"frame": {"x":56,"y":1,"w":10,"h":23},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":0,"w":10,"h":23},
 	"sourceSize": {"w":23,"h":23},
@@ -35,8 +98,18 @@
 	"spriteSourceSize": {"x":7,"y":0,"w":11,"h":23},
 	"sourceSize": {"w":23,"h":23},
 	"anchor": {"x":0.5,"y":0.5}
+},
+"projectile_evo1.png":
+{
+	"frame": {"x":1,"y":26,"w":2,"h":16},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":2,"h":16},
+	"sourceSize": {"w":2,"h":16},
+	"anchor": {"x":0.5,"y":0.5}
 }},
 "animations": {
+	"exp": ["exp1.png","exp2.png","exp3.png","exp4.png","exp5.png","exp6.png","exp7.png"],
 	"p": ["p1.png","p2.png","p3.png"]
 },
 "meta": {
@@ -44,8 +117,8 @@
 	"version": "1.0",
 	"image": "gameAssets.png",
 	"format": "RGBA8888",
-	"size": {"w":55,"h":25},
+	"size": {"w":84,"h":30},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:32fc30a85924fb43d48043a90d6589d6:6154fd79b8a095a245b253ef7fd7da41:410e49e65058c12258dc811c83ef725b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:c745a4179cf4f22e871c08d756121c60:1bd8dc3cc6cfafa5855ab8a24712de51:410e49e65058c12258dc811c83ef725b$"
 }
 }

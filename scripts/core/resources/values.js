@@ -22,6 +22,7 @@ const appMargin = 50;
 const externalMargin = 20;
 const spacingSmall = 30;
 const spacingTiny = 20;
+
 const newGameState =  {
     playerName: "",
     campaign: {

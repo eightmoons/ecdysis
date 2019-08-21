@@ -5,6 +5,7 @@ function randomInt(min, max) {
 function initializeInteractivity(pixi_objects) {
     pixi_objects.forEach(obj => {
         obj.interactive = true;
+        obj.buttonMode = true;
         obj
             .on('touchstart', onButtonDown)
             .on('mouseup', onButtonUp)

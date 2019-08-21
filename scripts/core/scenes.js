@@ -458,3 +458,13 @@ heartCancelButton.on('mousedown', () => {
 heartOkButton.on('mousedown', () => {
     changeScene(heartTutorialScene, mainMenuScene, polies);
 });
+
+/******************
+ * SHOP
+ *
+ *****************/
+
+let shopHeaderText,
+    snakeUpgradesText,
+    yourGoldText,
+    goldCountText;

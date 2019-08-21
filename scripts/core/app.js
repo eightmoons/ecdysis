@@ -31,6 +31,7 @@ function main(){
     playAreasAssets = resources["images/playAreas.json"].textures;
     uiAssets = resources["images/uiAssets.json"].textures;
     gameAssets = resources["images/gameAssets.json"].spritesheet;
+    gameAssetsTexture = resources["images/gameAssets.json"].textures;
 
     poly1 = new Sprite(polygonAssets["poly1.png"]);
     poly2 = new Sprite(polygonAssets["poly2.png"]);
@@ -64,10 +65,9 @@ function main(){
         borderedRectangle.y + (borderedRectangle.height / 2));
     miniSnake.vx = 0;
     miniSnake.vy = 0;
+    borderedRectangle.interactive = true;
     movementTutorialScene.addChild(borderedRectangle);
     movementTutorialScene.addChild(miniSnake);
-
-
 
     scenes.forEach(scene => {
         app.stage.addChild(scene);
