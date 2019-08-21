@@ -21,9 +21,12 @@ function onLoaderProgress(loader, resource) {
     console.log("progress:" + loader.progress + "%");
 }
 let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets;
-let poly1, poly2, poly3, polies, animatedLargeSlime, snakeSilhouette, borderedRectangle;
+let poly1, poly2, poly3, polies, animatedLargeSlime, snakeSilhouette, borderedRectangle, gameAssetsTexture;
 let miniSnake;
 let state;
+let gameStageArea;
+let isPaused = false;
+let mainPlayer;
 function main(){
 
     polygonAssets = resources["images/polygons.json"].textures;
@@ -69,6 +72,18 @@ function main(){
     movementTutorialScene.addChild(borderedRectangle);
     movementTutorialScene.addChild(miniSnake);
 
+    gameStageArea = new PIXI.Sprite(playAreasAssets["playerArea1.png"]);
+    mainPlayer = new PIXI.AnimatedSprite(gameAssets.animations["p"]);
+    gameStageArea.position.set(0,88);
+    gameStageArea.width = width;
+    gameStageArea.height = 512;
+    mainPlayer.play();
+    mainPlayer.animationSpeed = 0.11;
+
+    mainPlayer.position.set(gameStageArea.width / 2, gameStageArea.height / 2 + 88);
+    gameScreenScene.addChild(gameStageArea);
+    gameScreenScene.addChild(mainPlayer);
+
     scenes.forEach(scene => {
         app.stage.addChild(scene);
         scene.visible = false;
@@ -82,7 +97,37 @@ function gameLoop(delta) {
     state(delta);
 }
 
-let snakeArray = [];
+function onGame(delta) {
+    if (!isPaused){
+        let res = contain(mainPlayer, {x: 44, y:133, width: gameStageArea.width -22, height: gameStageArea.height + 67});
+        if ( res !== undefined) {
+            respawnSnake();
+        }
+        setMovementManager(mainPlayer);
+        mainPlayer.x += mainPlayer.vx;
+        mainPlayer.y += mainPlayer.vy;
+    }
+
+    function respawnSnake(){
+        if (saveState.campaign.life > 1) {
+            mainPlayer.vx = 0;
+            mainPlayer.vy = 0;
+            saveState.campaign.life--;
+            mainPlayer.position.set(gameStageArea.width / 2, gameStageArea.height / 2 + 88);
+            let harts = "";
+            for (let i = 0; i< saveState.campaign.life; i++) {
+                harts += "♥";
+            }
+            heartCountText.text = harts;
+        }
+        else {
+
+            state = onMenu;
+            changeScene(gameScreenScene, gameEndScene, polies);
+            gameOver();
+        }
+    }
+}
 
 function onMenu(delta){
     polies.forEach(poly => {
@@ -116,4 +161,15 @@ function onMenu(delta){
         miniSnake.vx = 0;
         miniSnake.vy = 0;
     }
+}
+
+function gameOver() {
+
+    gameEndText.text = "GAME OVER";
+    gameEndText.style = styleLargeTextRed;
+    gameEndDesc.text = "You ran out of hearts";
+    gameEndScoreText.text = "Score: " + saveState.campaign.score;
+    gameEndText.position.set(width/2 - (gameEndText.width/2), appMargin + 100);
+    gameEndDesc.position.set(width/2 - (gameEndDesc.width/2), gameEndText.y + gameEndText.height + 50);
+    gameEndScoreText.position.set(width - (appMargin + gameEndScoreText.width), height - (appMargin + gameEndScoreText.height));
 }

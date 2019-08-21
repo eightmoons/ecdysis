@@ -3,6 +3,17 @@ const styleLargeText = new TextStyle({
     fontSize: 60,
     fill: colorWhite,
 });
+const styleLargeTextGreen = new TextStyle({
+    fontFamily: font_family,
+    fontSize: 60,
+    fill: colorGreen,
+});
+const styleLargeTextRed = new TextStyle({
+    fontFamily: font_family,
+    fontSize: 60,
+    fill: colorRed,
+});
+
 
 const styleMediumText = new TextStyle({
     fontFamily: font_family,

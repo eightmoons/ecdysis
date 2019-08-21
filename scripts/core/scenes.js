@@ -10,7 +10,9 @@ let mainMenuScene = new Container(),
     obstaclesTutorialScene = new Container(),
     heartTutorialScene = new Container(),
 
-    campaignScene = new Container()
+    campaignScene = new Container(),
+    gameScreenScene = new Container(),
+    gameEndScene = new Container()
 ;
 
 let scenes = [
@@ -24,7 +26,9 @@ let scenes = [
     slimeTutorialScene,
     obstaclesTutorialScene,
     heartTutorialScene,
-    campaignScene
+    campaignScene,
+    gameScreenScene,
+    gameEndScene
 ];
 
 let sceneManager = {
@@ -155,7 +159,36 @@ campaignBack.on('mousedown', () => {
 });
 
 newGameText.on('mousedown', () => {
-    saveState = newGameState;
+    saveState = {
+        playerName: "",
+        campaign: {
+            life: 3,
+            score: 0,
+            coins: 0,
+            evolve: 0,
+            stage: 1,
+            upgrades: {
+                lethality: 1,
+                quantity: 1,
+                duration: 1,
+                fireRate: 1
+            }
+        },
+        settings: {
+            difficulty: 1,
+            sounds: true
+        }
+    };
+    Object.assign(saveState, saveState);
+    mainPlayer.vx = 0;
+    mainPlayer.vy = 0;
+    mainPlayer.position.set(gameStageArea.width / 2, gameStageArea.height / 2 + 88);
+    heartCountText.text = "♥♥♥";
+    coinCountText.text = saveState.campaign.coins + "g";
+    stageCountText.text = "STAGE: " + saveState.campaign.stage;
+    evoCountText.text = "EVO: " + saveState.campaign.evolve;
+    changeScene(campaignScene, gameScreenScene);
+    state = onGame;
 });
 
 /******************
@@ -468,3 +501,48 @@ let shopHeaderText,
     snakeUpgradesText,
     yourGoldText,
     goldCountText;
+
+
+
+/******************
+ * GAME START
+ *
+ *****************/
+let heartCountText = new PIXI.Text("♥♥♥", styleSmallTextRed),
+    coinCountText = new PIXI.Text("0g", styleFirst),
+    stageCountText = new PIXI.Text("Stage: ", styleSmallText),
+    evoCountText = new PIXI.Text("EVO: ", styleSmallText),
+    playerNameText = new PIXI.Text("", styleTinyTextAccent);
+
+heartCountText.position.set(appMargin, 16);
+coinCountText.position.set(appMargin, heartCountText.y + 10 + coinCountText.height);
+stageCountText.position.set(width - (appMargin + stageCountText.width), 16);
+evoCountText.position.set(width - (appMargin + evoCountText.width), stageCountText.y + 10 + evoCountText.height);
+playerNameText.position.set(appMargin, coinCountText.y + coinCountText.height + 10);
+
+let gameScreenObjects = [heartCountText, coinCountText, stageCountText, evoCountText, playerNameText];
+initializeInContainer(gameScreenObjects, gameScreenScene);
+
+/******************
+ * GAME END
+ *
+ *****************/
+let gameEndText = new PIXI.Text("_", styleLargeTextGreen),
+    gameEndDesc = new PIXI.Text("_", styleSmallText),
+    gameEndScoreText = new PIXI.Text("0", styleSmallText),
+    toMainMenuText = new PIXI.Text("to Main Menu", styleSmallTextIdle);
+
+gameEndText.position.set(width/2 - (gameEndText.width/2), appMargin + 100);
+gameEndDesc.position.set(width/2 - (gameEndDesc.width/2), gameEndText.y + gameEndText.height + 50);
+gameEndScoreText.position.set(width - (appMargin + gameEndScoreText.width), height - (appMargin + gameEndScoreText.height));
+toMainMenuText.position = back2home.position;
+
+let gameEndButtons = [toMainMenuText];
+let gameEndObjects = [gameEndText, gameEndDesc, gameEndScoreText, toMainMenuText];
+
+initializeInteractivity(gameEndButtons);
+initializeInContainer(gameEndObjects, gameEndScene);
+
+toMainMenuText.on('mousedown', () => {
+    changeScene(gameEndScene, mainMenuScene, polies)
+});
