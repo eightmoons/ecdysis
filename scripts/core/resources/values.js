@@ -23,14 +23,15 @@ const externalMargin = 20;
 const spacingSmall = 30;
 const spacingTiny = 20;
 
-let saveState  = {
+let saveState = {
     playerName: "",
     campaign: {
         life: 3,
         score: 0,
         coins: 0,
         evolve: 0,
-        stage: 0,
+        stage: 1,
+        level: 0,
         upgrades: {
             lethality: 1,
             quantity: 1,

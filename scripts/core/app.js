@@ -17,6 +17,8 @@ loader
     .add("images/mainSprites.json")
     .add("images/otherSprites.json")
     .add("images/inGameObjects.json")
+    .add("images/barricadeSprites.json")
+    .add("images/horizontalBarricade.json")
     .on("progress", onLoaderProgress)
     .load(main);
 
@@ -24,7 +26,8 @@ function onLoaderProgress(loader, resource) {
     console.log("loading: " + resource.url);
     console.log("progress:" + loader.progress + "%");
 }
-let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets, mainSprites, otherSprites, otherSpritesSheet, inGameObjects;
+let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets,
+    mainSprites, otherSprites, otherSpritesSheet, inGameObjects, verticalBarricade, horizontalBarricade;
 let poly1, poly2, poly3, polies, animatedLargeSlime,
     snakeSilhouette, borderedRectangle, gameAssetsTexture, gameBlocks,
     obstacleImageDisplay, heartImageDisplay, evoText;
@@ -33,6 +36,18 @@ let state;
 let gameStageArea;
 let isPaused = false;
 let mainPlayer, evoPointBlock, coins, slimes, activeSlimes;
+let stage2Obstacles, stage3Obstacles, stage4Obstacles, stage5Obstacles;
+let activeObstacles;
+let s2v1, s2v2, s2v3,
+    s2v4, s3h1, s3h2,
+    s3v1, s3v2, s4h1,
+    s4h2, s4h3, s4h4,
+    s4v1, s4v2, s4v3,
+    s4v4, s5h1, s5h2,
+    s5h3, s5h4, s5v1,
+    s5v2, s5v3, s5v4,
+    s2v, s3v, s4v, s5v, s3h, s4h, s5h, obstacleData, level
+;
 function main(){
     polygonAssets = resources["images/polygons.json"].textures;
     largeSlimeAssets = resources["images/large_slime.json"].spritesheet;
@@ -45,6 +60,8 @@ function main(){
     otherSprites = resources["images/otherSprites.json"].textures;
     otherSpritesSheet = resources["images/otherSprites.json"].spritesheet;
     inGameObjects = resources["images/inGameObjects.json"].spritesheet;
+    verticalBarricade = resources["images/barricadeSprites.json"].textures;
+    horizontalBarricade = resources["images/horizontalBarricade.json"].textures;
 
     poly1 = new Sprite(polygonAssets["poly1.png"]);
     poly2 = new Sprite(polygonAssets["poly2.png"]);
@@ -124,6 +141,76 @@ function main(){
     gameScreenScene.addChild(evoPointBlock);
     gameScreenScene.addChild(mainPlayer);
 
+    let horizontal = horizontalBarricade["barricadeh1.png"];
+    let vertical = verticalBarricade["barricade1.png"];
+
+    s5h1 = new Sprite(horizontal);
+    s5h2 = new Sprite(horizontal);
+    s5h3 = new Sprite(horizontal);
+    s5h4 = new Sprite(horizontal);
+    s5v1 = new Sprite(vertical);
+    s5v2 = new Sprite(vertical);
+    s5v3 = new Sprite(vertical);
+    s5v4 = new Sprite(vertical);
+    s4h1 = new Sprite(horizontal);
+    s4h2 = new Sprite(horizontal);
+    s4h3 = new Sprite(horizontal);
+    s4h4 = new Sprite(horizontal);
+    s4v1 = new Sprite(vertical);
+    s4v2 = new Sprite(vertical);
+    s4v3 = new Sprite(vertical);
+    s4v4 = new Sprite(vertical);
+    s3h1 = new Sprite(horizontal);
+    s3h2 = new Sprite(horizontal);
+    s3v1 = new Sprite(vertical);
+    s3v2 = new Sprite(vertical);
+    s2v1 = new Sprite(vertical);
+    s2v2 = new Sprite(vertical);
+    s2v3 = new Sprite(vertical);
+    s2v4 = new Sprite(vertical);
+
+    s5v1.position.set(getCenterHorizontal(s5v1),120);
+    s5v2.position.set(s5v1.x,208);
+    s5v3.position.set(s5h3.x + s5h3.width + px, getCenterVertical(s5v3));
+    s5v4.position.set(s5h4.x - px, s5v3.y);
+    s5h1.position.set(getCenterHorizontal(s5h1),120 + s5v1.height + px);
+    s5h2.position.set(getCenterHorizontal(s5h2), s5v2.y - px);
+    s5h3.position.set(bXMargin, getCenterVertical(s5h3));
+    s5h4.position.set(width - (bXMargin + s5h4.width), s5h3.y);
+    s4h1.position.set(bXMargin, 180);
+    s4h2.position.set(bXMargin + px, s4v2.y + (px * 7));
+    s4h3.position.set(width - (bXMargin + (px * 7)), s4h1.y);
+    s4h4.position.set(width - (bXMargin + (px * 8)), s4h2.y);
+    s4v1.position.set(bXMargin, px + s4h1.y);
+    s4v2.position.set(bXMargin, (px * 4) + s4v1.y + s4v1.height);
+    s4v3.position.set(width - (bXMargin + (px * 7)), s4h1.y + px);
+    s4v4.position.set(width - (bXMargin + (px * 7)), s4v2.y);
+    s3h1.position.set(getCenterHorizontal(s3h1), bYMargin);
+    s3v1.position.set(bXMargin, 88 + getCenterVertical(s3v1));
+    s3h2.position.set(s3h1.x, s3h1.y + bYMargin + (bYMargin / 2));
+    s3v2.position.set(s3v1.x + 490, s3v1.y);
+    s2v1.position.set(bXMargin, bYMargin);
+    s2v2.position.set(bXMargin, s2v1.y + s2v1.height);
+    s2v3.position.set(width - (bXMargin + (px * 7)), bYMargin);
+    s2v4.position.set(s2v3.x, s2v3.y + s2v3.height);
+
+    s5v = [s5v1, s5v2, s5v3, s5v4];
+    s5h = [s5h1, s5h2, s5h3, s5h4];
+    s4h = [s4h1, s4h2, s4h3, s4h4];
+    s4v = [s4v1, s4v2, s4v3, s4v4];
+    s3h = [s3h1, s3h2];
+    s3v = [s3v1, s3v2];
+    s2v = [s2v1, s2v2, s2v3, s2v4];
+
+    obstacleData = [];
+    [s5v, s5h, s4v, s4h, s3h, s3v, s2v].forEach(sprites => {
+        sprites.forEach(sprite => {
+            obstacleData.push(sprite);
+            gameStageArea.addChild(sprite);
+            sprite.visible = false;
+        });
+    });
+
     scenes.forEach(scene => {
         app.stage.addChild(scene);
         scene.visible = false;
@@ -153,6 +240,7 @@ function onGame(delta) {
             incrementEvolution();
             updateUI();
         }
+
     }
 }
 
@@ -197,24 +285,45 @@ function updateUI() {
     evoCountText.text = "EVO: " + saveState.campaign.evolve;
     saveState.campaign.score =(saveState.campaign.evolve + saveState.campaign.stage + saveState.campaign.life) * DIFFICULTY;
 }
-
+let evoCollected = 0;
 function incrementEvolution() {
     saveState.campaign.evolve += 1;
-    if (saveState.campaign.evolve === 1){
-        saveState.campaign.stage = 1;
-        gameStageArea.texture = (playAreasAssets["playerArea2.png"])
+    saveState.campaign.level += 1;
+    evoCollected +=1;
+    if (evoCollected === 2) {
+        saveState.campaign.level += 1;
+        evoCollected = 0;
     }
-    else if (saveState.campaign.evolve === 2) {
+    if (saveState.campaign.evolve === 10){
+        moveToCenter();
         saveState.campaign.stage = 2;
-        gameStageArea.texture = (playAreasAssets["playerArea3.png"])
+        gameStageArea.texture = (playAreasAssets["playerArea2.png"]);
     }
-    else if (saveState.campaign.evolve === 3) {
+    else if (saveState.campaign.evolve === 20) {
+        moveToCenter();
         saveState.campaign.stage = 3;
+        gameStageArea.texture = (playAreasAssets["playerArea3.png"]);
+    }
+    else if (saveState.campaign.evolve === 30) {
+        moveToCenter();
+        saveState.campaign.stage = 4;
         victory();
         state = onMenu;
         changeScene(gameScreenScene, gameEndScene, polies);
     }
 }
+
+function addObstacles() {
+    let level = saveState.campaign.level;
+}
+
+function moveToCenter(){
+    mainPlayer.vx = 0;
+    mainPlayer.vy = 0;
+    mainPlayer.position.set(gameStageArea.width / 2, gameStageArea.height / 2 + 88);
+}
+
+
 
 function respawnSnake(){
     if (saveState.campaign.life > 1) {

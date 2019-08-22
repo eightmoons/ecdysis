@@ -247,6 +247,7 @@ function checkHighScores() {
             coins: 0,
             evolve: 0,
             stage: 1,
+            level: 0,
             upgrades: {
                 lethality: 1,
                 quantity: 1,
@@ -256,4 +257,22 @@ function checkHighScores() {
         }
     };
     saveState.campaign.life = 3;
+}
+
+let px = 16;
+let bXMargin = 100 + px * 4;
+let bYMargin = 160 + px * 2;
+
+function getCenterHorizontal(sprite) {
+    return width/2 - (sprite.width/2)
+}
+
+function getCenterVertical(sprite) {
+    return 512 / 2 - (sprite.height / 2);
+}
+
+function setSprites(sprites, texture) {
+    sprites.forEach(sprite => {
+        sprite.texture = texture;
+    })
 }

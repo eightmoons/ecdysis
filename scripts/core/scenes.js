@@ -124,8 +124,8 @@ backText.on('mousedown', () => {
 });
 campaignText.on('mousedown', () => {
     changeScene(startMenuScene, campaignScene, polies);
-    continueText.interactive = saveState.campaign.stage !== 0;
-    continueText.style = saveState.campaign.stage !== 0 ? styleSmallTextIdle: styleSmallTextDisabled;
+    continueText.interactive = saveState.campaign.stage !== 1;
+    continueText.style = saveState.campaign.stage !== 1 ? styleSmallTextIdle: styleSmallTextDisabled;
 });
 /******************
  * Campaign
@@ -169,6 +169,7 @@ newGameText.on('mousedown', () => {
                 coins: 0,
                 evolve: 0,
                 stage: 1,
+                level: 0,
                 upgrades: {
                     lethality: 1,
                     quantity: 1,
@@ -478,7 +479,7 @@ heartOkButton.on('mousedown', () => {
 let shopHeaderText = new PIXI.Text(stringShop, styleLargeText),
     snakeUpgradesText = new PIXI.Text(stringSnakeUpgrade, styleMediumTextAccent),
     yourGoldText = new PIXI.Text(stringYourGold, styleSmallText),
-    goldCountText = new PIXI.Text("", styleFirst),
+    goldCountText = new PIXI.Text("0g", styleFirst),
     lethalityText = new PIXI.Text(stringLethality, styleSmallTextIdle),
     quantityText = new PIXI.Text(stringQuantity, styleSmallTextIdle),
     fireRateText = new PIXI.Text(stringFireRate, styleSmallTextIdle),
@@ -539,21 +540,22 @@ backToGameText.on('mousedown', () => {
  *
  *****************/
 let heartCountText = new PIXI.Text("♥♥♥", styleSmallTextRed),
-    coinCountText = new PIXI.Text("0g", styleFirst),
+    coinCountText = new PIXI.Text("", styleFirst),
     stageCountText = new PIXI.Text("Stage: ", styleSmallText),
     evoCountText = new PIXI.Text("EVO: ", styleSmallText),
-    playerNameText = new PIXI.Text("", styleTinyTextAccent),
+    playerNameText = new PIXI.Text("", styleSmallTextYellow),
     quitToMenuText = new PIXI.Text("Exit", styleSmallTextIdle);
 
 heartCountText.position.set(appMargin, 16);
 coinCountText.position.set(appMargin, heartCountText.y + 10 + coinCountText.height);
 stageCountText.position.set(width - (appMargin + stageCountText.width), 16);
 evoCountText.position.set(width - (appMargin + evoCountText.width), stageCountText.y + 10 + evoCountText.height);
-playerNameText.position.set(appMargin, coinCountText.y + coinCountText.height + 22);
-quitToMenuText.position.set(width - (appMargin + quitToMenuText.width), playerNameText.y - 2);
+// playerNameText.position.set(appMargin, coinCountText.y + coinCountText.height + 22);
+playerNameText.position = coinCountText.position;
+quitToMenuText.position.set(width - (appMargin + quitToMenuText.width), coinCountText.y + coinCountText.height + 20);
 
 let gameScreenButton = [quitToMenuText];
-let gameScreenObjects = [heartCountText, coinCountText, stageCountText, evoCountText, playerNameText, quitToMenuText];
+let gameScreenObjects = [heartCountText, stageCountText, evoCountText, playerNameText, quitToMenuText];
 initializeInteractivity(gameScreenButton);
 initializeInContainer(gameScreenObjects, gameScreenScene);
 
