@@ -169,30 +169,6 @@ function main(){
     s2v3 = new Sprite(vertical);
     s2v4 = new Sprite(vertical);
 
-    s5v1.position.set(getCenterHorizontal(s5v1),120);
-    s5v2.position.set(s5v1.x,208);
-    s5v3.position.set(s5h3.x + s5h3.width + px, getCenterVertical(s5v3));
-    s5v4.position.set(s5h4.x - px, s5v3.y);
-    s5h1.position.set(getCenterHorizontal(s5h1),120 + s5v1.height + px);
-    s5h2.position.set(getCenterHorizontal(s5h2), s5v2.y - px);
-    s5h3.position.set(bXMargin, getCenterVertical(s5h3));
-    s5h4.position.set(width - (bXMargin + s5h4.width), s5h3.y);
-    s4h1.position.set(bXMargin, 180);
-    s4h2.position.set(bXMargin + px, s4v2.y + (px * 7));
-    s4h3.position.set(width - (bXMargin + (px * 7)), s4h1.y);
-    s4h4.position.set(width - (bXMargin + (px * 8)), s4h2.y);
-    s4v1.position.set(bXMargin, px + s4h1.y);
-    s4v2.position.set(bXMargin, (px * 4) + s4v1.y + s4v1.height);
-    s4v3.position.set(width - (bXMargin + (px * 7)), s4h1.y + px);
-    s4v4.position.set(width - (bXMargin + (px * 7)), s4v2.y);
-    s3h1.position.set(getCenterHorizontal(s3h1), bYMargin);
-    s3v1.position.set(bXMargin, 88 + getCenterVertical(s3v1));
-    s3h2.position.set(s3h1.x, s3h1.y + bYMargin + (bYMargin / 2));
-    s3v2.position.set(s3v1.x + 490, s3v1.y);
-    s2v1.position.set(bXMargin, bYMargin);
-    s2v2.position.set(bXMargin, s2v1.y + s2v1.height);
-    s2v3.position.set(width - (bXMargin + (px * 7)), bYMargin);
-    s2v4.position.set(s2v3.x, s2v3.y + s2v3.height);
 
     s5v = [s5v1, s5v2, s5v3, s5v4];
     s5h = [s5h1, s5h2, s5h3, s5h4];
@@ -211,6 +187,34 @@ function main(){
         });
     });
 
+    s5v1.position.set(getCenterHorizontal(s5v1),32);
+    s5v2.position.set(s5v1.x,s5v1.y + (32 * 10) + 16);
+    s5h3.position.set(bXMargin, getCenterVertical(s5h3));
+    s5v3.position.set(s5h3.x + s5h3.width, getCenterVertical(s5v3));
+    s5h1.position.set(getCenterHorizontal(s5h1),(16 * 9));
+    s5h2.position.set(getCenterHorizontal(s5h2), s5v2.y - 16 );
+    s5h4.position.set(width - (bXMargin + s5h4.width), s5h3.y);
+    s5v4.position.set(s5h4.x - px, s5v3.y);
+
+    s4h1.position.set(bXMargin, (16*6));
+    s4v1.position.set(bXMargin, px + s4h1.y);
+    s4v2.position.set(bXMargin, (px * 4) + s4v1.y + s4v1.height);
+    s4h2.position.set(bXMargin, s4v2.y + (px * 7));
+    s4h3.position.set(width - (bXMargin + (px * 7)), s4h1.y);
+    s4h4.position.set(width - (bXMargin + (px * 7)) , s4h2.y);
+    s4v3.position.set(width - (bXMargin + 16), s4h1.y + px);
+    s4v4.position.set(width - (bXMargin + 16), s4v2.y);
+
+    s3h1.position.set(getCenterHorizontal(s3h1), bYMargin);
+    s3h2.position.set(s3h1.x, s3h1.y + bYMargin + (bYMargin / 2));
+    s3v1.position.set(bXMargin, 88 + getCenterVertical(s3v1)/2);
+    s3v2.position.set(s3v1.x + 490, s3v1.y);
+
+    s2v1.position.set(bXMargin, bYMargin);
+    s2v2.position.set(bXMargin, s2v1.y + s2v1.height);
+    s2v3.position.set(width - (bXMargin), bYMargin);
+    s2v4.position.set(s2v3.x, s2v3.y + s2v3.height);
+    activeObstacles = [];
     scenes.forEach(scene => {
         app.stage.addChild(scene);
         scene.visible = false;
@@ -239,6 +243,39 @@ function onGame(delta) {
                 randomInt(150, gameStageArea.height + 40));
             incrementEvolution();
             updateUI();
+        }
+
+        if (activeObstacles.count> 0){
+            activeObstacles.forEach(obs => {
+                if (isColliding(evoPointBlock, obs)){
+                    if (evoPointBlock.x > width){
+                        evoPointBlock.vx = -1;
+                    }
+                    else {
+                        evoPointBlock.vx = 1;
+                    }
+                    if (evoPointBlock.y > height){
+                        evoPointBlock.vy = -1;
+                    }
+                    else {
+                        evoPointBlock.vy = 1;
+                    }
+                    evoPointBlock.alpha = 0.4;
+                }
+                else {
+                    evoPointBlock.xy = 0;
+                    evoPointBlock.vy = 0;
+                    evoPointBlock.alpha = 1;
+                }
+
+                if (isColliding(mainPlayer, obs)){
+                    respawnSnake();
+                }
+            });
+            evoPointBlock.x += evoPointBlock.vx;
+            evoPointBlock.y += evoPointBlock.vy;
+
+
         }
 
     }
@@ -281,17 +318,20 @@ function onMenu(delta){
 function updateUI() {
     coinCountText.text = saveState.campaign.coins + "g";
     heartCountText.text = getHearts(saveState.campaign.life);
-    stageCountText.text = "STAGE: " + saveState.campaign.stage;
+    stageCountText.text = "STAGE: " + saveState.campaign.stage + "-" + saveState.campaign.level;
     evoCountText.text = "EVO: " + saveState.campaign.evolve;
     saveState.campaign.score =(saveState.campaign.evolve + saveState.campaign.stage + saveState.campaign.life) * DIFFICULTY;
+    stageCountText.position.set(width - (appMargin + stageCountText.width), 16);
+    evoCountText.position.set(width - (appMargin + evoCountText.width), stageCountText.y + 10 + evoCountText.height);
 }
 let evoCollected = 0;
+
 function incrementEvolution() {
     saveState.campaign.evolve += 1;
-    saveState.campaign.level += 1;
     evoCollected +=1;
     if (evoCollected === 2) {
         saveState.campaign.level += 1;
+        incrementLevel();
         evoCollected = 0;
     }
     if (saveState.campaign.evolve === 10){
@@ -313,8 +353,49 @@ function incrementEvolution() {
     }
 }
 
-function addObstacles() {
+function incrementLevel() {
     let level = saveState.campaign.level;
+    [s5v, s5h, s4v, s4h, s3h, s3v, s2v].forEach(sprites => {
+        sprites.forEach(sprite => {
+            sprite.visible = false;
+        })
+    });
+    if (level === 2) {
+        activeObstacles = [];
+        [s2v].forEach(sprites => {
+            sprites.forEach(sprite => {
+                sprite.visible = true;
+                activeObstacles.push(sprite);
+            })
+        })
+    }
+    else if (level === 3) {
+        activeObstacles = [];
+        [s3h, s3v].forEach(sprites => {
+            sprites.forEach(sprite => {
+                sprite.visible = true;
+                activeObstacles.push(sprite);
+            })
+        });
+    }
+    else if (level === 4) {
+        activeObstacles = [];
+        [s4v, s4h].forEach(sprites => {
+            sprites.forEach(sprite => {
+                sprite.visible = true;
+                activeObstacles.push(sprite);
+            })
+        });
+    }
+    else if (level === 5) {
+        activeObstacles = [];
+        [s5v, s5h].forEach(sprites => {
+            sprites.forEach(sprite => {
+                sprite.visible = true;
+                activeObstacles.push(sprite);
+            })
+        });
+    }
 }
 
 function moveToCenter(){

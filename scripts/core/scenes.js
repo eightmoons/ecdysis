@@ -169,7 +169,7 @@ newGameText.on('mousedown', () => {
                 coins: 0,
                 evolve: 0,
                 stage: 1,
-                level: 0,
+                level: 1,
                 upgrades: {
                     lethality: 1,
                     quantity: 1,
