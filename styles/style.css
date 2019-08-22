@@ -1,8 +1,5 @@
-/* @font-face {
-    font-family: 'pixelated';
-    src: url('styles/fonts/pixelated.ttf') format("truetype");
-    } */
-    /*@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');*/
+
+    @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 *{
 
 	margin: 0px;
@@ -13,6 +10,7 @@
 
 body{
     text-align: center;
+    background-image: url("../images/bg.jpg");
     background-color: #245425;
     background-repeat: no-repeat;
     background-size: cover;
@@ -24,8 +22,9 @@ body{
 }
 
 .logo{
-    font-size: 20px;
-    line-height: 50px;
+    font-size: 18px;
+    line-height: 40px;
+    
 }
 
 .description{
