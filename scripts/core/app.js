@@ -8,6 +8,7 @@ app.renderer.backgroundColor = colorBlack;
 document.body.appendChild(app.view);
 
 loader
+    .add("styles/fonts/PressStart2P-Regular.ttf")
     .add("images/polygons.json")
     .add("images/large_slime.json")
     .add("images/playAreas.json")
