@@ -576,7 +576,7 @@ stageCountText.position.set(width - (appMargin + stageCountText.width), 16);
 evoCountText.position.set(width - (appMargin + evoCountText.width), stageCountText.y + 10 + evoCountText.height);
 // playerNameText.position.set(appMargin, coinCountText.y + coinCountText.height + 22);
 playerNameText.position = coinCountText.position;
-quitToMenuText.position.set(width - (appMargin + quitToMenuText.width), coinCountText.y + coinCountText.height + 20);
+quitToMenuText.position.set(width - (appMargin + quitToMenuText.width), coinCountText.y + coinCountText.height + 15);
 
 let gameScreenButton = [quitToMenuText];
 let gameScreenObjects = [heartCountText, stageCountText, evoCountText, playerNameText, quitToMenuText];
