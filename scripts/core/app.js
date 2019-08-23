@@ -414,6 +414,11 @@ function incrementEvolution() {
         state = onMenu;
         transitSprite1.visible = true;
         transitSprite2.visible = false;
+        mainSlimes.forEach(slime => {
+            slime.textures = mainSprites.animations["slime2"];
+            slime.animationSpeed = 0.11;
+            slime.play();
+        })
     }
     else if (saveState.campaign.evolve === 20) {
         moveToCenter();
@@ -426,6 +431,11 @@ function incrementEvolution() {
         state = onMenu;
         transitSprite1.visible = false;
         transitSprite2.visible = true;
+        mainSlimes.forEach(slime => {
+            slime.textures = mainSprites.animations["slime3"];
+            slime.animationSpeed = 0.11;
+            slime.play();
+        })
     }
     else if (saveState.campaign.evolve === 30) {
         moveToCenter();
@@ -436,6 +446,11 @@ function incrementEvolution() {
         gameStageArea.texture = (playAreasAssets["playerArea1.png"]);
         state = onMenu;
         changeScene(gameScreenScene, gameEndScene, polies);
+        mainSlimes.forEach(slime => {
+            slime.textures = mainSprites.animations["slime1"];
+            slime.animationSpeed = 0.11;
+            slime.play();
+        })
     }
 }
 function incrementLevel() {
@@ -448,6 +463,7 @@ function incrementLevel() {
             let y = randomInt(88 + 32, 600 - 64);
             slime.x = x;
             slime.y = y;
+
         })
     }
     [s5v, s5h, s4v, s4h, s3h, s3v, s2v].forEach(sprites => {
