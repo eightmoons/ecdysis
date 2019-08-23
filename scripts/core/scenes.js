@@ -164,6 +164,25 @@ newGameText.on('mousedown', () => {
     if (name == null || name === "") {
     }
     else {
+        if (mainSlimes.length > 0) {
+            mainSlimes.forEach(slime => {
+                gameScreenScene.removeChild(slime);
+            });
+        }
+        mainSlimes = [];
+        for (let i = 0; i < DIFFICULTY * 2; i ++) {
+            let slime = new PIXI.AnimatedSprite(mainSprites.animations["slime1"]);
+            slime.animationSpeed = 0.11;
+            slime.play();
+            let x =  + randomInt((48 * i),800-32);
+            let y = randomInt(88 + 32, 600 - 64);
+            slime.x = x;
+            slime.y = y;
+            slime.vy = randomInt(-1.5 * DIFFICULTY,1.5 * DIFFICULTY);
+            slime.vx = randomInt(-1.5 * DIFFICULTY,1.5 * DIFFICULTY);
+            mainSlimes.push(slime);
+            gameScreenScene.addChild(slime);
+        }
         saveState = {
             playerName: "",
             campaign: {

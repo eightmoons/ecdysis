@@ -35,8 +35,7 @@ let miniSnake;
 let state;
 let gameStageArea;
 let isPaused = false;
-let mainPlayer, evoPointBlock, coins, slimes, activeSlimes;
-let stage2Obstacles, stage3Obstacles, stage4Obstacles, stage5Obstacles;
+let mainPlayer, evoPointBlock;
 let activeObstacles;
 let s2v1, s2v2, s2v3,
     s2v4, s3h1, s3h2,
@@ -48,6 +47,8 @@ let s2v1, s2v2, s2v3,
     s5v2, s5v3, s5v4,
     s2v, s3v, s4v, s5v, s3h, s4h, s5h, obstacleData, level, verticalSprites, horizontalSprites;
 ;
+
+let slimes1, slimes2, slimes3, mainSlimes = [];
 function main(){
     polygonAssets = resources["images/polygons.json"].textures;
     largeSlimeAssets = resources["images/large_slime.json"].spritesheet;
@@ -188,6 +189,7 @@ function main(){
         });
     });
 
+
     s5v1.position.set(getCenterHorizontal(s5v1),32);
     s5v2.position.set(s5v1.x,s5v1.y + (32 * 10) + 16);
     s5h3.position.set(bXMargin, getCenterVertical(s5h3));
@@ -248,6 +250,33 @@ function onGame(delta) {
         mainPlayer.x += mainPlayer.vx * DIFFICULTY + bonusx;
         mainPlayer.y += mainPlayer.vy * DIFFICULTY + bonusy;
 
+        mainSlimes.forEach(slime => {
+            slime.y += slime.vy;
+            slime.x += slime.vx;
+            let rr = contain(slime, {x: 32, y:110, width: gameStageArea.width -22, height: gameStageArea.height + 67});
+            if (rr === "left" || rr === "right") {
+                slime.vx = -slime.vx;
+            }
+            if (rr === "top" || rr === "bottom") {
+                slime.vy = -slime.vy;
+            }
+            if (isColliding(mainPlayer, slime, -11, -3)) {
+                isSnakeObstacle = true;
+                slime.position.set(randomInt(32, gameStageArea.height - 32),randomInt(32, gameStageArea.width - 32))
+            }
+            if (isColliding(slime, evoPointBlock)){
+                evoPointBlock.position.set(
+                    randomInt(50, gameStageArea.width - 40),
+                    randomInt(150, gameStageArea.height + 40));
+            }
+            mainSlimes.forEach(slime1 => {
+                if (slime1 !== slime && isColliding(slime1, slime)){
+                        slime.vx = -slime.vx;
+                        slime.vy = -slime.vy;
+                }
+            })
+        });
+
         if (isColliding(mainPlayer, evoPointBlock)){
             evoPointBlock.position.set(
                 randomInt(50, gameStageArea.width - 40),
@@ -258,13 +287,21 @@ function onGame(delta) {
 
         if (activeObstacles.length > 0){
             activeObstacles.forEach(obs => {
-                if (isColliding(evoPointBlock, obs)){
+                if (isColliding(evoPointBlock, obs) && obs.visible){
                     isEvoObstacle = true;
                     evoPointBlock.vx = 1;
                 }
-                if (isColliding(mainPlayer, obs, -13,-(16*7))){
+                if (isColliding(mainPlayer, obs, -10,-(16*7)) && obs.visible){
                     isSnakeObstacle = true;
                 }
+                mainSlimes.forEach(slime => {
+                    if (isColliding(slime, obs) && obs.visible) {
+                        slime.y += slime.vy;
+                    }
+                    else {
+                        slime.alpha = 1;
+                    }
+                })
             });
         }
 
@@ -352,7 +389,6 @@ function incrementEvolution() {
         saveState.campaign.stage = 3;
         setSprites(verticalSprites, verticalBarricade["barricade3.png"]);
         setSprites(horizontalSprites, horizontalBarricade["barricadeh3.png"]);
-        gameStageArea.texture = (playAreasAssets["playerArea3.png"]);
     }
     else if (saveState.campaign.evolve === 30) {
         moveToCenter();
@@ -366,6 +402,16 @@ function incrementEvolution() {
 }
 function incrementLevel() {
     let level = saveState.campaign.level;
+    if(mainSlimes.length > 0) {
+        let ctr = 0;
+        mainSlimes.forEach(slime => {
+            ctr ++;
+            let x =  + randomInt((48 * ctr),800-32);
+            let y = randomInt(88 + 32, 600 - 64);
+            slime.x = x;
+            slime.y = y;
+        })
+    }
     [s5v, s5h, s4v, s4h, s3h, s3v, s2v].forEach(sprites => {
         sprites.forEach(sprite => {
             sprite.visible = false;
@@ -464,8 +510,8 @@ function getHearts(life) {
 
 function generateSlimes(count, stage) {
     let slimes = [];
-    for (let i = 0; i < numberOfBlobs; i++) {
-        let slime = new PIXI.AnimatedSprite(mainSprites["slime" + stage]);
+    for (let i = 0; i < count; i++) {
+        let slime = new PIXI.AnimatedSprite(mainSprites.animations["slime"+stage]);
         slime.animationSpeed = 0.11;
         slime.play();
         slime.position.set(48 * i ,randomInt(0, 500 - slime.height));
