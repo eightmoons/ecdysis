@@ -99,21 +99,21 @@ function setMovementManager(sprite, as = 0) {
     };
 }
 
-function isColliding(r1, r2, xoffset = 0, yoffset = 0) {
+function isColliding(r1, r2, xoffset = 0, yoffset = 0, widthOffset = 0, heightOffset = 0, widthOffset2 = 0, heightOffset2 = 0) {
 
     let hit, combinedHalfWidths, combinedHalfHeights, vx, vy;
 
     hit = false;
 
-    r1.centerX = r1.x + r1.width / 2;
-    r1.centerY = r1.y + r1.height / 2;
-    r2.centerX = r2.x + r2.width / 2;
-    r2.centerY = r2.y + r2.height / 2;
+    r1.centerX = r1.x + (r1.width + widthOffset) / 2;
+    r1.centerY = r1.y + (r1.height + heightOffset) / 2;
+    r2.centerX = r2.x + (r2.width + widthOffset2) / 2;
+    r2.centerY = r2.y + (r2.height + heightOffset2) / 2;
 
     r1.halfWidth = r1.width / 2;
     r1.halfHeight = r1.height / 2 ;
     r2.halfWidth = r2.width / 2;
-    r2.halfHeight = r2.height / 2 + yoffset;
+    r2.halfHeight = r2.height /2;
 
     vx = r1.centerX - r2.centerX;
     vy = r1.centerY - r2.centerY;
