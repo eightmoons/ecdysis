@@ -199,7 +199,7 @@ function main(){
     s5h4.position.set(width - (bXMargin + s5h4.width), s5h3.y);
     s5v4.position.set(s5h4.x - px, s5v3.y);
 
-    s4h1.position.set(bXMargin, (16*6));
+    s4h1.position.set(bXMargin, (16*7));
     s4v1.position.set(bXMargin, px + s4h1.y);
     s4v2.position.set(bXMargin, (px * 4) + s4v1.y + s4v1.height);
     s4h2.position.set(bXMargin, s4v2.y + (px * 7));
@@ -291,12 +291,13 @@ function onGame(delta) {
                     isEvoObstacle = true;
                     evoPointBlock.vx = 1;
                 }
-                if (isColliding(mainPlayer, obs, -10,-(16*7)) && obs.visible){
+                if (isColliding(mainPlayer, obs, -10, -16*6) && obs.visible){
                     isSnakeObstacle = true;
                 }
                 mainSlimes.forEach(slime => {
-                    if (isColliding(slime, obs) && obs.visible) {
-                        slime.y += slime.vy;
+                    if (isColliding(slime, obs,-16,-16*6 ) && obs.visible) {
+                        slime.vx = -slime.vx;
+                        slime.vy = -slime.vy;
                     }
                     else {
                         slime.alpha = 1;
@@ -318,7 +319,12 @@ function onGame(delta) {
 
         if (isSnakeObstacle) {
             isSnakeObstacle = false;
-            respawnSnake()
+            // respawnSnake()
+            mainPlayer.vx = 0;
+            mainPlayer.vy = 0;
+            mainPlayer.alpha = 0.4;
+        }else {
+            mainPlayer.alpha = 1;
         }
 
     }
@@ -389,6 +395,7 @@ function incrementEvolution() {
         saveState.campaign.stage = 3;
         setSprites(verticalSprites, verticalBarricade["barricade3.png"]);
         setSprites(horizontalSprites, horizontalBarricade["barricadeh3.png"]);
+        gameStageArea.texture = (playAreasAssets["playerArea3.png"]);
     }
     else if (saveState.campaign.evolve === 30) {
         moveToCenter();
@@ -396,6 +403,7 @@ function incrementEvolution() {
         victory();
         setSprites(verticalSprites, verticalBarricade["barricade1.png"]);
         setSprites(horizontalSprites, horizontalBarricade["barricadeh1.png"]);
+        gameStageArea.texture = (playAreasAssets["playerArea1.png"]);
         state = onMenu;
         changeScene(gameScreenScene, gameEndScene, polies);
     }

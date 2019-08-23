@@ -178,8 +178,8 @@ newGameText.on('mousedown', () => {
             let y = randomInt(88 + 32, 600 - 64);
             slime.x = x;
             slime.y = y;
-            slime.vy = randomInt(-1.5 * DIFFICULTY,1.5 * DIFFICULTY);
-            slime.vx = randomInt(-1.5 * DIFFICULTY,1.5 * DIFFICULTY);
+            slime.vy =DIFFICULTY/2;
+            slime.vx =DIFFICULTY/2;
             mainSlimes.push(slime);
             gameScreenScene.addChild(slime);
         }
