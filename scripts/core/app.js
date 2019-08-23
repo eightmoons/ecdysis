@@ -51,7 +51,7 @@ let s2v1, s2v2, s2v3,
     s4v4, s5h1, s5h2,
     s5h3, s5h4, s5v1,
     s5v2, s5v3, s5v4,
-    s2v, s3v, s4v, s5v, s3h, s4h, s5h, obstacleData, level, verticalSprites, horizontalSprites;
+    s2v, s3v, s4v, s5v, s3h, s4h, s5h, obstacleData, level, verticalSprites, horizontalSprites, mText;
 ;
 
 let slimes1, slimes2, slimes3, mainSlimes = [], transitSprite1, transitSprite2, continueButton;
@@ -232,7 +232,7 @@ function main(){
     transitSprite1.animationSpeed = 0.01;
     transitionScene = new Container();
     continueButton = new PIXI.Text(continueText, styleLargeTextRed);
-    let mText = new PIXI.Text("You reached Evolution 2", styleSmallText);
+    mText = new PIXI.Text("You reached Evolution 2", styleSmallText);
     initializeInteractivity([continueButton]);
     transitionScene.addChild(transitSprite1);
     transitionScene.addChild(transitSprite2);
@@ -414,6 +414,11 @@ function incrementEvolution() {
         setSprites(verticalSprites, verticalBarricade["barricade2.png"]);
         setSprites(horizontalSprites, horizontalBarricade["barricadeh2.png"]);
         gameStageArea.texture = (playAreasAssets["playerArea2.png"]);
+        mText.text = "Congratulations you have reached evolution 2";
+        changeScene(gameScreenScene, transitionScene);
+        state = onMenu;
+        transit1.visible = true;
+        transit2.visible = false;
     }
     else if (saveState.campaign.evolve === 20) {
         moveToCenter();
@@ -421,6 +426,11 @@ function incrementEvolution() {
         setSprites(verticalSprites, verticalBarricade["barricade3.png"]);
         setSprites(horizontalSprites, horizontalBarricade["barricadeh3.png"]);
         gameStageArea.texture = (playAreasAssets["playerArea3.png"]);
+        mText.text = "Congratulations you have reached evolution 3";
+        changeScene(gameScreenScene, transitionScene);
+        state = onMenu;
+        transit1.visible = false;
+        transit2.visible = true;
     }
     else if (saveState.campaign.evolve === 30) {
         moveToCenter();
