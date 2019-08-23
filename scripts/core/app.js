@@ -306,6 +306,7 @@ function onGame(delta) {
         }
 
         if (isEvoObstacle) {
+            isEvoObstacle = false;
             evoPointBlock.alpha = 0.4;
         }
         else {
