@@ -265,11 +265,6 @@ function onGame(delta) {
                 isSnakeObstacle = true;
                 slime.position.set(randomInt(32, gameStageArea.height - 32),randomInt(32, gameStageArea.width - 32))
             }
-            if (isColliding(slime, evoPointBlock)){
-                evoPointBlock.position.set(
-                    randomInt(50, gameStageArea.width - 40),
-                    randomInt(150, gameStageArea.height + 40));
-            }
             mainSlimes.forEach(slime1 => {
                 if (slime1 !== slime && isColliding(slime1, slime)){
                         slime.vx = -slime.vx;
@@ -288,15 +283,15 @@ function onGame(delta) {
 
         if (activeObstacles.length > 0){
             activeObstacles.forEach(obs => {
-                if (isColliding(evoPointBlock, obs) && obs.visible){
+                if (isColliding(evoPointBlock, obs,16, 16*6) && obs.visible){
                     isEvoObstacle = true;
                     evoPointBlock.vx = 1;
                 }
-                if (isColliding(obs, mainPlayer, -10, -16*6) && obs.visible){
+                if (isColliding(obs, mainPlayer, 16, 16*6) && obs.visible){
                     isSnakeObstacle = true;
                 }
                 mainSlimes.forEach(slime => {
-                    if (isColliding(slime, obs,-16,-16*6 ) && obs.visible) {
+                    if (isColliding(slime, obs,16,16*6 ) && obs.visible) {
                         slime.vx = -slime.vx;
                         slime.vy = -slime.vy;
                     }
@@ -320,7 +315,7 @@ function onGame(delta) {
 
         if (isSnakeObstacle) {
             isSnakeObstacle = false;
-            respawnSnake()
+            respawnSnake();
             mainPlayer.vx = 0;
             mainPlayer.vy = 0;
             mainPlayer.alpha = 0.4;
