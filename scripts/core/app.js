@@ -229,20 +229,25 @@ function main(){
 
     transitSprite1 = new PIXI.AnimatedSprite(transit1.animations["e11"]);
     transitSprite2 = new PIXI.AnimatedSprite(transit2.animations["e21"]);
-    transitSprite1.animationSpeed = 0.01;
+    transitSprite1.animationSpeed = 0.09;
+    transitSprite2.animationSpeed = 0.09;
+    transitSprite1.play();
+    transitSprite2.play();
     transitionScene = new Container();
-    continueButton = new PIXI.Text(continueText, styleLargeTextRed);
+    continueButton = new PIXI.Text(stringContinue, styleSmallTextIdle);
     mText = new PIXI.Text("You reached Evolution 2", styleSmallText);
     initializeInteractivity([continueButton]);
     transitionScene.addChild(transitSprite1);
+    transitSprite1.visible = true;
+    transitSprite2.visible = false;
     transitionScene.addChild(transitSprite2);
     transitionScene.addChild(continueButton);
     transitionScene.addChild(mText);
-    continueButton.position.set(getCenterHorizontal(continueButton), height - (appMargin + continueButton.height));
-    mText.position.set(getCenterHorizontal(mText), height - (appMargin + (mText.height * 2)));
+    continueButton.position.set(getCenterHorizontal(continueButton), height - (appMargin + continueButton.height - 24));
+    mText.position.set(getCenterHorizontal(mText), height - (appMargin + (mText.height * 2) - 16));
     continueButton.on('mousedown', () => {
-        changeScene(mainMenuScene, gameScreenScene);
-        state = onGame();
+        changeScene(transitionScene, gameScreenScene);
+        state = onGame ;
     });
     scenes.push(transitionScene);
 
@@ -311,13 +316,13 @@ function onGame(delta) {
 
         if (activeObstacles.length > 0){
             activeObstacles.forEach(obs => {
-                if (isColliding(evoPointBlock, obs,0, 16*5) && obs.visible){
-                    isEvoObstacle = true;
+                if (isColliding(evoPointBlock, obs,0, -16*5) && obs.visible){
                     evoPointBlock.position.set(
                         randomInt(50, gameStageArea.width - 40),
                         randomInt(150, gameStageArea.height + 40));
                 }
                 if (isColliding(obs, mainPlayer, 13, 16*6) && obs.visible){
+                // if (isColliding(mainPlayer, obs, 0, -16*5) && obs.visible){
                     isSnakeObstacle = true;
                 }
                 mainSlimes.forEach(slime => {
@@ -330,16 +335,6 @@ function onGame(delta) {
                     }
                 })
             });
-        }
-
-        if (isEvoObstacle) {
-            isEvoObstacle = false;
-            evoPointBlock.alpha = 0.4;
-        }
-        else {
-            evoPointBlock.xy = 0;
-            evoPointBlock.vy = 0;
-            evoPointBlock.alpha = 1;
         }
 
         if (isSnakeObstacle) {
@@ -414,11 +409,11 @@ function incrementEvolution() {
         setSprites(verticalSprites, verticalBarricade["barricade2.png"]);
         setSprites(horizontalSprites, horizontalBarricade["barricadeh2.png"]);
         gameStageArea.texture = (playAreasAssets["playerArea2.png"]);
-        mText.text = "Congratulations you have reached evolution 2";
+        mText.text = "You reached Evolution 2";
         changeScene(gameScreenScene, transitionScene);
         state = onMenu;
-        transit1.visible = true;
-        transit2.visible = false;
+        transitSprite1.visible = true;
+        transitSprite2.visible = false;
     }
     else if (saveState.campaign.evolve === 20) {
         moveToCenter();
@@ -426,11 +421,11 @@ function incrementEvolution() {
         setSprites(verticalSprites, verticalBarricade["barricade3.png"]);
         setSprites(horizontalSprites, horizontalBarricade["barricadeh3.png"]);
         gameStageArea.texture = (playAreasAssets["playerArea3.png"]);
-        mText.text = "Congratulations you have reached evolution 3";
+        mText.text = "You reached Evolution 3";
         changeScene(gameScreenScene, transitionScene);
         state = onMenu;
-        transit1.visible = false;
-        transit2.visible = true;
+        transitSprite1.visible = false;
+        transitSprite2.visible = true;
     }
     else if (saveState.campaign.evolve === 30) {
         moveToCenter();
