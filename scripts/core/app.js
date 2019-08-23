@@ -124,6 +124,7 @@ function main(){
 
     gameStageArea = new PIXI.Sprite(playAreasAssets["playerArea1.png"]);
     mainPlayer = new PIXI.AnimatedSprite(gameAssets.animations["p"]);
+    // mainPlayer = new PIXI.AnimatedSprite(inGameObjects.animations["coin2"]);
     gameStageArea.position.set(0,88);
     gameStageArea.width = width;
     gameStageArea.height = 512;
@@ -237,7 +238,7 @@ function onGame(delta) {
     if (!isPaused){
         let res = contain(mainPlayer, {x: 44, y:133, width: gameStageArea.width -22, height: gameStageArea.height + 67});
         if ( res !== undefined) {
-            respawnSnake();
+            isSnakeObstacle = true;
         }
         setMovementManager(mainPlayer);
         let bonusx = 0;
@@ -283,9 +284,11 @@ function onGame(delta) {
 
         if (activeObstacles.length > 0){
             activeObstacles.forEach(obs => {
-                if (isColliding(evoPointBlock, obs,16, 16*6) && obs.visible){
+                if (isColliding(evoPointBlock, obs,0, 16*5) && obs.visible){
                     isEvoObstacle = true;
-                    evoPointBlock.vx = 1;
+                    evoPointBlock.position.set(
+                        randomInt(50, gameStageArea.width - 40),
+                        randomInt(150, gameStageArea.height + 40));
                 }
                 if (isColliding(obs, mainPlayer, 16, 16*6) && obs.visible){
                     isSnakeObstacle = true;
@@ -304,8 +307,6 @@ function onGame(delta) {
 
         if (isEvoObstacle) {
             evoPointBlock.alpha = 0.4;
-            evoPointBlock.x += evoPointBlock.vx;
-            isEvoObstacle = false;
         }
         else {
             evoPointBlock.xy = 0;
