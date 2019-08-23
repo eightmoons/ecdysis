@@ -616,6 +616,7 @@ toMainMenuText.on('mousedown', () => {
 
 
 /******************
- * GAME END
+ * TRANSITION
  *
  *****************/
+

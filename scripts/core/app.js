@@ -8,18 +8,22 @@ app.renderer.backgroundColor = colorBlack;
 document.body.appendChild(app.view);
 
 loader
-    .add("styles/fonts/PressStart2P-Regular.ttf")
-    .add("images/polygons.json")
-    .add("images/large_slime.json")
-    .add("images/playAreas.json")
-    .add("images/uiAssets.json")
-    .add("images/gameAssets.json")
-    .add("images/gameBlocks.json")
-    .add("images/mainSprites.json")
-    .add("images/otherSprites.json")
-    .add("images/inGameObjects.json")
-    .add("images/barricadeSprites.json")
-    .add("images/horizontalBarricade.json")
+    .add([
+        "styles/fonts/PressStart2P-Regular.ttf",
+        "images/polygons.json",
+        "images/large_slime.json",
+        "images/playAreas.json",
+        "images/uiAssets.json",
+        "images/gameAssets.json",
+        "images/gameBlocks.json",
+        "images/mainSprites.json",
+        "images/otherSprites.json",
+        "images/inGameObjects.json",
+        "images/barricadeSprites.json",
+        "images/horizontalBarricade.json",
+        "images/transitionOne.json",
+        "images/transitionTwo.json"
+        ])
     .on("progress", onLoaderProgress)
     .load(main);
 
@@ -28,10 +32,11 @@ function onLoaderProgress(loader, resource) {
     console.log("progress:" + loader.progress + "%");
 }
 let polygonAssets, largeSlimeAssets, playAreasAssets, uiAssets, gameAssets,
-    mainSprites, otherSprites, otherSpritesSheet, inGameObjects, verticalBarricade, horizontalBarricade;
+    mainSprites, otherSprites, otherSpritesSheet, inGameObjects, verticalBarricade, horizontalBarricade,
+    transit1, transit2;
 let poly1, poly2, poly3, polies, animatedLargeSlime,
     snakeSilhouette, borderedRectangle, gameAssetsTexture, gameBlocks,
-    obstacleImageDisplay, heartImageDisplay, evoText;
+    obstacleImageDisplay, heartImageDisplay, evoText, transitionScene;
 let miniSnake;
 let state;
 let gameStageArea;
@@ -49,7 +54,7 @@ let s2v1, s2v2, s2v3,
     s2v, s3v, s4v, s5v, s3h, s4h, s5h, obstacleData, level, verticalSprites, horizontalSprites;
 ;
 
-let slimes1, slimes2, slimes3, mainSlimes = [];
+let slimes1, slimes2, slimes3, mainSlimes = [], transitSprite1, transitSprite2, continueButton;
 function main(){
     polygonAssets = resources["images/polygons.json"].textures;
     largeSlimeAssets = resources["images/large_slime.json"].spritesheet;
@@ -64,6 +69,8 @@ function main(){
     inGameObjects = resources["images/inGameObjects.json"].spritesheet;
     verticalBarricade = resources["images/barricadeSprites.json"].textures;
     horizontalBarricade = resources["images/horizontalBarricade.json"].textures;
+    transit1 = resources["images/transitionOne.json"].spritesheet;
+    transit2 = resources["images/transitionTwo.json"].spritesheet;
 
     poly1 = new Sprite(polygonAssets["poly1.png"]);
     poly2 = new Sprite(polygonAssets["poly2.png"]);
@@ -220,11 +227,31 @@ function main(){
     s2v3.position.set(width - (bXMargin), bYMargin);
     s2v4.position.set(s2v3.x, s2v3.y + s2v3.height);
 
+    transitSprite1 = new PIXI.AnimatedSprite(transit1.animations["e11"]);
+    transitSprite2 = new PIXI.AnimatedSprite(transit2.animations["e21"]);
+    transitSprite1.animationSpeed = 0.01;
+    transitionScene = new Container();
+    continueButton = new PIXI.Text(continueText, styleLargeTextRed);
+    let mText = new PIXI.Text("You reached Evolution 2", styleSmallText);
+    initializeInteractivity([continueButton]);
+    transitionScene.addChild(transitSprite1);
+    transitionScene.addChild(transitSprite2);
+    transitionScene.addChild(continueButton);
+    transitionScene.addChild(mText);
+    continueButton.position.set(getCenterHorizontal(continueButton), height - (appMargin + continueButton.height));
+    mText.position.set(getCenterHorizontal(mText), height - (appMargin + (mText.height * 2)));
+    continueButton.on('mousedown', () => {
+        changeScene(mainMenuScene, gameScreenScene);
+        state = onGame();
+    });
+    scenes.push(transitionScene);
+
     activeObstacles = [];
     scenes.forEach(scene => {
         app.stage.addChild(scene);
         scene.visible = false;
     });
+
     mainMenuScene.visible = true;
     state = onMenu;
     app.ticker.add(delta => gameLoop(delta));
@@ -290,7 +317,7 @@ function onGame(delta) {
                         randomInt(50, gameStageArea.width - 40),
                         randomInt(150, gameStageArea.height + 40));
                 }
-                if (isColliding(obs, mainPlayer, 16, 16*6) && obs.visible){
+                if (isColliding(obs, mainPlayer, 13, 16*6) && obs.visible){
                     isSnakeObstacle = true;
                 }
                 mainSlimes.forEach(slime => {
