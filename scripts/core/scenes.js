@@ -126,6 +126,7 @@ campaignText.on('mousedown', () => {
     changeScene(startMenuScene, campaignScene, polies);
     continueText.interactive = saveState.campaign.stage !== 1;
     continueText.style = saveState.campaign.stage !== 1 ? styleSmallTextIdle: styleSmallTextDisabled;
+
 });
 /******************
  * Campaign
@@ -141,8 +142,8 @@ newGameText.position = startText.position;
 continueText.position = survivalText.position;
 campaignBack.position.set(appMargin, height - (appMargin + campaignText.height));
 
-let campaignButtons = [newGameText, continueText, campaignBack];
-let campaignObjects = [campaignHeaderText, newGameText, continueText, campaignBack];
+let campaignButtons = [newGameText, campaignBack];
+let campaignObjects = [campaignHeaderText, newGameText, campaignBack];
 
 initializeInteractivity(campaignButtons);
 initializeInContainer(campaignObjects, campaignScene);
@@ -158,6 +159,8 @@ continueText.on('mousedown', () => {
 
 newGameText.on('mousedown', () => {
     let name = prompt("Please enter your name", saveState.playerName);
+    setSprites(verticalSprites, verticalBarricade["barricade1.png"]);
+    setSprites(horizontalSprites, horizontalBarricade["barricadeh1.png"]);
     if (name == null || name === "") {
     }
     else {
@@ -188,10 +191,12 @@ newGameText.on('mousedown', () => {
         evoCountText.text = "EVO: " + saveState.campaign.evolve;
         saveState.playerName = name;
         playerNameText.text = saveState.playerName;
+        updateUI();
         gameStageArea.texture = playAreasAssets["playerArea1.png"];
+        continueText.text = "Continue (" + saveState.playerName + ")";
         changeScene(campaignScene, gameScreenScene);
         state = onGame;
-        continueText.text = "Continue (" + saveState.playerName + ")";
+        clearObstacles();
     }
 });
 

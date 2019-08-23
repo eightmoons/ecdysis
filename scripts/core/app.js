@@ -46,7 +46,7 @@ let s2v1, s2v2, s2v3,
     s4v4, s5h1, s5h2,
     s5h3, s5h4, s5v1,
     s5v2, s5v3, s5v4,
-    s2v, s3v, s4v, s5v, s3h, s4h, s5h, obstacleData, level
+    s2v, s3v, s4v, s5v, s3h, s4h, s5h, obstacleData, level, verticalSprites, horizontalSprites;
 ;
 function main(){
     polygonAssets = resources["images/polygons.json"].textures;
@@ -169,7 +169,6 @@ function main(){
     s2v3 = new Sprite(vertical);
     s2v4 = new Sprite(vertical);
 
-
     s5v = [s5v1, s5v2, s5v3, s5v4];
     s5h = [s5h1, s5h2, s5h3, s5h4];
     s4h = [s4h1, s4h2, s4h3, s4h4];
@@ -179,6 +178,8 @@ function main(){
     s2v = [s2v1, s2v2, s2v3, s2v4];
 
     obstacleData = [];
+    verticalSprites = [s5v1, s5v2, s5v3, s5v4, s4v1, s4v2, s4v3, s4v4, s3v1, s3v2, s2v1, s2v2, s2v3, s2v4];
+    horizontalSprites = [s5h1, s5h2, s5h3, s5h4, s4h1, s4h2, s4h3, s4h4, s3h1, s3h2];
     [s5v, s5h, s4v, s4h, s3h, s3v, s2v].forEach(sprites => {
         sprites.forEach(sprite => {
             obstacleData.push(sprite);
@@ -214,6 +215,7 @@ function main(){
     s2v2.position.set(bXMargin, s2v1.y + s2v1.height);
     s2v3.position.set(width - (bXMargin), bYMargin);
     s2v4.position.set(s2v3.x, s2v3.y + s2v3.height);
+
     activeObstacles = [];
     scenes.forEach(scene => {
         app.stage.addChild(scene);
@@ -227,6 +229,7 @@ function main(){
 function gameLoop(delta) {
     state(delta);
 }
+let isEvoObstacle, isSnakeObstacle;
 function onGame(delta) {
     if (!isPaused){
         let res = contain(mainPlayer, {x: 44, y:133, width: gameStageArea.width -22, height: gameStageArea.height + 67});
@@ -234,8 +237,16 @@ function onGame(delta) {
             respawnSnake();
         }
         setMovementManager(mainPlayer);
-        mainPlayer.x += mainPlayer.vx * DIFFICULTY;
-        mainPlayer.y += mainPlayer.vy * DIFFICULTY;
+        let bonusx = 0;
+        let bonusy = 0;
+        if (mainPlayer.vx !== 0){
+            bonusx = mainPlayer.vx > 0 ? delta : -delta;
+        }
+        if (mainPlayer.vy !== 0) {
+            bonusy = mainPlayer.vy > 0 ? delta : -delta;
+        }
+        mainPlayer.x += mainPlayer.vx * DIFFICULTY + bonusx;
+        mainPlayer.y += mainPlayer.vy * DIFFICULTY + bonusy;
 
         if (isColliding(mainPlayer, evoPointBlock)){
             evoPointBlock.position.set(
@@ -245,37 +256,32 @@ function onGame(delta) {
             updateUI();
         }
 
-        if (activeObstacles.count> 0){
+        if (activeObstacles.length > 0){
             activeObstacles.forEach(obs => {
                 if (isColliding(evoPointBlock, obs)){
-                    if (evoPointBlock.x > width){
-                        evoPointBlock.vx = -1;
-                    }
-                    else {
-                        evoPointBlock.vx = 1;
-                    }
-                    if (evoPointBlock.y > height){
-                        evoPointBlock.vy = -1;
-                    }
-                    else {
-                        evoPointBlock.vy = 1;
-                    }
-                    evoPointBlock.alpha = 0.4;
+                    isEvoObstacle = true;
+                    evoPointBlock.vx = 1;
                 }
-                else {
-                    evoPointBlock.xy = 0;
-                    evoPointBlock.vy = 0;
-                    evoPointBlock.alpha = 1;
-                }
-
-                if (isColliding(mainPlayer, obs)){
-                    respawnSnake();
+                if (isColliding(mainPlayer, obs, -13,-(16*7))){
+                    isSnakeObstacle = true;
                 }
             });
+        }
+
+        if (isEvoObstacle) {
+            evoPointBlock.alpha = 0.4;
             evoPointBlock.x += evoPointBlock.vx;
-            evoPointBlock.y += evoPointBlock.vy;
+            isEvoObstacle = false;
+        }
+        else {
+            evoPointBlock.xy = 0;
+            evoPointBlock.vy = 0;
+            evoPointBlock.alpha = 1;
+        }
 
-
+        if (isSnakeObstacle) {
+            isSnakeObstacle = false;
+            respawnSnake()
         }
 
     }
@@ -334,25 +340,30 @@ function incrementEvolution() {
         incrementLevel();
         evoCollected = 0;
     }
+
     if (saveState.campaign.evolve === 10){
-        moveToCenter();
         saveState.campaign.stage = 2;
+        setSprites(verticalSprites, verticalBarricade["barricade2.png"]);
+        setSprites(horizontalSprites, horizontalBarricade["barricadeh2.png"]);
         gameStageArea.texture = (playAreasAssets["playerArea2.png"]);
     }
     else if (saveState.campaign.evolve === 20) {
         moveToCenter();
         saveState.campaign.stage = 3;
+        setSprites(verticalSprites, verticalBarricade["barricade3.png"]);
+        setSprites(horizontalSprites, horizontalBarricade["barricadeh3.png"]);
         gameStageArea.texture = (playAreasAssets["playerArea3.png"]);
     }
     else if (saveState.campaign.evolve === 30) {
         moveToCenter();
         saveState.campaign.stage = 4;
         victory();
+        setSprites(verticalSprites, verticalBarricade["barricade1.png"]);
+        setSprites(horizontalSprites, horizontalBarricade["barricadeh1.png"]);
         state = onMenu;
         changeScene(gameScreenScene, gameEndScene, polies);
     }
 }
-
 function incrementLevel() {
     let level = saveState.campaign.level;
     [s5v, s5h, s4v, s4h, s3h, s3v, s2v].forEach(sprites => {
@@ -360,44 +371,65 @@ function incrementLevel() {
             sprite.visible = false;
         })
     });
+    if (level === 1) {
+        activeObstacles = [];
+        [s5v, s5h, s4v, s4h, s3h, s3v, s2v].forEach(sprites => {
+            sprites.forEach(sprite => {
+                sprite.visible = false;
+            })
+        });
+    }
     if (level === 2) {
         activeObstacles = [];
-        [s2v].forEach(sprites => {
-            sprites.forEach(sprite => {
-                sprite.visible = true;
-                activeObstacles.push(sprite);
+        [s2v].forEach(function (sprite) {
+            sprite.forEach(sprited => {
+                sprited.visible = true;
+                activeObstacles.push(sprited);
             })
-        })
+        });
+        moveToCenter();
     }
     else if (level === 3) {
         activeObstacles = [];
-        [s3h, s3v].forEach(sprites => {
-            sprites.forEach(sprite => {
-                sprite.visible = true;
-                activeObstacles.push(sprite);
+        [s3h, s3v].forEach(sprite => {
+            sprite.forEach(sprited => {
+                sprited.visible = true;
+                activeObstacles.push(sprited);
             })
         });
+        moveToCenter();
     }
     else if (level === 4) {
         activeObstacles = [];
-        [s4v, s4h].forEach(sprites => {
-            sprites.forEach(sprite => {
-                sprite.visible = true;
-                activeObstacles.push(sprite);
+        [s4v, s4h].forEach(sprite => {
+            sprite.forEach(sprited => {
+                sprited.visible = true;
+                activeObstacles.push(sprited);
             })
         });
+        moveToCenter();
     }
     else if (level === 5) {
         activeObstacles = [];
-        [s5v, s5h].forEach(sprites => {
-            sprites.forEach(sprite => {
-                sprite.visible = true;
-                activeObstacles.push(sprite);
+        [s5v, s5h].forEach(sprite => {
+            sprite.forEach(sprited => {
+                sprited.visible = true;
+                activeObstacles.push(sprited);
             })
         });
+        moveToCenter();
+        saveState.campaign.level = 1;
     }
-}
 
+    let x = 12;
+}
+function clearObstacles() {
+    [s5v, s5h, s4v, s4h, s3h, s3v, s2v].forEach(sprites => {
+        sprites.forEach(sprite => {
+            sprite.visible = false;
+        })
+    });
+}
 function moveToCenter(){
     mainPlayer.vx = 0;
     mainPlayer.vy = 0;
@@ -409,9 +441,7 @@ function moveToCenter(){
 function respawnSnake(){
     if (saveState.campaign.life > 1) {
         saveState.campaign.life--;
-        mainPlayer.vx = 0;
-        mainPlayer.vy = 0;
-        mainPlayer.position.set(gameStageArea.width / 2, gameStageArea.height / 2 + 88);
+        moveToCenter();
         updateUI();
     }
     else {
