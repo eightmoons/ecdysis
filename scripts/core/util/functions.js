@@ -111,9 +111,9 @@ function isColliding(r1, r2, xoffset = 0, yoffset = 0) {
     r2.centerY = r2.y + r2.height / 2;
 
     r1.halfWidth = r1.width / 2;
-    r1.halfHeight = r1.height / 2;
+    r1.halfHeight = r1.height / 2 ;
     r2.halfWidth = r2.width / 2;
-    r2.halfHeight = r2.height / 2;
+    r2.halfHeight = r2.height / 2 + yoffset;
 
     vx = r1.centerX - r2.centerX;
     vy = r1.centerY - r2.centerY;
