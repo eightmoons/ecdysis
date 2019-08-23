@@ -278,7 +278,7 @@ function onGame(delta) {
             })
         });
 
-        if (isColliding(mainPlayer, evoPointBlock, -10, -16*6)){
+        if (isColliding(mainPlayer, evoPointBlock)){
             evoPointBlock.position.set(
                 randomInt(50, gameStageArea.width - 40),
                 randomInt(150, gameStageArea.height + 40));
@@ -292,7 +292,7 @@ function onGame(delta) {
                     isEvoObstacle = true;
                     evoPointBlock.vx = 1;
                 }
-                if (isColliding(obs, mainPlayer, 0, 0, 0,0) && obs.visible){
+                if (isColliding(obs, mainPlayer, -10, -16*6) && obs.visible){
                     isSnakeObstacle = true;
                 }
                 mainSlimes.forEach(slime => {
