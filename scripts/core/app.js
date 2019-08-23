@@ -278,7 +278,7 @@ function onGame(delta) {
             })
         });
 
-        if (isColliding(mainPlayer, evoPointBlock, 0, 0, -8,-10)){
+        if (isColliding(mainPlayer, evoPointBlock, -10, -16*6)){
             evoPointBlock.position.set(
                 randomInt(50, gameStageArea.width - 40),
                 randomInt(150, gameStageArea.height + 40));
