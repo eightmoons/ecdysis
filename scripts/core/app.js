@@ -319,7 +319,7 @@ function onGame(delta) {
 
         if (isSnakeObstacle) {
             isSnakeObstacle = false;
-            // respawnSnake()
+            respawnSnake()
             mainPlayer.vx = 0;
             mainPlayer.vy = 0;
             mainPlayer.alpha = 0.4;
