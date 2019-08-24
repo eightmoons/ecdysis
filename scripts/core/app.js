@@ -52,7 +52,7 @@ let s2v1, s2v2, s2v3,
     s5h3, s5h4, s5v1,
     s5v2, s5v3, s5v4,
     s2v, s3v, s4v, s5v, s3h, s4h, s5h, obstacleData, level, verticalSprites, horizontalSprites, mText;
-;
+
 
 let slimes1, slimes2, slimes3, mainSlimes = [], transitSprite1, transitSprite2, continueButton;
 function main(){
@@ -112,6 +112,7 @@ function main(){
     evoText.x = 200;
     evoText.y = 200;
     evoText.animationSpeed = 0.11;
+    evoText.scale.set(15,15);
     evoText.play();
     evoText.position.set(width - (appMargin + evoText.width), 200);
     objectiveTutorialScene.addChild(evoText);

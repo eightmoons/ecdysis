@@ -170,7 +170,7 @@ newGameText.on('mousedown', () => {
             });
         }
         mainSlimes = [];
-        for (let i = 0; i < DIFFICULTY * 2; i ++) {
+        for (let i = 0; i < DIFFICULTY * 4; i ++) {
             let slime = new PIXI.AnimatedSprite(mainSprites.animations["slime1"]);
             slime.animationSpeed = 0.11;
             slime.play();
@@ -310,7 +310,7 @@ settingsBack.on('mousedown', () => {
 let leaderBoardHeaderText = new PIXI.Text(stringLeaderBoards,styleLargeText),
     firstText = new PIXI.Text("1st  N0obSl4yer: 69", styleFirst),
     secondText = new PIXI.Text("2nd  XxPROxX: 42", styleSecond),
-    thirdText = new PIXI.Text("3rd  Rami: 22", styleThird);
+    thirdText = new PIXI.Text("3rd  JPG2019: 22", styleThird);
 let leaderBoardsBack = new PIXI.Text(stringBack, styleSmallTextIdle);
 
 leaderBoardHeaderText.position = appNameText.position;

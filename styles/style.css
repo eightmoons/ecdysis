@@ -1,5 +1,5 @@
 
-    /*@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap'); not working saken*/
+    @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 *{
 
 	margin: 0px;
@@ -29,4 +29,8 @@ body{
 
 .description{
     font-size: 12px;
+}
+
+canvas{
+    margin-top: 20px;
 }
