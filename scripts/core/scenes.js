@@ -11,8 +11,7 @@ let mainMenuScene = new Container(),
     campaignScene = new Container(),
     gameScreenScene = new Container(),
     gameEndScene = new Container(),
-    snakeShopScene = new Container()
-;
+    snakeShopScene = new Container();
 
 let scenes = [
     mainMenuScene,
@@ -244,7 +243,7 @@ settingsBack.position.set(appMargin, backText.y);
 
 let settingsButtons = [settingsBack];
 let difficultyButtons = [easyText, mediumText, hardText];
-let settingsObjects = [settingsHeader, soundText, toggleText, difficultyText,
+let settingsObjects = [settingsHeader, difficultyText,
     easyText, mediumText, hardText, settingsBack];
 
 initializeInteractivity(settingsButtons);
